@@ -45,6 +45,10 @@ void Sdl::logSDLError(std::ostream &os, const std::string &msg) {
 }
 
 void Sdl::cleanUp() {
+
+	SDL_DestroyTexture(tile);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(screen);
 	SDL_Quit();
 }
 
@@ -62,6 +66,8 @@ SDL_Texture* Sdl::loadTexture(const std::string &file, SDL_Renderer *ren) {
 			this->logSDLError(std::cout, "CreateTextureFromSurface");
 		}
 
+	} else {
+		this->logSDLError(std::cout, "LoadBmp");
 	}
 
 	return texture;
@@ -99,16 +105,29 @@ void Sdl::handleEvent() {
 		}
 	}
 
+	if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.sym == SDLK_1) {
+			curPointerTexture = tile;
+		}
+
+		if (event.key.keysym.sym == SDLK_2) {
+			curPointerTexture = tile2;
+		}
+	}
+
 	if (leftDown) {
+
 		SDL_Rect *tileLoc = new SDL_Rect;
 		tileLoc->x = curX;
 		tileLoc->y = curY;
-		tiles.push_back(tileLoc);
+
+		Tile *newTile = new Tile(tileLoc, curPointerTexture);
+		tiles.push_back(newTile);
 	}
 
 	if (rightDown) {
 		for (size_t i = 0; i < tiles.size(); i++) {
-			SDL_Rect *curTile = tiles[i];
+			SDL_Rect *curTile = tiles[i]->location;
 			if (curTile->x == curX && curTile->y == curY) {
 				tiles.erase(tiles.begin() + i);
 				break;
@@ -131,6 +150,9 @@ int main(int argc, char* args[]) {
 	}
 
 	tile = sdl.loadTexture("tile.bmp", renderer);
+	tile2 = sdl.loadTexture("tile2.bmp", renderer);
+
+	curPointerTexture = tile;
 
 	while (quit == false) {
 		SDL_RenderClear(renderer);
@@ -141,10 +163,12 @@ int main(int argc, char* args[]) {
 				quit = true;
 			}
 		}
-		sdl.renderTexture(tile, renderer, curX * 20, curY * 20);
 
-		for (SDL_Rect *curTile : tiles) {
-			sdl.renderTexture(tile, renderer, curTile->x * 20, curTile->y * 20);
+		sdl.renderTexture(curPointerTexture, renderer, curX * 20, curY * 20);
+
+		for (Tile *curTile : tiles) {
+			sdl.renderTexture(curTile->texture, renderer,
+					curTile->location->x * 20, curTile->location->y * 20);
 		}
 		SDL_RenderPresent(renderer);
 

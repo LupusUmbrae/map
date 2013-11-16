@@ -8,13 +8,23 @@
 #ifndef SDL_H_
 #define SDL_H_
 
+// C++ Includes
 #include <string.h>
 #include <iostream>
 #include <ostream>
 #include <vector>
 
+// SDL Includes
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+
+// Map Includes
+#include "Tile.h"
+
+
+/*
+ * Actual code
+ */
 
 // Screeeeeen
 const int SCREEN_WIDTH = 648;
@@ -32,10 +42,13 @@ int curX = 0, curY = 0;
 
 // textures
 SDL_Texture* tile = NULL;
+SDL_Texture* tile2 = NULL;
+
+SDL_Texture* curPointerTexture = NULL;
 
 
 // tiles
-std::vector<SDL_Rect*> tiles;
+std::vector<Tile*> tiles;
 bool rightDown = false;
 bool leftDown = false;
 
