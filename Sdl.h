@@ -16,6 +16,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "menus/TopMenu.h"
+#include "menus/MenuItem.h"
+
 // Screeeeeen
 const int SCREEN_WIDTH = 648;
 const int SCREEN_HEIGHT = 480;
@@ -38,6 +41,9 @@ SDL_Texture* tile = NULL;
 std::vector<SDL_Rect*> tiles;
 bool rightDown = false;
 bool leftDown = false;
+
+//menus
+TopMenu* topMenu = NULL;
 
 class Sdl {
 public:

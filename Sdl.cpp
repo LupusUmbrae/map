@@ -124,11 +124,17 @@ int main(int argc, char* args[]) {
 	//Start SDL
 	Sdl sdl;
 
+
+
 	bool quit = false;
 
 	if (!sdl.init()) {
 		return 1;
 	}
+
+	//int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer
+	std::vector<MenuItem*> items;
+	topMenu = new TopMenu(20, items, renderer);
 
 	tile = sdl.loadTexture("tile.bmp", renderer);
 
@@ -143,9 +149,14 @@ int main(int argc, char* args[]) {
 		}
 		sdl.renderTexture(tile, renderer, curX * 20, curY * 20);
 
+
 		for (SDL_Rect *curTile : tiles) {
 			sdl.renderTexture(tile, renderer, curTile->x * 20, curTile->y * 20);
 		}
+
+		topMenu->renderMenu(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderPresent(renderer);
 
 	}
