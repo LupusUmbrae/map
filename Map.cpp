@@ -1,22 +1,21 @@
 /*
- * Sdl.cpp
+ * Map.cpp
  *
  *  Created on: 10 Nov 2013
  *      Author: Robin
  */
 
-#include "Sdl.h"
-#include "SDL2/SDL.h"
+#include "Map.h"
 
-Sdl::Sdl() {
+Map::Map() {
 
 }
 
-Sdl::~Sdl() {
+Map::~Map() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Sdl::init() {
+bool Map::init() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return false;
@@ -40,18 +39,22 @@ bool Sdl::init() {
 	return true;
 }
 
-void Sdl::logSDLError(std::ostream &os, const std::string &msg) {
+void Map::logSDLError(std::ostream &os, const std::string &msg) {
 	os << msg << " error: " << SDL_GetError() << std::endl;
 }
 
-void Sdl::cleanUp() {
+void Map::cleanUp() {
+
+	SDL_DestroyTexture(tile);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(screen);
 	SDL_Quit();
 }
 
 /**
  *
  */
-SDL_Texture* Sdl::loadTexture(const std::string &file, SDL_Renderer *ren) {
+SDL_Texture* Map::loadTexture(const std::string &file, SDL_Renderer *ren) {
 	SDL_Texture *texture = NULL;
 	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
 
@@ -62,12 +65,14 @@ SDL_Texture* Sdl::loadTexture(const std::string &file, SDL_Renderer *ren) {
 			this->logSDLError(std::cout, "CreateTextureFromSurface");
 		}
 
+	} else {
+		this->logSDLError(std::cout, "LoadBmp");
 	}
 
 	return texture;
 }
 
-void Sdl::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
+void Map::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
 	SDL_Rect dst;
 	dst.x = x;
 	dst.y = y;
@@ -75,7 +80,7 @@ void Sdl::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
 	SDL_RenderCopy(ren, tex, NULL, &dst);
 }
 
-void Sdl::handleEvent() {
+void Map::handleEvent() {
 
 	if (event.type == SDL_MOUSEMOTION) {
 
@@ -99,16 +104,29 @@ void Sdl::handleEvent() {
 		}
 	}
 
+	if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.sym == SDLK_1) {
+			curPointerTexture = tile;
+		}
+
+		if (event.key.keysym.sym == SDLK_2) {
+			curPointerTexture = tile2;
+		}
+	}
+
 	if (leftDown) {
+
 		SDL_Rect *tileLoc = new SDL_Rect;
 		tileLoc->x = curX;
 		tileLoc->y = curY;
-		tiles.push_back(tileLoc);
+
+		Tile *newTile = new Tile(tileLoc, curPointerTexture);
+		tiles.push_back(newTile);
 	}
 
 	if (rightDown) {
 		for (size_t i = 0; i < tiles.size(); i++) {
-			SDL_Rect *curTile = tiles[i];
+			SDL_Rect *curTile = tiles[i]->location;
 			if (curTile->x == curX && curTile->y == curY) {
 				tiles.erase(tiles.begin() + i);
 				break;
@@ -122,13 +140,11 @@ void Sdl::handleEvent() {
 
 int main(int argc, char* args[]) {
 	//Start SDL
-	Sdl sdl;
-
-
+	Map map;
 
 	bool quit = false;
 
-	if (!sdl.init()) {
+	if (!map.init()) {
 		return 1;
 	}
 
@@ -136,22 +152,26 @@ int main(int argc, char* args[]) {
 	std::vector<MenuItem*> items;
 	topMenu = new TopMenu(20, items, renderer);
 
-	tile = sdl.loadTexture("tile.bmp", renderer);
+	tile = map.loadTexture("tile.bmp", renderer);
+	tile2 = map.loadTexture("tile2.bmp", renderer);
+
+	curPointerTexture = tile;
 
 	while (quit == false) {
 		SDL_RenderClear(renderer);
 
 		while (SDL_PollEvent(&event)) {
-			sdl.handleEvent();
+			map.handleEvent();
 			if (event.type == SDL_QUIT) {
 				quit = true;
 			}
 		}
-		sdl.renderTexture(tile, renderer, curX * 20, curY * 20);
 
+		map.renderTexture(curPointerTexture, renderer, curX * 20, curY * 20);
 
-		for (SDL_Rect *curTile : tiles) {
-			sdl.renderTexture(tile, renderer, curTile->x * 20, curTile->y * 20);
+		for (Tile *curTile : tiles) {
+			map.renderTexture(curTile->texture, renderer,
+					curTile->location->x * 20, curTile->location->y * 20);
 		}
 
 		topMenu->renderMenu(renderer);
@@ -161,7 +181,7 @@ int main(int argc, char* args[]) {
 
 	}
 
-	sdl.cleanUp();
+	map.cleanUp();
 
 	return 0;
 }
