@@ -13,19 +13,19 @@
 #include <SDL2/SDL.h>
 
 #include "MenuItem.h"
+#include "../IDisplay.h"
 
-class TopMenu {
+class TopMenu : public display::IDisplay{
 public:
 	TopMenu(int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer);
 	virtual ~TopMenu();
 
-	void renderMenu(SDL_Renderer* renderer);
+	void render(SDL_Renderer* renderer);
+	void handleEvents(SDL_Event event);
 
 
 private:
 	std::vector<MenuItem*> items;
-	SDL_Texture* menuTexture = NULL;
-	SDL_Rect* menuRectangle = new SDL_Rect;
 
 };
 

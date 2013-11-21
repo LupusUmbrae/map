@@ -19,15 +19,17 @@
 #include <SDL2/SDL_image.h>
 
 // Map Includes
-#include "Tile.h"
+#include "mapping/Tile.h"
 
+#include "menus/TopMenu.h"
+#include "menus/MenuItem.h"
+
+#include "mapping/DrawingArea.h"
 
 /*
  * Actual code
  */
 
-#include "menus/TopMenu.h"
-#include "menus/MenuItem.h"
 
 // Screeeeeen
 const int SCREEN_WIDTH = 648;
@@ -38,9 +40,6 @@ const int SCREEN_BPP = 32;
 SDL_Window *screen = NULL;
 SDL_Renderer *renderer = NULL;
 
-// event for handling..
-SDL_Event event;
-
 int curX = 0, curY = 0;
 
 // textures
@@ -49,14 +48,12 @@ SDL_Texture* tile2 = NULL;
 
 SDL_Texture* curPointerTexture = NULL;
 
-
 // tiles
 std::vector<Tile*> tiles;
 bool rightDown = false;
 bool leftDown = false;
 
-//menus
-TopMenu* topMenu = NULL;
+
 
 class Map {
 public:
@@ -64,15 +61,29 @@ public:
 	virtual ~Map();
 
 	bool init();
+	bool run(); // TODO
 	void cleanUp();
 	void logSDLError(std::ostream &os, const std::string &msg);
 
 	void applySurface(int x, int y, SDL_Surface* source,
 			SDL_Surface* destination);
-	void handleEvent();
+	void handleEvent(SDL_Event event);
+	void render();
+	void renderClean();
 
 	SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *ren);
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
+
+private:
+	int curX = 0, curY = 0;
+
+	//Displays
+	TopMenu* topMenu = NULL;
+
+	mapping::DrawingArea* drawingArea = NULL;
+	//SDL_Renderer *renderer = NULL;
+
+	std::vector<display::IDisplay*> displays;
 
 };
 

@@ -36,6 +36,30 @@ bool Map::init() {
 	if (screen == NULL) {
 		return false;
 	}
+
+	std::vector<MenuItem*> items;
+
+	/*
+	 * Load textures
+	 */
+
+	tile = loadTexture("resources/tile.bmp", renderer);
+	tile2 = loadTexture("resources/tile2.bmp", renderer);
+
+	/*
+	 *  Create the display areas
+	 */
+
+	// Menus
+	topMenu = new TopMenu(20, items, renderer);
+
+	// Drawing Areas
+	drawingArea = new mapping::DrawingArea(0, 20, SCREEN_HEIGHT - 20,
+			SCREEN_WIDTH, tile);
+
+	displays.push_back(topMenu);
+	displays.push_back(drawingArea);
+
 	return true;
 }
 
@@ -46,6 +70,7 @@ void Map::logSDLError(std::ostream &os, const std::string &msg) {
 void Map::cleanUp() {
 
 	SDL_DestroyTexture(tile);
+	SDL_DestroyTexture(tile2);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(screen);
 	SDL_Quit();
@@ -80,62 +105,42 @@ void Map::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
 	SDL_RenderCopy(ren, tex, NULL, &dst);
 }
 
-void Map::handleEvent() {
+void Map::handleEvent(SDL_Event event) {
 
-	if (event.type == SDL_MOUSEMOTION) {
+	if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.type == SDL_MOUSEMOTION) {
 
-		curX = event.motion.x / 20;
-		curY = event.motion.y / 20;
-	}
-	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		if (event.button.button == SDL_BUTTON_LEFT) {
-			leftDown = true;
+			curX = event.motion.x;
+			curY = event.motion.y;
 		}
-		if (event.button.button == SDL_BUTTON_RIGHT) {
-			rightDown = true;
+		for (display::IDisplay *display : displays) {
+			if (display->inArea(curX, curY)) {
+				display->handleEvents(event);
+			}
 		}
 	}
+
 	if (event.type == SDL_MOUSEBUTTONUP) {
-		if (event.button.button == SDL_BUTTON_LEFT) {
-			leftDown = false;
-		}
-		if (event.button.button == SDL_BUTTON_RIGHT) {
-			rightDown = false;
+		for (display::IDisplay *display : displays) {
+			display->mouseUp(event.button.button);
 		}
 	}
 
 	if (event.type == SDL_KEYDOWN) {
 		if (event.key.keysym.sym == SDLK_1) {
-			curPointerTexture = tile;
+			drawingArea->setCurTexture(tile);
 		}
 
 		if (event.key.keysym.sym == SDLK_2) {
-			curPointerTexture = tile2;
+			drawingArea->setCurTexture(tile2);
 		}
 	}
+}
 
-	if (leftDown) {
-
-		SDL_Rect *tileLoc = new SDL_Rect;
-		tileLoc->x = curX;
-		tileLoc->y = curY;
-
-		Tile *newTile = new Tile(tileLoc, curPointerTexture);
-		tiles.push_back(newTile);
+void Map::render() {
+	for (display::IDisplay *display : displays) {
+		display->render(renderer);
 	}
-
-	if (rightDown) {
-		for (size_t i = 0; i < tiles.size(); i++) {
-			SDL_Rect *curTile = tiles[i]->location;
-			if (curTile->x == curX && curTile->y == curY) {
-				tiles.erase(tiles.begin() + i);
-				break;
-			}
-
-		}
-
-	}
-
 }
 
 int main(int argc, char* args[]) {
@@ -149,32 +154,22 @@ int main(int argc, char* args[]) {
 	}
 
 	//int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer
-	std::vector<MenuItem*> items;
-	topMenu = new TopMenu(20, items, renderer);
-
-	tile = map.loadTexture("tile.bmp", renderer);
-	tile2 = map.loadTexture("tile2.bmp", renderer);
 
 	curPointerTexture = tile;
+
+	SDL_Event event;
 
 	while (quit == false) {
 		SDL_RenderClear(renderer);
 
 		while (SDL_PollEvent(&event)) {
-			map.handleEvent();
+			map.handleEvent(event);
 			if (event.type == SDL_QUIT) {
 				quit = true;
 			}
 		}
 
-		map.renderTexture(curPointerTexture, renderer, curX * 20, curY * 20);
-
-		for (Tile *curTile : tiles) {
-			map.renderTexture(curTile->texture, renderer,
-					curTile->location->x * 20, curTile->location->y * 20);
-		}
-
-		topMenu->renderMenu(renderer);
+		map.render();
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderPresent(renderer);
