@@ -14,14 +14,27 @@
 
 #include "IMenuAction.h"
 
+namespace menu {
+
 class MenuItem {
 public:
-	MenuItem();
+	MenuItem(std::string name, std::string tooltip, IMenuAction* action,
+			SDL_Texture* icon, SDL_Texture* iconHover);
 	virtual ~MenuItem();
+	SDL_Texture* getIcon();
+	void setHover(bool hovering);
+
 	std::string* name;
 	std::string* tooltip;
 	IMenuAction* action;
 
+private:
+	bool hover = false;
+
+	SDL_Texture* icon;
+	SDL_Texture* iconHover;
 };
+
+}
 
 #endif /* MENUITEM_H_ */

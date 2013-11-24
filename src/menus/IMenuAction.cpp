@@ -7,7 +7,11 @@
 
 #include "IMenuAction.h"
 
+namespace menu {
+
 IMenuAction::IMenuAction() {
 	// TODO Auto-generated constructor stub
+
+}
 
 }

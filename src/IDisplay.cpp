@@ -15,8 +15,10 @@ IDisplay::IDisplay() {
 }
 
 bool IDisplay::inArea(int x, int y) {
-	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->h))) {
-		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->w))) {
+	curX = x;
+	curY = y;
+	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->w))) {
+		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->h))) {
 			return true;
 		}
 	}

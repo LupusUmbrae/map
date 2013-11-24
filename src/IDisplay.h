@@ -28,6 +28,8 @@ public:
 protected:
 	bool leftDown = false;
 	bool rightDown = false;
+	int curX = 0;
+	int curY = 0;
 
 	SDL_Rect *areaRect = new SDL_Rect();
 };

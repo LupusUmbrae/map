@@ -14,6 +14,5 @@ Tile::Tile(SDL_Rect* location, SDL_Texture* texture) {
 }
 
 Tile::~Tile() {
-	this->location = NULL;
-	this->texture = NULL;
+	delete location;
 }

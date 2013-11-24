@@ -22,6 +22,7 @@
 #include "mapping/Tile.h"
 
 #include "menus/TopMenu.h"
+#include "menus/LeftMenu.h"
 #include "menus/MenuItem.h"
 
 #include "mapping/DrawingArea.h"
@@ -43,8 +44,15 @@ SDL_Renderer *renderer = NULL;
 int curX = 0, curY = 0;
 
 // textures
+std::vector<SDL_Texture*> textures;
 SDL_Texture* tile = NULL;
 SDL_Texture* tile2 = NULL;
+
+SDL_Texture* menuNew = NULL;
+SDL_Texture* menuNewHover = NULL;
+
+SDL_Texture* menuSave = NULL;
+SDL_Texture* menuSaveHover = NULL;
 
 SDL_Texture* curPointerTexture = NULL;
 
@@ -78,7 +86,7 @@ private:
 	int curX = 0, curY = 0;
 
 	//Displays
-	TopMenu* topMenu = NULL;
+	menu::TopMenu* topMenu = NULL;
 
 	mapping::DrawingArea* drawingArea = NULL;
 	//SDL_Renderer *renderer = NULL;

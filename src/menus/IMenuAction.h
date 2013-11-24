@@ -7,12 +7,16 @@
 
 #ifndef IMENUACTION_H_
 #define IMENUACTION_H_
+namespace menu {
 
 class IMenuAction {
 public:
 	IMenuAction();
-	virtual ~IMenuAction() {};
+	virtual ~IMenuAction() {
+	}
+	;
 	virtual bool action() = 0;
 };
 
+}
 #endif /* IMENUACTION_H_ */

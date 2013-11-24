@@ -22,7 +22,7 @@ bool Map::init() {
 	}
 
 	screen = SDL_CreateWindow("My game", SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED, SCREEN_HEIGHT, SCREEN_WIDTH,
+			SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT,
 			SDL_WINDOW_RESIZABLE);
 
 	renderer = SDL_CreateRenderer(screen, -1, 0);
@@ -37,7 +37,7 @@ bool Map::init() {
 		return false;
 	}
 
-	std::vector<MenuItem*> items;
+	std::vector<menu::MenuItem*> items;
 
 	/*
 	 * Load textures
@@ -46,19 +46,36 @@ bool Map::init() {
 	tile = loadTexture("resources/tile.bmp", renderer);
 	tile2 = loadTexture("resources/tile2.bmp", renderer);
 
+	menuNew = loadTexture("resources/menus/new.bmp", renderer);
+	menuNewHover = loadTexture("resources/menus/newHover.bmp", renderer);
+
+	menuSave = loadTexture("resources/menus/save.bmp", renderer);
+	menuSaveHover = loadTexture("resources/menus/saveHover.bmp", renderer);
+
 	/*
 	 *  Create the display areas
 	 */
 
 	// Menus
-	topMenu = new TopMenu(20, items, renderer);
+	menu::MenuItem* menuNewItem = new menu::MenuItem("new", "tooltip New", NULL,
+			menuNew, menuNewHover);
+	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", "tooltip Save",
+			NULL, menuSave, menuSaveHover);
+
+	items.push_back(menuNewItem);
+	items.push_back(menuSaveItem);
+	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, renderer);
+
+	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
+			200);
 
 	// Drawing Areas
-	drawingArea = new mapping::DrawingArea(0, 20, SCREEN_HEIGHT - 20,
-			SCREEN_WIDTH, tile);
+	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
+			SCREEN_WIDTH - 200, tile);
 
 	displays.push_back(topMenu);
 	displays.push_back(drawingArea);
+	displays.push_back(leftMenu);
 
 	return true;
 }
@@ -69,8 +86,10 @@ void Map::logSDLError(std::ostream &os, const std::string &msg) {
 
 void Map::cleanUp() {
 
-	SDL_DestroyTexture(tile);
-	SDL_DestroyTexture(tile2);
+	for (SDL_Texture* curTex : textures) {
+		SDL_DestroyTexture(curTex);
+	}
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(screen);
 	SDL_Quit();
@@ -90,6 +109,8 @@ SDL_Texture* Map::loadTexture(const std::string &file, SDL_Renderer *ren) {
 			this->logSDLError(std::cout, "CreateTextureFromSurface");
 		}
 
+		// This makes it easier to clean them up at the end
+		textures.push_back(texture);
 	} else {
 		this->logSDLError(std::cout, "LoadBmp");
 	}
