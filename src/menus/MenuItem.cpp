@@ -10,8 +10,8 @@ namespace menu {
 
 MenuItem::MenuItem(std::string name, std::string tooltip, IMenuAction* action,
 		SDL_Texture* icon, SDL_Texture* iconHover) {
-	this->name = &name;
-	this->tooltip = &tooltip;
+	this->name = name;
+	this->tooltip = tooltip;
 	this->action = action;
 	this->icon = icon;
 	this->iconHover = iconHover;

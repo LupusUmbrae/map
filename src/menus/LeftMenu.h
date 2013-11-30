@@ -13,7 +13,6 @@
 #include "../IDisplay.h"
 
 
-
 namespace menu {
 
 class LeftMenu: public display::IDisplay {

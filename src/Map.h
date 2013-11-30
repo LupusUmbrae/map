@@ -17,8 +17,10 @@
 // SDL Includes
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 // Map Includes
+
 #include "mapping/Tile.h"
 
 #include "menus/TopMenu.h"
@@ -92,7 +94,7 @@ private:
 	//SDL_Renderer *renderer = NULL;
 
 	std::vector<display::IDisplay*> displays;
-
+	TTF_Font* font;
 };
 
 #endif /* SDL_H_ */

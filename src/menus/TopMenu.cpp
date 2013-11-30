@@ -10,7 +10,8 @@
 namespace menu {
 
 TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
-		std::vector<menu::MenuItem*> menuItems, SDL_Renderer* renderer) {
+		std::vector<menu::MenuItem*> menuItems, SDL_Renderer* renderer,
+		TTF_Font* font) {
 	items = menuItems;
 
 	areaRect->x = offsetX;
@@ -18,7 +19,9 @@ TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
 	areaRect->h = height;
 	areaRect->w = width;
 
-	this->drawItems(renderer);
+	this->renderer = renderer;
+	this->font = font;
+	this->drawItems();
 }
 
 TopMenu::~TopMenu() {
@@ -40,13 +43,20 @@ void TopMenu::render(SDL_Renderer* renderer) {
 		curItem = itemIter->second;
 		SDL_RenderCopy(renderer, curItem->getIcon(), NULL, curRect);
 	}
+	if (tooltip != NULL) {
+		SDL_Rect* dst = new SDL_Rect();
+		dst->x = curX+10;
+		dst->y = curY;
+		SDL_QueryTexture(tooltip, NULL, NULL, &dst->w, &dst->h);
+		SDL_RenderCopy(renderer, tooltip, NULL, dst);
+	}
+
 }
 
 void TopMenu::handleEvents(SDL_Event event) {
 	SDL_Rect* curRect;
 	menu::MenuItem* curItem;
 	bool found = false;
-	;
 
 	/**
 	 * First find if the mouse is over something. Also reset all hovers
@@ -67,14 +77,25 @@ void TopMenu::handleEvents(SDL_Event event) {
 	if (found) {
 		if (event.type == SDL_MOUSEMOTION) {
 			curItem->setHover(true);
+			// Add tooltip
+			SDL_Surface* textSurface = TTF_RenderText_Solid(font,
+					curItem->tooltip.c_str(), textColor);
+
+			tooltip = SDL_CreateTextureFromSurface(renderer, textSurface);
+			SDL_FreeSurface(textSurface);
 		}
 		if (event.type == SDL_MOUSEBUTTONDOWN) {
 
 		}
 	}
+	else
+	{
+		SDL_DestroyTexture(tooltip);
+		tooltip = NULL;
+	}
 }
 
-void TopMenu::drawItems(SDL_Renderer* renderer) {
+void TopMenu::drawItems() {
 	int x = 2;
 	int spacer = 5;
 

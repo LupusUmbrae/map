@@ -15,9 +15,24 @@ Map::~Map() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ *
+ */
 bool Map::init() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		return false;
+	}
+
+	int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) & imgFlags)) {
+		std::cout << "IMG_Init Error: " << IMG_GetError() << std::endl;
+		return false;
+	}
+
+	if( TTF_Init() == -1 )
+	{
+		std::cout << "TTF_Init Error: " << TTF_GetError() << std::endl;
 		return false;
 	}
 
@@ -38,6 +53,16 @@ bool Map::init() {
 	}
 
 	std::vector<menu::MenuItem*> items;
+
+	/*
+	 * Fonts
+	 */
+
+	font = TTF_OpenFont("resources/lazy.ttf", 10);
+	if (font == NULL) {
+		std::cout << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+		return false;
+	}
 
 	/*
 	 * Load textures
@@ -64,7 +89,7 @@ bool Map::init() {
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
-	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, renderer);
+	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, renderer, font);
 
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
 			200);

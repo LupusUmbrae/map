@@ -24,8 +24,8 @@ public:
 	SDL_Texture* getIcon();
 	void setHover(bool hovering);
 
-	std::string* name;
-	std::string* tooltip;
+	std::string name;
+	std::string tooltip;
 	IMenuAction* action;
 
 private:
