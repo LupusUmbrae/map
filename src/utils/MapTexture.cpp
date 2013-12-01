@@ -45,4 +45,5 @@ void MapTexture::render(int xPos, int yPos, SDL_Rect* clip, double angle,
 	SDL_RenderCopyEx(renderer, texture, clip, &renderQuad, angle, center,
 			flip);
 }
+
 } /* namespace utils */

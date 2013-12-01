@@ -8,8 +8,9 @@
 #include "MenuItem.h"
 namespace menu {
 
-MenuItem::MenuItem(std::string name, std::string tooltip, IMenuAction* action,
-		utils::MapTexture* icon, utils::MapTexture* iconHover) {
+MenuItem::MenuItem(std::string name, utils::MapTexture* tooltip,
+		IMenuAction* action, utils::MapTexture* icon,
+		utils::MapTexture* iconHover) {
 	this->name = name;
 	this->tooltip = tooltip;
 	this->action = action;

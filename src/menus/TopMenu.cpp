@@ -34,7 +34,7 @@ void TopMenu::render() {
 	SDL_RenderFillRect(renderer, areaRect);
 
 	// Draw the items
-	SDL_Rect* curRect;
+	SDL_Rect* curRect = NULL;
 	menu::MenuItem* curItem;
 	for (auto itemIter = itemMap.begin(); itemIter != itemMap.end();
 			++itemIter) {
@@ -43,12 +43,9 @@ void TopMenu::render() {
 		curItem = itemIter->second;
 		curItem->getIcon()->render(curRect->x, curRect->y);
 	}
+
 	if (tooltip != NULL) {
-		SDL_Rect* dst = new SDL_Rect();
-		dst->x = curX + 10;
-		dst->y = curY;
-		SDL_QueryTexture(tooltip, NULL, NULL, &dst->w, &dst->h);
-		SDL_RenderCopy(renderer, tooltip, NULL, dst);
+		tooltip->render(curX + 10, curY);
 	}
 
 }
@@ -77,18 +74,13 @@ void TopMenu::handleEvents(SDL_Event event) {
 	if (found) {
 		if (event.type == SDL_MOUSEMOTION) {
 			curItem->setHover(true);
-			// Add tooltip
-			SDL_Surface* textSurface = TTF_RenderText_Solid(font,
-					curItem->tooltip.c_str(), textColor);
 
-			tooltip = SDL_CreateTextureFromSurface(renderer, textSurface);
-			SDL_FreeSurface(textSurface);
+			tooltip = curItem->tooltip;
 		}
 		if (event.type == SDL_MOUSEBUTTONDOWN) {
 
 		}
 	} else {
-		SDL_DestroyTexture(tooltip);
 		tooltip = NULL;
 	}
 }

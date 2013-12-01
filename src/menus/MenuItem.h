@@ -22,14 +22,14 @@ namespace menu {
 
 class MenuItem {
 public:
-	MenuItem(std::string name, std::string tooltip, IMenuAction* action,
+	MenuItem(std::string name, utils::MapTexture* tooltip, IMenuAction* action,
 			utils::MapTexture* icon, utils::MapTexture* iconHover);
 	virtual ~MenuItem();
 	utils::MapTexture* getIcon();
 	void setHover(bool hovering);
 
 	std::string name;
-	std::string tooltip;
+	utils::MapTexture* tooltip;
 	IMenuAction* action;
 
 private:

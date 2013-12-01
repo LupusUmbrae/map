@@ -18,9 +18,6 @@ bool Image::loadImage(std::string file) {
 
 	SDL_Surface *loadedImage = IMG_Load(file.c_str());
 
-	if (renderer == NULL) {
-		logSDLError(std::cout, "renderer null in image");
-	}
 
 	if (loadedImage != NULL) {
 		texture = SDL_CreateTextureFromSurface(renderer, loadedImage);

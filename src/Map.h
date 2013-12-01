@@ -25,6 +25,7 @@
 #include "utils/logger.h"
 #include "utils/MapTextures.h"
 #include "utils/textures/Image.h"
+#include "utils/textures/Text.h"
 
 #include "mapping/Tile.h"
 
@@ -63,6 +64,7 @@ public:
 	virtual ~Map();
 
 	bool init();
+	bool loadResources();
 	bool run(); // TODO
 	void cleanUp();
 

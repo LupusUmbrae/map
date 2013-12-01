@@ -56,7 +56,10 @@ bool Map::init() {
 		return false;
 	}
 
-	std::vector<menu::MenuItem*> items;
+	return true;
+}
+
+bool Map::loadResources() {
 
 	/*
 	 * Fonts
@@ -89,7 +92,6 @@ bool Map::init() {
 	menuSave->loadImage("resources/menus/save.bmp");
 	menuSaveHover->loadImage("resources/menus/saveHover.bmp");
 
-
 	loadedTextures.push_back(tile);
 	loadedTextures.push_back(tile2);
 	loadedTextures.push_back(menuNew);
@@ -102,10 +104,25 @@ bool Map::init() {
 	 */
 
 	// Menus
-	menu::MenuItem* menuNewItem = new menu::MenuItem("new", "tooltip New", NULL,
+	std::vector<menu::MenuItem*> items;
+
+	SDL_Color color = { 0, 0, 0 }; // black text
+	SDL_Color bgColor = { 255, 255, 255}; // white background
+
+
+	utils::Text* newTooltip = new utils::Text(renderer);
+	utils::Text* saveTooltip = new utils::Text(renderer);
+
+	newTooltip->createText("New map", color, bgColor, font);
+	saveTooltip->createText("Save map", color, bgColor, font);
+
+	loadedTextures.push_back(newTooltip);
+	loadedTextures.push_back(saveTooltip);
+
+	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip, NULL,
 			menuNew, menuNewHover);
-	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", "tooltip Save",
-			NULL, menuSave, menuSaveHover);
+	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip, NULL,
+			menuSave, menuSaveHover);
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
@@ -193,6 +210,9 @@ int main(int argc, char* args[]) {
 		return 1;
 	}
 
+	if (!map.loadResources()) {
+		return 1;
+	}
 	//int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer
 
 	SDL_Event event;

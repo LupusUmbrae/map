@@ -23,6 +23,8 @@
 #include "MenuItem.h"
 #include "../IDisplay.h"
 
+#include "../utils/MapTextures.h"
+
 namespace menu {
 class TopMenu: public display::IDisplay {
 public:
@@ -40,7 +42,7 @@ private:
 	std::vector<MenuItem*> items;
 	std::map<SDL_Rect*, MenuItem*> itemMap;
 
-	SDL_Texture* tooltip = NULL;
+	utils::MapTexture* tooltip = NULL;
 	TTF_Font* font;
 	SDL_Color textColor = { 0, 0, 0 };
 
