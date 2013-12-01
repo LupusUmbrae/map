@@ -7,7 +7,7 @@
 
 #include "Tile.h"
 
-Tile::Tile(SDL_Rect* location, SDL_Texture* texture) {
+Tile::Tile(SDL_Rect* location, utils::MapTexture* texture) {
 	this->location = location;
 	this->texture = texture;
 

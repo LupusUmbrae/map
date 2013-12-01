@@ -8,20 +8,24 @@
 #ifndef MENUITEM_H_
 #define MENUITEM_H_
 
+// C++ Includes
 #include <string>
 
+// SDL Includes
 #include <SDL2/SDL.h>
 
+// Map Includes
 #include "IMenuAction.h"
+#include "../utils/MapTextures.h"
 
 namespace menu {
 
 class MenuItem {
 public:
 	MenuItem(std::string name, std::string tooltip, IMenuAction* action,
-			SDL_Texture* icon, SDL_Texture* iconHover);
+			utils::MapTexture* icon, utils::MapTexture* iconHover);
 	virtual ~MenuItem();
-	SDL_Texture* getIcon();
+	utils::MapTexture* getIcon();
 	void setHover(bool hovering);
 
 	std::string name;
@@ -31,8 +35,8 @@ public:
 private:
 	bool hover = false;
 
-	SDL_Texture* icon;
-	SDL_Texture* iconHover;
+	utils::MapTexture* icon;
+	utils::MapTexture* iconHover;
 };
 
 }

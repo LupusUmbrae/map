@@ -10,8 +10,8 @@
 namespace menu {
 
 TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
-		std::vector<menu::MenuItem*> menuItems, SDL_Renderer* renderer,
-		TTF_Font* font) {
+		std::vector<menu::MenuItem*> menuItems, TTF_Font* font,
+		SDL_Renderer* renderer) {
 	items = menuItems;
 
 	areaRect->x = offsetX;
@@ -19,8 +19,8 @@ TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
 	areaRect->h = height;
 	areaRect->w = width;
 
-	this->renderer = renderer;
 	this->font = font;
+	this->renderer = renderer;
 	this->drawItems();
 }
 
@@ -28,7 +28,7 @@ TopMenu::~TopMenu() {
 	// TODO Auto-generated destructor stub
 }
 
-void TopMenu::render(SDL_Renderer* renderer) {
+void TopMenu::render() {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 	//SDL_RenderDrawRect( renderer, menuRectangle );
 	SDL_RenderFillRect(renderer, areaRect);
@@ -41,11 +41,11 @@ void TopMenu::render(SDL_Renderer* renderer) {
 
 		curRect = itemIter->first;
 		curItem = itemIter->second;
-		SDL_RenderCopy(renderer, curItem->getIcon(), NULL, curRect);
+		curItem->getIcon()->render(curRect->x, curRect->y);
 	}
 	if (tooltip != NULL) {
 		SDL_Rect* dst = new SDL_Rect();
-		dst->x = curX+10;
+		dst->x = curX + 10;
 		dst->y = curY;
 		SDL_QueryTexture(tooltip, NULL, NULL, &dst->w, &dst->h);
 		SDL_RenderCopy(renderer, tooltip, NULL, dst);
@@ -87,9 +87,7 @@ void TopMenu::handleEvents(SDL_Event event) {
 		if (event.type == SDL_MOUSEBUTTONDOWN) {
 
 		}
-	}
-	else
-	{
+	} else {
 		SDL_DestroyTexture(tooltip);
 		tooltip = NULL;
 	}
@@ -103,7 +101,8 @@ void TopMenu::drawItems() {
 		SDL_Rect* dst = new SDL_Rect();
 		dst->x = x;
 		dst->y = 2;
-		SDL_QueryTexture(item->getIcon(), NULL, NULL, &dst->w, &dst->h);
+		dst->w = item->getIcon()->getWidth();
+		dst->h = item->getIcon()->getHeight();
 
 		itemMap.insert(std::make_pair(dst, item));
 

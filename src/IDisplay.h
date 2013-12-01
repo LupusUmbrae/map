@@ -8,9 +8,13 @@
 #ifndef IDISPLAY_H_
 #define IDISPLAY_H_
 
+// C++ Includes
 #include <iostream>
 
+// SDL Includes
 #include <SDL2/SDL.h>
+
+// Map Includes
 
 namespace display {
 
@@ -19,7 +23,7 @@ public:
 	IDisplay();
 	virtual ~IDisplay() {};
 
-	virtual void render(SDL_Renderer* renderer) = 0;
+	virtual void render() = 0;
 	virtual void handleEvents(SDL_Event event) = 0;
 
 	bool inArea(int x, int y);
@@ -31,6 +35,7 @@ protected:
 	int curX = 0;
 	int curY = 0;
 
+	SDL_Renderer* renderer;
 	SDL_Rect *areaRect = new SDL_Rect();
 };
 

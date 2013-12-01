@@ -12,28 +12,30 @@
 #include <vector>
 #include <iostream>
 
+// Map Includes
+#include "../utils/logger.h"
 
 #include "../IDisplay.h"
+
 #include "Tile.h"
 
 namespace mapping {
 
 class DrawingArea: public display::IDisplay {
 public:
-	DrawingArea(int offsetX, int offsetY, int height, int width, SDL_Texture *texture);
+	DrawingArea(int offsetX, int offsetY, int height, int width, utils::MapTexture *texture);
 
-	void render(SDL_Renderer* renderer);
+	void render();
 	void handleEvents(SDL_Event event);
-	void setCurTexture(SDL_Texture *texture);
+	void setCurTexture(utils::MapTexture *texture);
 
 private:
 	int curX = 0, curY = 0;
 
-	SDL_Texture *texture = NULL;
+	utils::MapTexture *texture = NULL;
 
 	std::vector<Tile*> tiles;
 
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
 };
 
 } /* namespace mapping */

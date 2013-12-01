@@ -9,7 +9,7 @@
 namespace menu {
 
 MenuItem::MenuItem(std::string name, std::string tooltip, IMenuAction* action,
-		SDL_Texture* icon, SDL_Texture* iconHover) {
+		utils::MapTexture* icon, utils::MapTexture* iconHover) {
 	this->name = name;
 	this->tooltip = tooltip;
 	this->action = action;
@@ -22,7 +22,7 @@ MenuItem::~MenuItem() {
 	// TODO Auto-generated destructor stub
 }
 
-SDL_Texture* MenuItem::getIcon() {
+utils::MapTexture* MenuItem::getIcon() {
 	if (hover) {
 		return iconHover;
 	}

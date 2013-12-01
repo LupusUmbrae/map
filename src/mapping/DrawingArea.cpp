@@ -10,7 +10,7 @@
 namespace mapping {
 
 DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
-		SDL_Texture *texture) {
+		utils::MapTexture *texture) {
 	areaRect->x = offsetX;
 	areaRect->y = offsetY;
 	areaRect->h = height;
@@ -20,18 +20,18 @@ DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
 	curX = 0;
 }
 
-void DrawingArea::render(SDL_Renderer* renderer) {
+void DrawingArea::render() {
 	int x, y;
 	for (Tile *curTile : tiles) {
 		x = (curTile->location->x * 20) + areaRect->x;
 		y = (curTile->location->y * 20) + areaRect->y;
-		this->renderTexture(curTile->texture, renderer, x, y);
+		curTile->texture->render(x, y);
 	}
 
 	x = (curX * 20) + areaRect->x;
 	y = (curY * 20) + areaRect->y;
 
-	this->renderTexture(texture, renderer, x, y);
+	texture->render(x, y);
 }
 
 void DrawingArea::handleEvents(SDL_Event event) {
@@ -75,16 +75,7 @@ void DrawingArea::handleEvents(SDL_Event event) {
 	}
 }
 
-void DrawingArea::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x,
-		int y) {
-	SDL_Rect dst;
-	dst.x = x;
-	dst.y = y;
-	SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
-	SDL_RenderCopy(ren, tex, NULL, &dst);
-}
-
-void DrawingArea::setCurTexture(SDL_Texture *texture) {
+void DrawingArea::setCurTexture(utils::MapTexture *texture) {
 	this->texture = texture;
 }
 

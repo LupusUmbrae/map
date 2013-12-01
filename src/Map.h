@@ -20,6 +20,11 @@
 #include <SDL2/SDL_ttf.h>
 
 // Map Includes
+#include "MapConstants.h"
+
+#include "utils/logger.h"
+#include "utils/MapTextures.h"
+#include "utils/textures/Image.h"
 
 #include "mapping/Tile.h"
 
@@ -33,7 +38,6 @@
  * Actual code
  */
 
-
 // Screeeeeen
 const int SCREEN_WIDTH = 648;
 const int SCREEN_HEIGHT = 480;
@@ -46,24 +50,12 @@ SDL_Renderer *renderer = NULL;
 int curX = 0, curY = 0;
 
 // textures
-std::vector<SDL_Texture*> textures;
-SDL_Texture* tile = NULL;
-SDL_Texture* tile2 = NULL;
 
-SDL_Texture* menuNew = NULL;
-SDL_Texture* menuNewHover = NULL;
-
-SDL_Texture* menuSave = NULL;
-SDL_Texture* menuSaveHover = NULL;
-
-SDL_Texture* curPointerTexture = NULL;
 
 // tiles
 std::vector<Tile*> tiles;
 bool rightDown = false;
 bool leftDown = false;
-
-
 
 class Map {
 public:
@@ -73,7 +65,6 @@ public:
 	bool init();
 	bool run(); // TODO
 	void cleanUp();
-	void logSDLError(std::ostream &os, const std::string &msg);
 
 	void applySurface(int x, int y, SDL_Surface* source,
 			SDL_Surface* destination);
@@ -81,17 +72,31 @@ public:
 	void render();
 	void renderClean();
 
-	SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *ren);
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
 
 private:
 	int curX = 0, curY = 0;
 
+
+
+	// Images
+	std::vector<utils::MapTexture*> loadedTextures;
+
+	utils::Image* tile;
+	utils::Image* tile2;
+
+	utils::Image* menuNew;
+	utils::Image* menuNewHover;
+
+	utils::Image* menuSave;
+	utils::Image* menuSaveHover;
+
+	utils::Image* curPointerTexture;
+
 	//Displays
 	menu::TopMenu* topMenu = NULL;
 
 	mapping::DrawingArea* drawingArea = NULL;
-	//SDL_Renderer *renderer = NULL;
 
 	std::vector<display::IDisplay*> displays;
 	TTF_Font* font;

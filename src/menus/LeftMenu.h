@@ -10,15 +10,18 @@
 
 #include <SDL2/SDL.h>
 
+// Map Includes
+#include "../MapConstants.h"
+#include "../utils/logger.h"
 #include "../IDisplay.h"
-
 
 namespace menu {
 
 class LeftMenu: public display::IDisplay {
 public:
-	LeftMenu(int offsetX, int offsetY, int height, int width);
-	void render(SDL_Renderer* renderer);
+	LeftMenu(int offsetX, int offsetY, int height, int width,
+			SDL_Renderer* renderer);
+	void render();
 	void handleEvents(SDL_Event event);
 };
 

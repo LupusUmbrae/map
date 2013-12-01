@@ -19,6 +19,7 @@ Map::~Map() {
  *
  */
 bool Map::init() {
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return false;
@@ -30,8 +31,7 @@ bool Map::init() {
 		return false;
 	}
 
-	if( TTF_Init() == -1 )
-	{
+	if (TTF_Init() == -1) {
 		std::cout << "TTF_Init Error: " << TTF_GetError() << std::endl;
 		return false;
 	}
@@ -41,6 +41,10 @@ bool Map::init() {
 			SDL_WINDOW_RESIZABLE);
 
 	renderer = SDL_CreateRenderer(screen, -1, 0);
+
+	if (renderer == NULL) {
+		logSDLError(std::cout, "Create renderer failed");
+	}
 
 	SDL_SetWindowFullscreen(screen, 0);
 
@@ -67,15 +71,31 @@ bool Map::init() {
 	/*
 	 * Load textures
 	 */
+	tile = new utils::Image(renderer);
+	tile2 = new utils::Image(renderer);
+	menuNew = new utils::Image(renderer);
+	menuNewHover = new utils::Image(renderer);
+	menuSave = new utils::Image(renderer);
+	menuSaveHover = new utils::Image(renderer);
 
-	tile = loadTexture("resources/tile.bmp", renderer);
-	tile2 = loadTexture("resources/tile2.bmp", renderer);
+	logSDLError(std::cout, "hello?");
 
-	menuNew = loadTexture("resources/menus/new.bmp", renderer);
-	menuNewHover = loadTexture("resources/menus/newHover.bmp", renderer);
+	tile->loadImage("resources/tile.bmp");
+	tile2->loadImage("resources/tile2.bmp");
 
-	menuSave = loadTexture("resources/menus/save.bmp", renderer);
-	menuSaveHover = loadTexture("resources/menus/saveHover.bmp", renderer);
+	menuNew->loadImage("resources/menus/new.bmp");
+	menuNewHover->loadImage("resources/menus/newHover.bmp");
+
+	menuSave->loadImage("resources/menus/save.bmp");
+	menuSaveHover->loadImage("resources/menus/saveHover.bmp");
+
+
+	loadedTextures.push_back(tile);
+	loadedTextures.push_back(tile2);
+	loadedTextures.push_back(menuNew);
+	loadedTextures.push_back(menuNewHover);
+	loadedTextures.push_back(menuSave);
+	loadedTextures.push_back(menuSaveHover);
 
 	/*
 	 *  Create the display areas
@@ -89,10 +109,11 @@ bool Map::init() {
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
-	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, renderer, font);
+
+	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
 
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
-			200);
+			200, renderer);
 
 	// Drawing Areas
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
@@ -105,42 +126,15 @@ bool Map::init() {
 	return true;
 }
 
-void Map::logSDLError(std::ostream &os, const std::string &msg) {
-	os << msg << " error: " << SDL_GetError() << std::endl;
-}
-
 void Map::cleanUp() {
 
-	for (SDL_Texture* curTex : textures) {
-		SDL_DestroyTexture(curTex);
+	for (utils::MapTexture* curTex : loadedTextures) {
+		curTex->unload();
 	}
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(screen);
 	SDL_Quit();
-}
-
-/**
- *
- */
-SDL_Texture* Map::loadTexture(const std::string &file, SDL_Renderer *ren) {
-	SDL_Texture *texture = NULL;
-	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
-
-	if (loadedImage != NULL) {
-		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
-		SDL_FreeSurface(loadedImage);
-		if (texture == NULL) {
-			this->logSDLError(std::cout, "CreateTextureFromSurface");
-		}
-
-		// This makes it easier to clean them up at the end
-		textures.push_back(texture);
-	} else {
-		this->logSDLError(std::cout, "LoadBmp");
-	}
-
-	return texture;
 }
 
 void Map::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
@@ -185,7 +179,7 @@ void Map::handleEvent(SDL_Event event) {
 
 void Map::render() {
 	for (display::IDisplay *display : displays) {
-		display->render(renderer);
+		display->render();
 	}
 }
 
@@ -200,8 +194,6 @@ int main(int argc, char* args[]) {
 	}
 
 	//int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer
-
-	curPointerTexture = tile;
 
 	SDL_Event event;
 
