@@ -32,6 +32,8 @@ public:
 private:
 	int curX = 0, curY = 0;
 
+	int scale = 20;
+
 	utils::MapTexture *texture = NULL;
 
 	std::vector<Tile*> tiles;

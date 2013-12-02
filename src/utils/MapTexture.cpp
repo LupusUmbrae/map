@@ -30,10 +30,20 @@ int MapTexture::getWidth() {
 	return this->width;
 }
 
-void MapTexture::render(int xPos, int yPos, SDL_Rect* clip, double angle,
+void MapTexture::render(int xPos, int yPos, int width, int height, SDL_Rect* clip, double angle,
 		SDL_Point* center, SDL_RendererFlip flip) {
 	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { xPos, yPos, width, height };
+	SDL_Rect renderQuad = { xPos, yPos, this->width, this->height };
+
+	if(width > 0)
+	{
+		renderQuad.w = width;
+	}
+
+	if(height > 0)
+	{
+		renderQuad.h = height;
+	}
 
 	//Set clip rendering dimensions
 	if (clip != NULL) {

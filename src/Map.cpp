@@ -76,6 +76,7 @@ bool Map::loadResources() {
 	 */
 	tile = new utils::Image(renderer);
 	tile2 = new utils::Image(renderer);
+	stone = new utils::Image(renderer);
 	menuNew = new utils::Image(renderer);
 	menuNewHover = new utils::Image(renderer);
 	menuSave = new utils::Image(renderer);
@@ -85,6 +86,7 @@ bool Map::loadResources() {
 
 	tile->loadImage("resources/tile.bmp");
 	tile2->loadImage("resources/tile2.bmp");
+	stone->loadImage("resources/tiles/stone.png");
 
 	menuNew->loadImage("resources/menus/new.bmp");
 	menuNewHover->loadImage("resources/menus/newHover.bmp");
@@ -94,6 +96,7 @@ bool Map::loadResources() {
 
 	loadedTextures.push_back(tile);
 	loadedTextures.push_back(tile2);
+	loadedTextures.push_back(stone);
 	loadedTextures.push_back(menuNew);
 	loadedTextures.push_back(menuNewHover);
 	loadedTextures.push_back(menuSave);
@@ -107,8 +110,7 @@ bool Map::loadResources() {
 	std::vector<menu::MenuItem*> items;
 
 	SDL_Color color = { 0, 0, 0 }; // black text
-	SDL_Color bgColor = { 255, 255, 255}; // white background
-
+	SDL_Color bgColor = { 255, 255, 255 }; // white background
 
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
@@ -154,14 +156,6 @@ void Map::cleanUp() {
 	SDL_Quit();
 }
 
-void Map::renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y) {
-	SDL_Rect dst;
-	dst.x = x;
-	dst.y = y;
-	SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
-	SDL_RenderCopy(ren, tex, NULL, &dst);
-}
-
 void Map::handleEvent(SDL_Event event) {
 
 	if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN) {
@@ -191,7 +185,36 @@ void Map::handleEvent(SDL_Event event) {
 		if (event.key.keysym.sym == SDLK_2) {
 			drawingArea->setCurTexture(tile2);
 		}
+
+		if (event.key.keysym.sym == SDLK_3) {
+			drawingArea->setCurTexture(stone);
+		}
 	}
+}
+
+void Map::run() {
+	bool quit = false;
+
+	SDL_Event event;
+
+	while (quit == false) {
+		SDL_RenderClear(renderer);
+
+		while (SDL_PollEvent(&event)) {
+			this->handleEvent(event);
+			if (event.type == SDL_QUIT) {
+				quit = true;
+			}
+		}
+
+		this->render();
+
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_RenderPresent(renderer);
+
+	}
+
+	this->cleanUp();
 }
 
 void Map::render() {
@@ -204,8 +227,6 @@ int main(int argc, char* args[]) {
 	//Start SDL
 	Map map;
 
-	bool quit = false;
-
 	if (!map.init()) {
 		return 1;
 	}
@@ -213,28 +234,8 @@ int main(int argc, char* args[]) {
 	if (!map.loadResources()) {
 		return 1;
 	}
-	//int height, std::vector<MenuItem*> menuItems, SDL_Renderer* renderer
 
-	SDL_Event event;
-
-	while (quit == false) {
-		SDL_RenderClear(renderer);
-
-		while (SDL_PollEvent(&event)) {
-			map.handleEvent(event);
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
-		}
-
-		map.render();
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderPresent(renderer);
-
-	}
-
-	map.cleanUp();
+	map.run();
 
 	return 0;
 }

@@ -25,13 +25,13 @@ void DrawingArea::render() {
 	for (Tile *curTile : tiles) {
 		x = (curTile->location->x * 20) + areaRect->x;
 		y = (curTile->location->y * 20) + areaRect->y;
-		curTile->texture->render(x, y);
+		curTile->texture->render(x, y, scale, scale);
 	}
 
 	x = (curX * 20) + areaRect->x;
 	y = (curY * 20) + areaRect->y;
 
-	texture->render(x, y);
+	texture->render(x, y, scale, scale);
 }
 
 void DrawingArea::handleEvents(SDL_Event event) {

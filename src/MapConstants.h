@@ -8,7 +8,13 @@
 #ifndef MAPCONSTANTS_H_
 #define MAPCONSTANTS_H_
 
+//C++ Includes
+
+//SDL Includes
 #include <SDL2/SDL.h>
+
+// Map includes
+
 
 namespace MapConstants {
 

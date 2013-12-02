@@ -44,19 +44,7 @@ const int SCREEN_WIDTH = 648;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
-// me window
-SDL_Window *screen = NULL;
-SDL_Renderer *renderer = NULL;
 
-int curX = 0, curY = 0;
-
-// textures
-
-
-// tiles
-std::vector<Tile*> tiles;
-bool rightDown = false;
-bool leftDown = false;
 
 class Map {
 public:
@@ -65,7 +53,7 @@ public:
 
 	bool init();
 	bool loadResources();
-	bool run(); // TODO
+	void run(); // TODO
 	void cleanUp();
 
 	void applySurface(int x, int y, SDL_Surface* source,
@@ -74,11 +62,16 @@ public:
 	void render();
 	void renderClean();
 
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y);
 
 private:
 	int curX = 0, curY = 0;
 
+	// me window
+	SDL_Window *screen = NULL;
+	SDL_Renderer *renderer = NULL;
+
+	// tiles
+	std::vector<Tile*> tiles;
 
 
 	// Images
@@ -86,6 +79,7 @@ private:
 
 	utils::Image* tile;
 	utils::Image* tile2;
+	utils::Image* stone;
 
 	utils::Image* menuNew;
 	utils::Image* menuNewHover;
