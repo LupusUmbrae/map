@@ -10,6 +10,7 @@
 
 // C++ Includes
 #include <vector>
+#include <algorithm>
 #include <iostream>
 
 // Map Includes
@@ -23,13 +24,15 @@ namespace mapping {
 
 class DrawingArea: public display::IDisplay {
 public:
-	DrawingArea(int offsetX, int offsetY, int height, int width, utils::MapTexture *texture);
+	DrawingArea(int offsetX, int offsetY, int height, int width,
+			utils::MapTexture *texture);
 
 	void render();
 	void handleEvents(SDL_Event event);
 	void setCurTexture(utils::MapTexture *texture);
 
 private:
+
 	int curX = 0, curY = 0;
 
 	int scale = 20;
@@ -37,6 +40,8 @@ private:
 	utils::MapTexture *texture = NULL;
 
 	std::vector<Tile*> tiles;
+
+
 
 };
 

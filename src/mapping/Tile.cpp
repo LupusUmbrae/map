@@ -7,12 +7,13 @@
 
 #include "Tile.h"
 
-Tile::Tile(SDL_Rect* location, utils::MapTexture* texture) {
-	this->location = location;
+Tile::Tile(int x, int y, utils::MapTexture* texture) {
+	this->x = x;
+	this->y = y;
 	this->texture = texture;
 
 }
 
 Tile::~Tile() {
-	delete location;
+
 }

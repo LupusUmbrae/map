@@ -158,7 +158,7 @@ void Map::cleanUp() {
 
 void Map::handleEvent(SDL_Event event) {
 
-	if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN) {
+	if (event.type != SDL_MOUSEBUTTONUP && event.type != SDL_KEYDOWN) {
 		if (event.type == SDL_MOUSEMOTION) {
 
 			curX = event.motion.x;

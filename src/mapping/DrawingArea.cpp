@@ -22,14 +22,15 @@ DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
 
 void DrawingArea::render() {
 	int x, y;
+
 	for (Tile *curTile : tiles) {
-		x = (curTile->location->x * 20) + areaRect->x;
-		y = (curTile->location->y * 20) + areaRect->y;
+		x = (curTile->x * scale) + areaRect->x;
+		y = (curTile->y * scale) + areaRect->y;
 		curTile->texture->render(x, y, scale, scale);
 	}
 
-	x = (curX * 20) + areaRect->x;
-	y = (curY * 20) + areaRect->y;
+	x = (curX * scale) + areaRect->x;
+	y = (curY * scale) + areaRect->y;
 
 	texture->render(x, y, scale, scale);
 }
@@ -37,8 +38,8 @@ void DrawingArea::render() {
 void DrawingArea::handleEvents(SDL_Event event) {
 
 	if (event.type == SDL_MOUSEMOTION) {
-		curX = (event.motion.x - areaRect->x) / 20;
-		curY = (event.motion.y - areaRect->y) / 20;
+		curX = (event.motion.x - areaRect->x) / scale;
+		curY = (event.motion.y - areaRect->y) / scale;
 
 	}
 
@@ -51,26 +52,47 @@ void DrawingArea::handleEvents(SDL_Event event) {
 		}
 	}
 
-	if (leftDown) {
-		SDL_Rect *tileLoc = new SDL_Rect;
-		tileLoc->x = curX;
-		tileLoc->y = curY;
+	if(event.type == SDL_MOUSEWHEEL)
+	{
+		scale += event.wheel.y;
+		if(scale < 10)
+		{
+			scale = 10;
+		}
 
-		Tile *newTile = new Tile(tileLoc, texture);
-		tiles.push_back(newTile);
+		if(scale > 100)
+		{
+			scale = 100;
+		}
+	}
+
+	if (leftDown) {
+
+		Tile *newTile = new Tile(curX, curY, texture);
+
+		bool found = false;
+		for (size_t i = 0; i < tiles.size(); i++) {
+			if (tiles[i]->x == curX && tiles[i]->y == curY) {
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			tiles.push_back(newTile);
+		}
+
 	}
 
 	if (rightDown) {
 		Tile* tile;
 		for (size_t i = 0; i < tiles.size(); i++) {
-			SDL_Rect *curTile = tiles[i]->location;
-			if (curTile->x == curX && curTile->y == curY) {
+			if (tiles[i]->x == curX && tiles[i]->y == curY) {
 				tile = tiles.at(i);
 				tiles.erase(tiles.begin() + i);
 				delete tile;
 				break;
 			}
-
 		}
 	}
 }

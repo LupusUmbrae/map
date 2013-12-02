@@ -13,14 +13,16 @@
 
 // Map Includes
 #include "../utils/MapTextures.h"
-
+#include "../utils/logger.h"
 
 class Tile {
 public:
-	Tile(SDL_Rect* location, utils::MapTexture* texture);
+
+	Tile(int x, int y, utils::MapTexture* texture);
 	virtual ~Tile();
 
-	SDL_Rect* location = NULL;
+	int x;
+	int y;
 	utils::MapTexture* texture = NULL;
 
 };
