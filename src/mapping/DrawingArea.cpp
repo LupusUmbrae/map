@@ -52,16 +52,11 @@ void DrawingArea::handleEvents(SDL_Event event) {
 		}
 	}
 
-	if(event.type == SDL_MOUSEWHEEL)
-	{
+	if (event.type == SDL_MOUSEWHEEL) {
 		scale += event.wheel.y;
-		if(scale < 10)
-		{
+		if (scale < 10) {
 			scale = 10;
-		}
-
-		if(scale > 100)
-		{
+		} else if (scale > 100) {
 			scale = 100;
 		}
 	}

@@ -82,8 +82,6 @@ bool Map::loadResources() {
 	menuSave = new utils::Image(renderer);
 	menuSaveHover = new utils::Image(renderer);
 
-	logSDLError(std::cout, "hello?");
-
 	tile->loadImage("resources/tile.bmp");
 	tile2->loadImage("resources/tile2.bmp");
 	stone->loadImage("resources/tiles/stone.png");
