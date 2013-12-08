@@ -71,9 +71,18 @@ bool Map::loadResources() {
 		return false;
 	}
 
+	font2 = TTF_OpenFont("resources/lazy.ttf", 15);
+	if (font == NULL) {
+		std::cout << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+		return false;
+	}
+
 	/*
 	 * Load textures
 	 */
+	utils::Image* groupOpen = new utils::Image(renderer);
+	utils::Image* groupClosed = new utils::Image(renderer);
+
 	tile = new utils::Image(renderer);
 	tile2 = new utils::Image(renderer);
 	stone = new utils::Image(renderer);
@@ -92,6 +101,9 @@ bool Map::loadResources() {
 	menuSave->loadImage("resources/menus/save.bmp");
 	menuSaveHover->loadImage("resources/menus/saveHover.bmp");
 
+	groupOpen->loadImage("resources/menus/minus.png");
+	groupClosed->loadImage("resources/menus/cross.png");
+
 	loadedTextures.push_back(tile);
 	loadedTextures.push_back(tile2);
 	loadedTextures.push_back(stone);
@@ -99,6 +111,25 @@ bool Map::loadResources() {
 	loadedTextures.push_back(menuNewHover);
 	loadedTextures.push_back(menuSave);
 	loadedTextures.push_back(menuSaveHover);
+	loadedTextures.push_back(groupOpen);
+	loadedTextures.push_back(groupClosed);
+
+
+	SDL_Color color = { 0, 0, 0 }; // black text
+	SDL_Color bgColor = { 255, 255, 255 }; // white background
+
+	utils::Text* newTooltip = new utils::Text(renderer);
+	utils::Text* saveTooltip = new utils::Text(renderer);
+
+	utils::Text* groupName = new utils::Text(renderer);
+
+	newTooltip->createText("New map", color, bgColor, font);
+	saveTooltip->createText("Save map", color, bgColor, font);
+
+	groupName->createText("Group One", color, font);
+
+	loadedTextures.push_back(newTooltip);
+	loadedTextures.push_back(saveTooltip);
 
 	/*
 	 *  Create the display areas
@@ -107,17 +138,8 @@ bool Map::loadResources() {
 	// Menus
 	std::vector<menu::MenuItem*> items;
 
-	SDL_Color color = { 0, 0, 0 }; // black text
-	SDL_Color bgColor = { 255, 255, 255 }; // white background
 
-	utils::Text* newTooltip = new utils::Text(renderer);
-	utils::Text* saveTooltip = new utils::Text(renderer);
 
-	newTooltip->createText("New map", color, bgColor, font);
-	saveTooltip->createText("Save map", color, bgColor, font);
-
-	loadedTextures.push_back(newTooltip);
-	loadedTextures.push_back(saveTooltip);
 
 	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip, NULL,
 			menuNew, menuNewHover);
@@ -129,8 +151,34 @@ bool Map::loadResources() {
 
 	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
 
+	std::vector <utils::MapTexture*> tiles;
+
+	tiles.push_back(tile);
+	tiles.push_back(tile2);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+	tiles.push_back(stone);
+
+	menu::TileGroup* group = new menu::TileGroup(groupName, tiles);
+
+	std::vector<menu::TileGroup*> groups;
+
+	groups.push_back(group);
+	groups.push_back(group);
+
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
-			200, renderer);
+			200, renderer, groups, groupClosed, groupOpen);
 
 	// Drawing Areas
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,

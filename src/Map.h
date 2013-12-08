@@ -32,6 +32,7 @@
 #include "menus/TopMenu.h"
 #include "menus/LeftMenu.h"
 #include "menus/MenuItem.h"
+#include "menus/TileGroup.h"
 
 #include "mapping/DrawingArea.h"
 
@@ -96,6 +97,7 @@ private:
 
 	std::vector<display::IDisplay*> displays;
 	TTF_Font* font;
+	TTF_Font* font2;
 };
 
 #endif /* SDL_H_ */
