@@ -137,10 +137,10 @@ bool Map::loadResources() {
 	// Menus
 	std::vector<menu::MenuItem*> items;
 
-	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip, NULL,
-			menuNew, menuNewHover);
-	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip, NULL,
-			menuSave, menuSaveHover);
+	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip,
+			new action::IAction(action::NEW), menuNew, menuNewHover);
+	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip,
+			new action::IAction(action::SAVE), menuSave, menuSaveHover);
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
@@ -221,30 +221,26 @@ void Map::handleEvent(SDL_Event event) {
 	}
 
 	if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.sym == SDLK_1) {
-			drawingArea->setCurTexture(tile);
-		}
 
-		if (event.key.keysym.sym == SDLK_2) {
-			drawingArea->setCurTexture(tile2);
-		}
-
-		if (event.key.keysym.sym == SDLK_3) {
-			drawingArea->setCurTexture(stone);
-		}
 	}
 }
 
 void Map::handleAction(action::IAction* action) {
+
+	action::changeTile* tileAction;
 
 	switch (action->getAction()) {
 	case action::NONE:
 		logMessage("None action received");
 		break;
 	case action::CHANGE_TILE:
-		action::changeTile* tileAction =
-				static_cast<action::changeTile*>(action);
+		tileAction = static_cast<action::changeTile*>(action);
 		drawingArea->setCurTexture(tileAction->getTile());
+		break;
+	case action::NEW:
+		drawingArea->clearMap();
+		break;
+	case action::SAVE:
 		break;
 	}
 }

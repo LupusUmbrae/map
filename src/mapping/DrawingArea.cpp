@@ -96,4 +96,8 @@ void DrawingArea::setCurTexture(utils::MapTexture *texture) {
 	this->texture = texture;
 }
 
+void DrawingArea::clearMap() {
+	this->tiles.clear();
+}
+
 } /* namespace mapping */

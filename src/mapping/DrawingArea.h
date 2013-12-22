@@ -31,6 +31,8 @@ public:
 	void handleEvents(SDL_Event event);
 	void setCurTexture(utils::MapTexture *texture);
 
+	void clearMap();
+
 private:
 
 	int curX = 0, curY = 0;

@@ -15,14 +15,14 @@
 #include <SDL2/SDL.h>
 
 // Map Includes
-#include "IMenuAction.h"
+#include "../actions/IAction.h"
 #include "../utils/MapTextures.h"
 
 namespace menu {
 
 class MenuItem {
 public:
-	MenuItem(std::string name, utils::MapTexture* tooltip, IMenuAction* action,
+	MenuItem(std::string name, utils::MapTexture* tooltip, action::IAction* action,
 			utils::MapTexture* icon, utils::MapTexture* iconHover);
 	virtual ~MenuItem();
 	utils::MapTexture* getIcon();
@@ -30,7 +30,7 @@ public:
 
 	std::string name;
 	utils::MapTexture* tooltip;
-	IMenuAction* action;
+	action::IAction* action;
 
 private:
 	bool hover = false;

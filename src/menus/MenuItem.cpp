@@ -9,7 +9,7 @@
 namespace menu {
 
 MenuItem::MenuItem(std::string name, utils::MapTexture* tooltip,
-		IMenuAction* action, utils::MapTexture* icon,
+		action::IAction* action, utils::MapTexture* icon,
 		utils::MapTexture* iconHover) {
 	this->name = name;
 	this->tooltip = tooltip;
@@ -20,7 +20,7 @@ MenuItem::MenuItem(std::string name, utils::MapTexture* tooltip,
 }
 
 MenuItem::~MenuItem() {
-	// TODO Auto-generated destructor stub
+	delete action;
 }
 
 utils::MapTexture* MenuItem::getIcon() {

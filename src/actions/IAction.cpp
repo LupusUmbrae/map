@@ -12,6 +12,11 @@ namespace action {
 IAction::IAction() {
 }
 
+IAction::IAction(actions action)
+{
+	this->action = action;
+}
+
 actions IAction::getAction() {
 	return this->action;
 }

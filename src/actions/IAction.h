@@ -18,13 +18,14 @@
 namespace action {
 
 enum actions {
-	NONE=0, CHANGE_TILE=1
+	NONE, CHANGE_TILE, NEW, SAVE
 };
 
 class IAction {
 public:
 	IAction();
-	void setAction(actions action);
+	IAction(actions action);
+
 	actions getAction();
 
 protected:
