@@ -114,7 +114,6 @@ bool Map::loadResources() {
 	loadedTextures.push_back(groupOpen);
 	loadedTextures.push_back(groupClosed);
 
-
 	SDL_Color color = { 0, 0, 0 }; // black text
 	SDL_Color bgColor = { 255, 255, 255 }; // white background
 
@@ -138,9 +137,6 @@ bool Map::loadResources() {
 	// Menus
 	std::vector<menu::MenuItem*> items;
 
-
-
-
 	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip, NULL,
 			menuNew, menuNewHover);
 	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip, NULL,
@@ -151,7 +147,7 @@ bool Map::loadResources() {
 
 	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
 
-	std::vector <utils::MapTexture*> tiles;
+	std::vector<utils::MapTexture*> tiles;
 
 	tiles.push_back(tile);
 	tiles.push_back(tile2);
@@ -171,11 +167,12 @@ bool Map::loadResources() {
 	tiles.push_back(stone);
 
 	menu::TileGroup* group = new menu::TileGroup(groupName, tiles);
+	menu::TileGroup* group2 = new menu::TileGroup(groupName, tiles);
 
 	std::vector<menu::TileGroup*> groups;
 
 	groups.push_back(group);
-	groups.push_back(group);
+	groups.push_back(group2);
 
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
 			200, renderer, groups, groupClosed, groupOpen);
@@ -238,10 +235,25 @@ void Map::handleEvent(SDL_Event event) {
 	}
 }
 
+void Map::handleAction(action::IAction* action) {
+
+	switch (action->getAction()) {
+	case action::NONE:
+		logMessage("None action received");
+		break;
+	case action::CHANGE_TILE:
+		action::changeTile* tileAction =
+				static_cast<action::changeTile*>(action);
+		drawingArea->setCurTexture(tileAction->getTile());
+		break;
+	}
+}
+
 void Map::run() {
 	bool quit = false;
 
 	SDL_Event event;
+	action::IAction* action;
 
 	while (quit == false) {
 		SDL_RenderClear(renderer);
@@ -251,6 +263,13 @@ void Map::run() {
 			if (event.type == SDL_QUIT) {
 				quit = true;
 			}
+		}
+
+		action = action::ActionQueue::getInstance().pollEvent();
+		while (action != NULL) {
+			handleAction(action);
+			delete action;
+			action = action::ActionQueue::getInstance().pollEvent();
 		}
 
 		this->render();

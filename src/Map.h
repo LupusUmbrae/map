@@ -27,6 +27,9 @@
 #include "utils/textures/Image.h"
 #include "utils/textures/Text.h"
 
+#include "actions/ActionQueue.h"
+#include "actions/IAction.h"
+
 #include "mapping/Tile.h"
 
 #include "menus/TopMenu.h"
@@ -60,6 +63,7 @@ public:
 	void applySurface(int x, int y, SDL_Surface* source,
 			SDL_Surface* destination);
 	void handleEvent(SDL_Event event);
+	void handleAction(action::IAction* action);
 	void render();
 	void renderClean();
 

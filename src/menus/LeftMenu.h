@@ -8,6 +8,10 @@
 #ifndef LEFTMENU_H_
 #define LEFTMENU_H_
 
+// C++ Includes
+#include <sstream>
+
+// SDL Includes
 #include <SDL2/SDL.h>
 
 // Map Includes

@@ -56,18 +56,21 @@ void LeftMenu::render() {
 				}
 
 			}
+			renY += 20;
 
 		} else {
 			this->groupClosed->render(renX, renY, 10, 10);
-			renX += 15;
+			renX += 10;
 			curGroup->getGroupName()->render(renX, renY);
+			renY += 10;
 		}
 
 		curGroup->setArea(startX, startY, this->areaRect->w, renY - startY);
+		curGroup->setSpacing(SPACER, 10, 20);
 
 		// prepare for the next item
 		renX = this->areaRect->x;
-		renY += SPACER + 20;
+		renY += SPACER;
 	}
 }
 
@@ -77,7 +80,7 @@ void LeftMenu::handleEvents(SDL_Event event) {
 			for (TileGroup* curGroup : groups) {
 				if (curGroup->inArea(curX, curY)) {
 					// icon or expand bit?
-
+					curGroup->handleEvent(curX, curY);
 					break;
 				}
 			}

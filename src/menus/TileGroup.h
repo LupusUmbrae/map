@@ -15,6 +15,9 @@
 
 // Map Includes
 #include "../utils/MapTextures.h"
+#include "../utils/logger.h"
+#include "../actions/changeTile.h"
+#include "../actions/ActionQueue.h"
 
 namespace menu {
 
@@ -24,6 +27,9 @@ public:
 
 	bool inArea(int x, int y);
 	void setArea(int x, int y, int w, int h);
+	void setSpacing(int spacer, int nameSize, int iconSize);
+
+	void handleEvent(int x, int y);
 
 	bool isOpen();
 	void setOpen(bool open) {this->open = open;};
@@ -33,6 +39,10 @@ public:
 
 private:
 	SDL_Rect *areaRect = new SDL_Rect();
+
+	int spacer; // spacer used to space icons
+	int nameSize;
+	int iconSize;
 
 	utils::MapTexture* groupName;
 	std::vector <utils::MapTexture*> tiles;
