@@ -9,10 +9,17 @@
 #define SDL_H_
 
 // C++ Includes
-#include <string.h>
+#include <string>
 #include <iostream>
 #include <ostream>
 #include <vector>
+#include <fstream>
+
+#include <dirent.h>
+
+#include <json/json.h>
+
+#include <sstream>
 
 // SDL Includes
 #include <SDL2/SDL.h>
@@ -48,25 +55,32 @@ const int SCREEN_WIDTH = 648;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
-
-
-class Map {
+class Map
+{
 public:
 	Map();
-	virtual ~Map();
+	virtual
+	~Map();
 
-	bool init();
-	bool loadResources();
-	void run(); // TODO
-	void cleanUp();
+	bool
+	init();
+	bool
+	loadResources();
+	void
+	run(); // TODO
+	void
+	cleanUp();
 
-	void applySurface(int x, int y, SDL_Surface* source,
-			SDL_Surface* destination);
-	void handleEvent(SDL_Event event);
-	void handleAction(action::IAction* action);
-	void render();
-	void renderClean();
-
+	void
+	applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
+	void
+	handleEvent(SDL_Event event);
+	void
+	handleAction(action::IAction* action);
+	void
+	render();
+	void
+	renderClean();
 
 private:
 	int curX = 0, curY = 0;
@@ -77,7 +91,6 @@ private:
 
 	// tiles
 	std::vector<Tile*> tiles;
-
 
 	// Images
 	std::vector<utils::MapTexture*> loadedTextures;

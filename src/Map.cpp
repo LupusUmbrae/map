@@ -78,6 +78,76 @@ bool Map::loadResources() {
 	}
 
 	/*
+	 * Find tile sets
+	 */
+
+	SDL_Color color = { 0, 0, 0 }; // black text
+	SDL_Color bgColor = { 255, 255, 255 }; // white background
+
+	Json::Reader reader;
+	Json::Value root;
+
+	std::vector<menu::TileGroup*> groups;
+	std::vector<utils::MapTexture*> tiles;
+	menu::TileGroup* curGroup;
+	utils::Image* curTile;
+	utils::Text* groupName;
+
+	DIR* dir;
+	struct dirent* ent;
+
+	std::stringstream setFolder;
+	std::stringstream jsonFolder;
+	std::stringstream imageLocation;
+	std::stringstream uniqueName;
+
+	// TODO mossro: improve this.. thing, also probably move to a new class
+	if ((dir = opendir("resources/tilesets/")) != NULL) {
+		std::ifstream ifile;
+		while ((ent = readdir(dir)) != NULL) {
+			setFolder.str("");
+			jsonFolder.str("");
+
+			setFolder << "resources/tilesets/" << ent->d_name;
+			jsonFolder << setFolder.str() << "/set.json";
+
+			ifile.open(jsonFolder.str(), std::ifstream::in); // marked as error but compiles
+			if (ifile) {
+				if (reader.parse(ifile, root)) {
+					tiles.clear();
+					// Create tile set
+					groupName = new utils::Text(renderer);
+					groupName->createText(root["name"].asString(), color, font);
+
+					Json::Value imagesToLoad = root["tiles"];
+					for (size_t i = 0; i < imagesToLoad.size(); i++) {
+						curTile = new utils::Image(renderer);
+
+						uniqueName.str("");
+						imageLocation.str("");
+
+						imageLocation << setFolder.str() << "/"
+								<< imagesToLoad[0].get("filename", "").asString();
+						uniqueName << ent->d_name << "."
+								<< imagesToLoad[0].get("name", "").asString();
+
+						curTile->loadImage(imageLocation.str());
+						curTile->setUniqueName(uniqueName.str());
+						tiles.push_back(curTile);
+						loadedTextures.push_back(curTile);
+					}
+					curGroup = new menu::TileGroup(groupName, tiles);
+					groups.push_back(curGroup);
+
+				} else {
+					logMessage(reader.getFormattedErrorMessages());
+				}
+
+			}
+		}
+	}
+
+	/*
 	 * Load textures
 	 */
 	utils::Image* groupOpen = new utils::Image(renderer);
@@ -114,18 +184,15 @@ bool Map::loadResources() {
 	loadedTextures.push_back(groupOpen);
 	loadedTextures.push_back(groupClosed);
 
-	SDL_Color color = { 0, 0, 0 }; // black text
-	SDL_Color bgColor = { 255, 255, 255 }; // white background
-
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
 
-	utils::Text* groupName = new utils::Text(renderer);
+	//utils::Text* groupName = new utils::Text(renderer);
 
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
 
-	groupName->createText("Group One", color, font);
+//	groupName->createText("Group One", color, font);
 
 	loadedTextures.push_back(newTooltip);
 	loadedTextures.push_back(saveTooltip);
@@ -146,33 +213,6 @@ bool Map::loadResources() {
 	items.push_back(menuSaveItem);
 
 	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
-
-	std::vector<utils::MapTexture*> tiles;
-
-	tiles.push_back(tile);
-	tiles.push_back(tile2);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-	tiles.push_back(stone);
-
-	menu::TileGroup* group = new menu::TileGroup(groupName, tiles);
-	menu::TileGroup* group2 = new menu::TileGroup(groupName, tiles);
-
-	std::vector<menu::TileGroup*> groups;
-
-	groups.push_back(group);
-	groups.push_back(group2);
 
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
 			200, renderer, groups, groupClosed, groupOpen);
@@ -226,7 +266,6 @@ void Map::handleEvent(SDL_Event event) {
 }
 
 void Map::handleAction(action::IAction* action) {
-
 	action::changeTile* tileAction;
 
 	switch (action->getAction()) {
@@ -241,6 +280,16 @@ void Map::handleAction(action::IAction* action) {
 		drawingArea->clearMap();
 		break;
 	case action::SAVE:
+		Json::Value saveRoot;
+
+		saveRoot = drawingArea->save();
+
+		std::ofstream saveFile("resources/save.json");
+		if (saveFile) {
+			saveFile << saveRoot;
+			saveFile.close();
+		}
+
 		break;
 	}
 }

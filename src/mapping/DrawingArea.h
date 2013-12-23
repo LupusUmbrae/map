@@ -13,6 +13,10 @@
 #include <algorithm>
 #include <iostream>
 
+#include <json/value.h>
+
+// SDL Includes
+
 // Map Includes
 #include "../utils/logger.h"
 
@@ -31,6 +35,8 @@ public:
 	void handleEvents(SDL_Event event);
 	void setCurTexture(utils::MapTexture *texture);
 
+	Json::Value save();
+
 	void clearMap();
 
 private:
@@ -42,8 +48,6 @@ private:
 	utils::MapTexture *texture = NULL;
 
 	std::vector<Tile*> tiles;
-
-
 
 };
 

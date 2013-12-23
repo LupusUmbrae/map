@@ -1,0 +1,11 @@
+{
+  "name" : "test set",
+  "tiles" : [
+      { 
+      "name"     : "tile1",
+      "filename" : "stone.png", 
+      "category" : "floor"
+      }
+    ]
+  }
+}

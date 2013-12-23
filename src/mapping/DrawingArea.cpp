@@ -96,6 +96,24 @@ void DrawingArea::setCurTexture(utils::MapTexture *texture) {
 	this->texture = texture;
 }
 
+Json::Value DrawingArea::save() {
+	Json::Value root;
+
+	root["name"] = "testSAve";
+	root["version"] = "v0.1";
+
+	Tile* tile;
+	for (size_t i = 0; i < tiles.size(); i++) {
+		tile = tiles.at(i);
+
+		root["map"][i]["name"] = *tile->texture->getUniqueName();
+		root["map"][i]["x"] = tile->x;
+		root["map"][i]["y"] = tile->y;
+	}
+
+	return root;
+}
+
 void DrawingArea::clearMap() {
 	this->tiles.clear();
 }
