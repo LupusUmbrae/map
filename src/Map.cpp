@@ -177,17 +177,13 @@ bool Map::loadResources() {
 	groupOpen->loadImage("resources/menus/minus.png");
 	groupClosed->loadImage("resources/menus/cross.png");
 
-
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
 	utils::Text* loadTooltip = new utils::Text(renderer);
 
-
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
 	loadTooltip->createText("Load map", color, bgColor, font);
-
-
 
 	/*
 	 *  Create the display areas
@@ -313,17 +309,26 @@ void Map::handleAction(action::IAction* action) {
 				if (mapRoot["version"].asString().compare("v0.1") == 0) {
 					Json::Value tiles = mapRoot["map"];
 					for (Json::Value tile : tiles) {
+						texture = NULL; // clear it
 						tileName = tile["name"].asString();
 						for (utils::MapTexture* curTex : utils::MapTexture::loadedTextures) {
-							if (curTex->getUniqueName()->compare(tileName)  == 0) {
+							if (curTex->getUniqueName()->compare(tileName)
+									== 0) {
 								texture = curTex;
 								break;
 							}
 						}
 						x = tile["x"].asInt();
 						y = tile["y"].asInt();
-						loadedTile = new Tile(x, y, texture);
-						loadedMap.push_back(loadedTile);
+						if (texture != NULL) {
+							loadedTile = new Tile(x, y, texture);
+							loadedMap.push_back(loadedTile);
+						}
+						else
+						{
+							logMessage("Failed to find tile");
+						}
+
 					}
 					drawingArea->loadMap(loadedMap);
 				}
