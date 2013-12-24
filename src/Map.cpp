@@ -338,7 +338,6 @@ void Map::handleAction(action::IAction* action) {
 				if (mapRoot["version"].asString().compare("v0.1") == 0) {
 					Json::Value tiles = mapRoot["map"];
 					for (Json::Value tile : tiles) {
-						logMessage(tile["name"].asString());
 						tileName = tile["name"].asString();
 						for (utils::MapTexture* curTex : loadedTextures) {
 							if (curTex->getUniqueName()->compare(tileName)  == 0) {

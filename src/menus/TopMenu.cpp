@@ -89,7 +89,6 @@ void TopMenu::drawItems() {
 	int spacer = 5;
 
 	for (menu::MenuItem* item : items) {
-		logMessage(item->name);
 		SDL_Rect* dst = new SDL_Rect();
 		dst->x = x;
 		dst->y = 2;
