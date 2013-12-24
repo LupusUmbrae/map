@@ -35,6 +35,9 @@ public:
 	void handleEvents(SDL_Event event);
 	void setCurTexture(utils::MapTexture *texture);
 
+	// TODO mossro: Update this temporary function
+	void loadMap(std::vector<Tile*> tiles);
+
 	Json::Value save();
 
 	void clearMap();

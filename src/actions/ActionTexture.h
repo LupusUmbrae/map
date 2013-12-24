@@ -20,14 +20,14 @@
 
 namespace action {
 
-class changeTile: public action::IAction {
+class ActionTile: public action::IAction {
 public:
-	changeTile(utils::MapTexture* tile);
+	ActionTile(utils::MapTexture* texture);
 
-	utils::MapTexture* getTile();
+	utils::MapTexture* getTexture();
 
 private:
-	utils::MapTexture* tile;
+	utils::MapTexture* texture;
 };
 
 } /* namespace action */

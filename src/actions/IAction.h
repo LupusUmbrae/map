@@ -14,11 +14,17 @@
 
 // Map Includes
 
-
 namespace action {
 
 enum actions {
-	NONE, CHANGE_TILE, NEW, SAVE
+	/*
+	 * NONE - do nothing, if this is called its due to an error somehwere
+	 * Change Tile - Change the currently selected tile in the drawing area
+	 * New - Create a new map
+	 * Save - save a map
+	 * Load - load a map
+	 */
+	NONE, CHANGE_TILE, NEW, SAVE, LOAD
 };
 
 class IAction {

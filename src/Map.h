@@ -59,28 +59,18 @@ class Map
 {
 public:
 	Map();
-	virtual
-	~Map();
+	virtual ~Map();
 
-	bool
-	init();
-	bool
-	loadResources();
-	void
-	run(); // TODO
-	void
-	cleanUp();
+	bool init();
+	bool loadResources();
+	void run();
+	void cleanUp();
 
-	void
-	applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
-	void
-	handleEvent(SDL_Event event);
-	void
-	handleAction(action::IAction* action);
-	void
-	render();
-	void
-	renderClean();
+	void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
+	void handleEvent(SDL_Event event);
+	void handleAction(action::IAction* action);
+	void render();
+	void renderClean();
 
 private:
 	int curX = 0, curY = 0;
@@ -99,13 +89,6 @@ private:
 	utils::Image* tile2;
 	utils::Image* stone;
 
-	utils::Image* menuNew;
-	utils::Image* menuNewHover;
-
-	utils::Image* menuSave;
-	utils::Image* menuSaveHover;
-
-	utils::Image* curPointerTexture;
 
 	//Displays
 	menu::TopMenu* topMenu = NULL;

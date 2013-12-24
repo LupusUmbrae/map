@@ -153,6 +153,15 @@ bool Map::loadResources() {
 	utils::Image* groupOpen = new utils::Image(renderer);
 	utils::Image* groupClosed = new utils::Image(renderer);
 
+	utils::Image* menuNew;
+	utils::Image* menuNewHover;
+
+	utils::Image* menuSave;
+	utils::Image* menuSaveHover;
+
+	utils::Image* menuLoad;
+	utils::Image* menuLoadHover;
+
 	tile = new utils::Image(renderer);
 	tile2 = new utils::Image(renderer);
 	stone = new utils::Image(renderer);
@@ -160,6 +169,8 @@ bool Map::loadResources() {
 	menuNewHover = new utils::Image(renderer);
 	menuSave = new utils::Image(renderer);
 	menuSaveHover = new utils::Image(renderer);
+	menuLoad = new utils::Image(renderer);
+	menuLoadHover = new utils::Image(renderer);
 
 	tile->loadImage("resources/tile.bmp");
 	tile2->loadImage("resources/tile2.bmp");
@@ -171,6 +182,9 @@ bool Map::loadResources() {
 	menuSave->loadImage("resources/menus/save.bmp");
 	menuSaveHover->loadImage("resources/menus/saveHover.bmp");
 
+	menuLoad->loadImage("resources/menus/load.png");
+	menuLoadHover->loadImage("resources/menus/loadHover.png");
+
 	groupOpen->loadImage("resources/menus/minus.png");
 	groupClosed->loadImage("resources/menus/cross.png");
 
@@ -181,16 +195,20 @@ bool Map::loadResources() {
 	loadedTextures.push_back(menuNewHover);
 	loadedTextures.push_back(menuSave);
 	loadedTextures.push_back(menuSaveHover);
+	loadedTextures.push_back(menuLoad);
+	loadedTextures.push_back(menuLoadHover);
 	loadedTextures.push_back(groupOpen);
 	loadedTextures.push_back(groupClosed);
 
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
+	utils::Text* loadTooltip = new utils::Text(renderer);
 
 	//utils::Text* groupName = new utils::Text(renderer);
 
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
+	loadTooltip->createText("Load map", color, bgColor, font);
 
 //	groupName->createText("Group One", color, font);
 
@@ -208,9 +226,12 @@ bool Map::loadResources() {
 			new action::IAction(action::NEW), menuNew, menuNewHover);
 	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip,
 			new action::IAction(action::SAVE), menuSave, menuSaveHover);
+	menu::MenuItem* menuLoadItem = new menu::MenuItem("load", loadTooltip,
+			new action::IAction(action::LOAD), menuLoad, menuLoadHover);
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
+	items.push_back(menuLoadItem);
 
 	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
 
@@ -266,30 +287,84 @@ void Map::handleEvent(SDL_Event event) {
 }
 
 void Map::handleAction(action::IAction* action) {
-	action::changeTile* tileAction;
+	action::ActionTile* tileAction;
+
+	Json::Reader reader;
+	Json::Value mapRoot;
+	Json::Value saveRoot;
+
+	std::ifstream ifile;
+	std::ofstream saveFile;
+
+	Tile* loadedTile;
+	utils::MapTexture* texture;
+	std::vector<Tile*> loadedMap;
+
+	std::string tileName;
+	int x;
+	int y;
 
 	switch (action->getAction()) {
 	case action::NONE:
 		logMessage("None action received");
 		break;
 	case action::CHANGE_TILE:
-		tileAction = static_cast<action::changeTile*>(action);
-		drawingArea->setCurTexture(tileAction->getTile());
+		tileAction = static_cast<action::ActionTile*>(action);
+		drawingArea->setCurTexture(tileAction->getTexture());
 		break;
 	case action::NEW:
 		drawingArea->clearMap();
 		break;
 	case action::SAVE:
-		Json::Value saveRoot;
 
 		saveRoot = drawingArea->save();
 
-		std::ofstream saveFile("resources/save.json");
+		saveFile.open("resources/save.json");
 		if (saveFile) {
 			saveFile << saveRoot;
 			saveFile.close();
 		}
 
+		break;
+	case action::LOAD:
+
+		/*
+		 * TODO mossro: Move this else where
+		 */
+
+		ifile.open("resources/save.json");
+		if (ifile) {
+			if (reader.parse(ifile, mapRoot)) {
+				if (mapRoot["version"].asString().compare("v0.1") == 0) {
+					Json::Value tiles = mapRoot["map"];
+					for (Json::Value tile : tiles) {
+						logMessage(tile["name"].asString());
+						tileName = tile["name"].asString();
+						for (utils::MapTexture* curTex : loadedTextures) {
+							if (curTex->getUniqueName()->compare(tileName)  == 0) {
+								texture = curTex;
+								break;
+							}
+						}
+						x = tile["x"].asInt();
+						y = tile["y"].asInt();
+						loadedTile = new Tile(x, y, texture);
+						loadedMap.push_back(loadedTile);
+					}
+					drawingArea->loadMap(loadedMap);
+				}
+			} else {
+				logMessage(reader.getFormattedErrorMessages());
+			}
+		}
+
+		/*
+		 * END TODO..
+		 */
+
+		break;
+	default:
+		logMessage("Unknown event");
 		break;
 	}
 }

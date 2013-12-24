@@ -114,6 +114,13 @@ Json::Value DrawingArea::save() {
 	return root;
 }
 
+void DrawingArea::loadMap(std::vector<Tile*> tiles)
+{
+	this->tiles.clear();
+
+	this->tiles.insert(this->tiles.end(), tiles.begin(), tiles.end());
+}
+
 void DrawingArea::clearMap() {
 	this->tiles.clear();
 }

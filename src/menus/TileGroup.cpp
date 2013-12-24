@@ -51,7 +51,7 @@ void TileGroup::handleEvent(int x, int y) {
 		for (size_t i = 0; i < tiles.size(); i++) {
 			if (x >= curX && (x <= (curX + iconSize))) {
 				if (y >= curY && (y <= (curY + iconSize))) {
-					action::ActionQueue::getInstance().addAction(new action::changeTile(tiles.at(i)));
+					action::ActionQueue::getInstance().addAction(new action::ActionTile(tiles.at(i)));
 					break;
 				}
 			}
