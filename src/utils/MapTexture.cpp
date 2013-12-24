@@ -10,6 +10,8 @@
 namespace utils
 {
 
+std::vector<MapTexture*> MapTexture::loadedTextures = {};
+
 MapTexture::MapTexture()
 {
 	width = 0;

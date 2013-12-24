@@ -32,7 +32,11 @@ void DrawingArea::render() {
 	x = (curX * scale) + areaRect->x;
 	y = (curY * scale) + areaRect->y;
 
-	texture->render(x, y, scale, scale);
+	if(texture != NULL)
+	{
+		texture->render(x, y, scale, scale);
+	}
+
 }
 
 void DrawingArea::handleEvents(SDL_Event event) {
@@ -62,21 +66,21 @@ void DrawingArea::handleEvents(SDL_Event event) {
 	}
 
 	if (leftDown) {
+		if (texture != NULL) {
+			Tile *newTile = new Tile(curX, curY, texture);
 
-		Tile *newTile = new Tile(curX, curY, texture);
+			bool found = false;
+			for (size_t i = 0; i < tiles.size(); i++) {
+				if (tiles[i]->x == curX && tiles[i]->y == curY) {
+					found = true;
+					break;
+				}
+			}
 
-		bool found = false;
-		for (size_t i = 0; i < tiles.size(); i++) {
-			if (tiles[i]->x == curX && tiles[i]->y == curY) {
-				found = true;
-				break;
+			if (!found) {
+				tiles.push_back(newTile);
 			}
 		}
-
-		if (!found) {
-			tiles.push_back(newTile);
-		}
-
 	}
 
 	if (rightDown) {

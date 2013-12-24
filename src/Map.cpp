@@ -101,6 +101,10 @@ bool Map::loadResources() {
 	std::stringstream imageLocation;
 	std::stringstream uniqueName;
 
+	/*
+	 * Load tilesets
+	 */
+
 	// TODO mossro: improve this.. thing, also probably move to a new class
 	if ((dir = opendir("resources/tilesets/")) != NULL) {
 		std::ifstream ifile;
@@ -134,7 +138,6 @@ bool Map::loadResources() {
 						curTile->loadImage(imageLocation.str());
 						curTile->setUniqueName(uniqueName.str());
 						tiles.push_back(curTile);
-						loadedTextures.push_back(curTile);
 					}
 					curGroup = new menu::TileGroup(groupName, tiles);
 					groups.push_back(curGroup);
@@ -148,33 +151,19 @@ bool Map::loadResources() {
 	}
 
 	/*
-	 * Load textures
+	 * Load static textures
 	 */
 	utils::Image* groupOpen = new utils::Image(renderer);
 	utils::Image* groupClosed = new utils::Image(renderer);
 
-	utils::Image* menuNew;
-	utils::Image* menuNewHover;
+	utils::Image* menuNew = new utils::Image(renderer);
+	utils::Image* menuNewHover = new utils::Image(renderer);
 
-	utils::Image* menuSave;
-	utils::Image* menuSaveHover;
+	utils::Image* menuSave = new utils::Image(renderer);
+	utils::Image* menuSaveHover = new utils::Image(renderer);
 
-	utils::Image* menuLoad;
-	utils::Image* menuLoadHover;
-
-	tile = new utils::Image(renderer);
-	tile2 = new utils::Image(renderer);
-	stone = new utils::Image(renderer);
-	menuNew = new utils::Image(renderer);
-	menuNewHover = new utils::Image(renderer);
-	menuSave = new utils::Image(renderer);
-	menuSaveHover = new utils::Image(renderer);
-	menuLoad = new utils::Image(renderer);
-	menuLoadHover = new utils::Image(renderer);
-
-	tile->loadImage("resources/tile.bmp");
-	tile2->loadImage("resources/tile2.bmp");
-	stone->loadImage("resources/tiles/stone.png");
+	utils::Image* menuLoad = new utils::Image(renderer);
+	utils::Image* menuLoadHover = new utils::Image(renderer);
 
 	menuNew->loadImage("resources/menus/new.bmp");
 	menuNewHover->loadImage("resources/menus/newHover.bmp");
@@ -188,38 +177,23 @@ bool Map::loadResources() {
 	groupOpen->loadImage("resources/menus/minus.png");
 	groupClosed->loadImage("resources/menus/cross.png");
 
-	loadedTextures.push_back(tile);
-	loadedTextures.push_back(tile2);
-	loadedTextures.push_back(stone);
-	loadedTextures.push_back(menuNew);
-	loadedTextures.push_back(menuNewHover);
-	loadedTextures.push_back(menuSave);
-	loadedTextures.push_back(menuSaveHover);
-	loadedTextures.push_back(menuLoad);
-	loadedTextures.push_back(menuLoadHover);
-	loadedTextures.push_back(groupOpen);
-	loadedTextures.push_back(groupClosed);
 
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
 	utils::Text* loadTooltip = new utils::Text(renderer);
 
-	//utils::Text* groupName = new utils::Text(renderer);
 
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
 	loadTooltip->createText("Load map", color, bgColor, font);
 
-//	groupName->createText("Group One", color, font);
 
-	loadedTextures.push_back(newTooltip);
-	loadedTextures.push_back(saveTooltip);
 
 	/*
 	 *  Create the display areas
 	 */
 
-	// Menus
+	// Top Menu
 	std::vector<menu::MenuItem*> items;
 
 	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip,
@@ -235,12 +209,13 @@ bool Map::loadResources() {
 
 	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
 
+	// Side menu
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
 			200, renderer, groups, groupClosed, groupOpen);
 
 	// Drawing Areas
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
-			SCREEN_WIDTH - 200, tile);
+			SCREEN_WIDTH - 200, NULL);
 
 	displays.push_back(topMenu);
 	displays.push_back(drawingArea);
@@ -251,7 +226,7 @@ bool Map::loadResources() {
 
 void Map::cleanUp() {
 
-	for (utils::MapTexture* curTex : loadedTextures) {
+	for (utils::MapTexture* curTex : utils::MapTexture::loadedTextures) {
 		curTex->unload();
 	}
 
@@ -339,7 +314,7 @@ void Map::handleAction(action::IAction* action) {
 					Json::Value tiles = mapRoot["map"];
 					for (Json::Value tile : tiles) {
 						tileName = tile["name"].asString();
-						for (utils::MapTexture* curTex : loadedTextures) {
+						for (utils::MapTexture* curTex : utils::MapTexture::loadedTextures) {
 							if (curTex->getUniqueName()->compare(tileName)  == 0) {
 								texture = curTex;
 								break;

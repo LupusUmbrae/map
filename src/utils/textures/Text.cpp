@@ -51,6 +51,8 @@ bool Text::convertSurface(SDL_Surface* textSurface) {
 		height = textSurface->h;
 
 		SDL_FreeSurface(textSurface);
+
+		MapTexture::loadedTextures.push_back(this);
 	} else {
 		logSDLError(std::cerr, "RenderText_Solid in Text");
 		success = false;

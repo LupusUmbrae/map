@@ -11,6 +11,7 @@
 // C++ Includes
 #include <iostream>
 #include <string>
+#include <vector>
 
 // SDL Includes
 #include <SDL2/SDL.h>
@@ -30,6 +31,8 @@ class MapTexture
 public:
 	MapTexture();
 	~MapTexture();
+
+	static std::vector<MapTexture*> loadedTextures;
 
 	void render(int xPos, int yPos, int width = 0, int height = 0,
 			SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL,

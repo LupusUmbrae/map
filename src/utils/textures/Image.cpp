@@ -30,6 +30,8 @@ bool Image::loadImage(std::string file) {
 		height = loadedImage->h;
 
 		SDL_FreeSurface(loadedImage);
+
+		MapTexture::loadedTextures.push_back(this);
 	} else {
 		logSDLError(std::cout, "LoadBmp");
 		success = false;

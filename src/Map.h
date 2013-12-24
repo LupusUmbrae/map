@@ -82,12 +82,6 @@ private:
 	// tiles
 	std::vector<Tile*> tiles;
 
-	// Images
-	std::vector<utils::MapTexture*> loadedTextures;
-
-	utils::Image* tile;
-	utils::Image* tile2;
-	utils::Image* stone;
 
 
 	//Displays
