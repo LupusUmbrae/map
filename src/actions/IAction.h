@@ -16,15 +16,16 @@
 
 namespace action {
 
+/*!
+ * NONE - do nothing, if this is called its due to an error somehwere
+ * Change Tile - Change the currently selected tile in the drawing area
+ * New - Create a new map
+ * Save - save a map
+ * Load - load a map
+ * Close - Close the given display (i.e. remove it from the displays)
+ */
 enum actions {
-	/*
-	 * NONE - do nothing, if this is called its due to an error somehwere
-	 * Change Tile - Change the currently selected tile in the drawing area
-	 * New - Create a new map
-	 * Save - save a map
-	 * Load - load a map
-	 */
-	NONE, CHANGE_TILE, NEW, SAVE, LOAD
+	NONE, CHANGE_TILE, NEW, SAVE, LOAD, CLOSE
 };
 
 class IAction {

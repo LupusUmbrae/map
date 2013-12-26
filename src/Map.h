@@ -43,6 +43,7 @@
 #include "menus/LeftMenu.h"
 #include "menus/MenuItem.h"
 #include "menus/TileGroup.h"
+#include "menus/DialogBox.h"
 
 #include "mapping/DrawingArea.h"
 
@@ -55,8 +56,7 @@ const int SCREEN_WIDTH = 648;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
-class Map
-{
+class Map {
 public:
 	Map();
 	virtual ~Map();
@@ -66,7 +66,8 @@ public:
 	void run();
 	void cleanUp();
 
-	void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
+	void applySurface(int x, int y, SDL_Surface* source,
+			SDL_Surface* destination);
 	void handleEvent(SDL_Event event);
 	void handleAction(action::IAction* action);
 	void render();
@@ -82,14 +83,15 @@ private:
 	// tiles
 	std::vector<Tile*> tiles;
 
-
+	void addToDisplay(display::IDisplay* display, unsigned int zIndex = 0);
+	void removeDisplay(display::IDisplay* display);
 
 	//Displays
 	menu::TopMenu* topMenu = NULL;
 
 	mapping::DrawingArea* drawingArea = NULL;
 
-	std::vector<display::IDisplay*> displays;
+	std::vector<std::vector<display::IDisplay*>> displaysNew;
 	TTF_Font* font;
 	TTF_Font* font2;
 };

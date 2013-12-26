@@ -26,7 +26,7 @@ public:
 	virtual void render() = 0;
 	virtual void handleEvents(SDL_Event event) = 0;
 
-	bool inArea(int x, int y);
+	virtual bool inArea(int x, int y);
 	void mouseUp(Uint8 button);
 
 protected:

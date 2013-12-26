@@ -7,8 +7,12 @@
 
 #include "Map.h"
 
+/*!
+ *  \brief text
+ */
 Map::Map() {
-
+	// Give the displays the first row, the add to display wont handle this
+	displaysNew.push_back((std::vector<display::IDisplay*>()));
 }
 
 Map::~Map() {
@@ -165,6 +169,8 @@ bool Map::loadResources() {
 	utils::Image* menuLoad = new utils::Image(renderer);
 	utils::Image* menuLoadHover = new utils::Image(renderer);
 
+	utils::Image* ok = new utils::Image(renderer);
+
 	menuNew->loadImage("resources/menus/new.bmp");
 	menuNewHover->loadImage("resources/menus/newHover.bmp");
 
@@ -177,17 +183,27 @@ bool Map::loadResources() {
 	groupOpen->loadImage("resources/menus/minus.png");
 	groupClosed->loadImage("resources/menus/cross.png");
 
+	ok->loadImage("resources/menus/ok.png");
+
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
 	utils::Text* loadTooltip = new utils::Text(renderer);
+
+	utils::Text* dialogTitle = new utils::Text(renderer);
+	utils::Text* dialogMessage = new utils::Text(renderer);
 
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
 	loadTooltip->createText("Load map", color, bgColor, font);
 
+	dialogTitle->createText("Dialog Title", color, bgColor, font);
+	dialogMessage->createText("Dialog message", color, bgColor, font);
+
 	/*
 	 *  Create the display areas
 	 */
+
+	menu::DialogBox::setImages(ok, ok, ok);
 
 	// Top Menu
 	std::vector<menu::MenuItem*> items;
@@ -213,9 +229,14 @@ bool Map::loadResources() {
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
 			SCREEN_WIDTH - 200, NULL);
 
-	displays.push_back(topMenu);
-	displays.push_back(drawingArea);
-	displays.push_back(leftMenu);
+	menu::DialogBox* dialogTest = new menu::DialogBox(300, 100, 60, 200,
+			dialogTitle, dialogMessage, menu::MESSAGE, true, renderer);
+
+	addToDisplay(topMenu);
+	addToDisplay(drawingArea);
+	addToDisplay(leftMenu);
+
+	addToDisplay(dialogTest, 1);
 
 	return true;
 }
@@ -239,17 +260,23 @@ void Map::handleEvent(SDL_Event event) {
 			curX = event.motion.x;
 			curY = event.motion.y;
 		}
-		for (display::IDisplay *display : displays) {
-			if (display->inArea(curX, curY)) {
-				display->handleEvents(event);
+		for (size_t i = (displaysNew.size()); i-- > 0;) {
+			for (display::IDisplay *display : displaysNew.at(i)) {
+				if (display->inArea(curX, curY)) {
+					display->handleEvents(event);
+					return;
+				}
 			}
 		}
 	}
 
 	if (event.type == SDL_MOUSEBUTTONUP) {
-		for (display::IDisplay *display : displays) {
-			display->mouseUp(event.button.button);
+		for (size_t i = (displaysNew.size()); i-- > 0;) {
+			for (display::IDisplay *display : displaysNew.at(i)) {
+				display->mouseUp(event.button.button);
+			}
 		}
+		return;
 	}
 
 	if (event.type == SDL_KEYDOWN) {
@@ -259,6 +286,7 @@ void Map::handleEvent(SDL_Event event) {
 
 void Map::handleAction(action::IAction* action) {
 	action::ActionTile* tileAction;
+	action::ActionDialog* dialogAction;
 
 	Json::Reader reader;
 	Json::Value mapRoot;
@@ -323,9 +351,7 @@ void Map::handleAction(action::IAction* action) {
 						if (texture != NULL) {
 							loadedTile = new Tile(x, y, texture);
 							loadedMap.push_back(loadedTile);
-						}
-						else
-						{
+						} else {
 							logMessage("Failed to find tile");
 						}
 
@@ -341,6 +367,10 @@ void Map::handleAction(action::IAction* action) {
 		 * END TODO..
 		 */
 
+		break;
+	case action::CLOSE:
+		dialogAction = static_cast<action::ActionDialog*>(action);
+		this->removeDisplay(dialogAction->getDisplay());
 		break;
 	default:
 		logMessage("Unknown event");
@@ -382,8 +412,42 @@ void Map::run() {
 }
 
 void Map::render() {
-	for (display::IDisplay *display : displays) {
-		display->render();
+	/*
+	 * The outer vector depicts layers, the positon in the vector represents the z-index
+	 */
+	for (size_t i = (displaysNew.size()); i-- > 0;) {
+		for (size_t j = 0; j < displaysNew.at(i).size(); j++) {
+			displaysNew.at(i).at(j)->render();
+		}
+	}
+}
+
+void Map::addToDisplay(display::IDisplay* display, unsigned int zIndex) {
+	// Check the vector exists
+	if (displaysNew.size() <= zIndex) {
+		for (size_t i = displaysNew.size(); i <= zIndex; i++) {
+			displaysNew.push_back(std::vector<display::IDisplay*>());
+		}
+	}
+
+	displaysNew.at(zIndex).push_back(display);
+}
+
+void Map::removeDisplay(display::IDisplay* display) {
+
+	bool found = false;
+	for (size_t i = (displaysNew.size()); i-- > 0;) {
+		for (size_t j = 0; j < displaysNew.at(i).size(); j++) {
+			if (displaysNew.at(i).at(j) == display) {
+				displaysNew.at(i).erase(displaysNew.at(i).begin() + j);
+				found = true;
+				delete display;
+				break;
+			}
+			if (found) {
+				break;
+			}
+		}
 	}
 }
 
