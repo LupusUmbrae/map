@@ -10,30 +10,92 @@
 namespace mapping {
 
 DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
-		utils::MapTexture *texture) {
+		utils::MapTexture *texture, SDL_Renderer* renderer) {
+	this->renderer = renderer;
 	areaRect->x = offsetX;
 	areaRect->y = offsetY;
 	areaRect->h = height;
 	areaRect->w = width;
 	this->texture = texture;
-	curY = 0;
-	curX = 0;
+	tileY = 0;
+	tileX = 0;
+
+	mapArea.x = 0;
+	mapArea.y = 0;
+	mapArea.w = 800;
+	mapArea.h = 500;
+
+	viewX = 0;
+	viewY = 0;
+
+}
+
+void DrawingArea::scrollDrawingArea(int x, int y) {
+	viewX += x * scale;
+	viewY += y * scale;
+
+	if (viewX < 0) {
+		viewX = 0;
+	} else if (viewX > mapArea.w) {
+		viewX = mapArea.w;
+	}
+
+	if (viewY < 0) {
+		viewY = 0;
+	} else if (viewY > mapArea.h) {
+		viewY = mapArea.h;
+	}
 }
 
 void DrawingArea::render() {
 	int x, y;
 
-	for (Tile *curTile : tiles) {
-		x = (curTile->x * scale) + areaRect->x;
-		y = (curTile->y * scale) + areaRect->y;
-		curTile->texture->render(x, y, scale, scale);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+
+	SDL_Rect curArea;
+
+	curArea.x = areaRect->x - viewX;
+	curArea.y = areaRect->y - viewY;
+	curArea.w = areaRect->w + (mapArea.w - viewX);
+	curArea.h = areaRect->h + (mapArea.h - viewY);
+
+	if (curArea.x < areaRect->x) {
+		curArea.x = areaRect->x;
+	}
+	if (curArea.w > areaRect->w) {
+		curArea.w = areaRect->w;
+	}
+	if (curArea.y < areaRect->y) {
+		curArea.y = areaRect->y;
+	}
+	if (curArea.h > areaRect->h) {
+		curArea.h = areaRect->h;
 	}
 
-	x = (curX * scale) + areaRect->x;
-	y = (curY * scale) + areaRect->y;
+	SDL_RenderDrawRect(renderer, &curArea);
 
-	if(texture != NULL)
-	{
+	for (Tile *curTile : tiles) {
+		x = (curTile->x * scale);
+		y = (curTile->y * scale);
+
+//		std::cout << "x(" << x << ") >= viewX(" << viewX << ") && x(" << x << ") < [viewX(" << viewX << ") + areaRect->w(" << areaRect->w << ")]" << std::endl;
+//		std::cout << "y(" << y << ") >= viewY(" << viewY << ") && y(" << y << ") < [viewY(" << viewY << ") + areaRect->h(" << areaRect->h << ")]" << std::endl;
+
+		if ((x >= viewX && x < (viewX + scale + areaRect->w))
+				&& (y >= viewY && y < (viewY + scale + areaRect->h))) {
+
+			// Correct locations within the actual screen
+			x += areaRect->x - viewX;
+			y += areaRect->y - viewY;
+			curTile->texture->render(x, y, scale, scale);
+		}
+
+	}
+
+	x = (tileX * scale) + areaRect->x - viewX;
+	y = (tileY * scale) + areaRect->y - viewY;
+
+	if (texture != NULL) {
 		texture->render(x, y, scale, scale);
 	}
 
@@ -42,8 +104,8 @@ void DrawingArea::render() {
 void DrawingArea::handleEvents(SDL_Event event) {
 
 	if (event.type == SDL_MOUSEMOTION) {
-		curX = (event.motion.x - areaRect->x) / scale;
-		curY = (event.motion.y - areaRect->y) / scale;
+		tileX = (event.motion.x - areaRect->x + viewX) / scale;
+		tileY = (event.motion.y - areaRect->y + viewY) / scale;
 
 	}
 
@@ -67,18 +129,22 @@ void DrawingArea::handleEvents(SDL_Event event) {
 
 	if (leftDown) {
 		if (texture != NULL) {
-			Tile *newTile = new Tile(curX, curY, texture);
+			if ((tileX >= mapArea.x && (tileX + scale) <= mapArea.w)
+					&& (tileY >= mapArea.y && (tileY + scale) <= mapArea.h)) {
 
-			bool found = false;
-			for (size_t i = 0; i < tiles.size(); i++) {
-				if (tiles[i]->x == curX && tiles[i]->y == curY) {
-					found = true;
-					break;
+				Tile *newTile = new Tile(tileX, tileY, texture);
+
+				bool found = false;
+				for (size_t i = 0; i < tiles.size(); i++) {
+					if (tiles[i]->x == tileX && tiles[i]->y == tileY) {
+						found = true;
+						break;
+					}
 				}
-			}
 
-			if (!found) {
-				tiles.push_back(newTile);
+				if (!found) {
+					tiles.push_back(newTile);
+				}
 			}
 		}
 	}
@@ -86,7 +152,7 @@ void DrawingArea::handleEvents(SDL_Event event) {
 	if (rightDown) {
 		Tile* tile;
 		for (size_t i = 0; i < tiles.size(); i++) {
-			if (tiles[i]->x == curX && tiles[i]->y == curY) {
+			if (tiles[i]->x == tileX && tiles[i]->y == tileY) {
 				tile = tiles.at(i);
 				tiles.erase(tiles.begin() + i);
 				delete tile;
@@ -118,8 +184,7 @@ Json::Value DrawingArea::save() {
 	return root;
 }
 
-void DrawingArea::loadMap(std::vector<Tile*> tiles)
-{
+void DrawingArea::loadMap(std::vector<Tile*> tiles) {
 	this->tiles.clear();
 
 	this->tiles.insert(this->tiles.end(), tiles.begin(), tiles.end());

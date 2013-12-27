@@ -29,11 +29,13 @@ namespace mapping {
 class DrawingArea: public display::IDisplay {
 public:
 	DrawingArea(int offsetX, int offsetY, int height, int width,
-			utils::MapTexture *texture);
+			utils::MapTexture *texture, SDL_Renderer* renderer);
 
 	void render();
 	void handleEvents(SDL_Event event);
 	void setCurTexture(utils::MapTexture *texture);
+
+	void scrollDrawingArea(int x, int y);
 
 	// TODO mossro: Update this temporary function
 	void loadMap(std::vector<Tile*> tiles);
@@ -44,14 +46,20 @@ public:
 
 private:
 
-	int curX = 0, curY = 0;
-
 	int scale = 20;
+
+	int border = 0;
 
 	utils::MapTexture *texture = NULL;
 
 	std::vector<Tile*> tiles;
 
+	SDL_Rect mapArea;
+	int viewX;
+	int viewY;
+
+	int tileX = 0;
+	int tileY = 0;
 };
 
 } /* namespace mapping */

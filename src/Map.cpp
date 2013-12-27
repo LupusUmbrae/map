@@ -195,15 +195,9 @@ bool Map::loadResources() {
 	utils::Text* saveTooltip = new utils::Text(renderer);
 	utils::Text* loadTooltip = new utils::Text(renderer);
 
-	utils::Text* dialogTitle = new utils::Text(renderer);
-	utils::Text* dialogMessage = new utils::Text(renderer);
-
 	newTooltip->createText("New map", color, bgColor, font);
 	saveTooltip->createText("Save map", color, bgColor, font);
 	loadTooltip->createText("Load map", color, bgColor, font);
-
-	dialogTitle->createText("Dialog Title", color, bgColor, font);
-	dialogMessage->createText("Dialog message", color, bgColor, font);
 
 	/*
 	 *  Create the display areas
@@ -233,17 +227,11 @@ bool Map::loadResources() {
 
 	// Drawing Areas
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
-			SCREEN_WIDTH - 200, NULL);
-
-	menu::DialogBox* dialogTest = new menu::DialogBox(300, 100, 60, 200,
-			dialogTitle, dialogMessage, menu::YES_NO, true, renderer,
-			action::CLOSE);
+			SCREEN_WIDTH - 200, NULL, renderer);
 
 	addToDisplay(topMenu);
 	addToDisplay(drawingArea);
 	addToDisplay(leftMenu);
-
-	addToDisplay(dialogTest, 1);
 
 	return true;
 }
@@ -288,7 +276,20 @@ void Map::handleEvent(SDL_Event event) {
 	}
 
 	if (event.type == SDL_KEYDOWN) {
-
+		switch (event.key.keysym.sym) {
+		case SDLK_UP:
+			drawingArea->scrollDrawingArea(0, -1);
+			break;
+		case SDLK_DOWN:
+			drawingArea->scrollDrawingArea(0, 1);
+			break;
+		case SDLK_LEFT:
+			drawingArea->scrollDrawingArea(-1, 0);
+			break;
+		case SDLK_RIGHT:
+			drawingArea->scrollDrawingArea(1, 0);
+			break;
+		}
 	}
 }
 
@@ -329,8 +330,8 @@ void Map::handleAction(action::IAction action) {
 		if (action.getObject() == nullptr) {
 			addToDisplay(
 					new menu::DialogBox(300, 100, 60, 200, "Save",
-							"Are you sure you want to save?", menu::YES_NO, true, renderer,
-							action::SAVE), 3);
+							"Are you sure you want to save?", menu::YES_NO,
+							true, renderer, action::SAVE), 3);
 		} else {
 			dialog = reinterpret_cast<menu::DialogBox*>(action.getObject());
 
