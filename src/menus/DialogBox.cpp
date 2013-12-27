@@ -22,7 +22,7 @@ void DialogBox::setImages(utils::MapTexture* ok, utils::MapTexture* yes,
 
 DialogBox::DialogBox(int offsetX, int offsetY, int height, int width,
 		utils::MapTexture* title, utils::MapTexture* message, dialog type,
-		bool blocking, SDL_Renderer* renderer) {
+		bool blocking, SDL_Renderer* renderer, action::actions actionType) {
 	areaRect->x = offsetX;
 	areaRect->y = offsetY;
 	areaRect->h = height;
@@ -34,6 +34,33 @@ DialogBox::DialogBox(int offsetX, int offsetY, int height, int width,
 	this->blocking = blocking;
 	this->renderer = renderer;
 
+	this->actionType = actionType;
+
+	drawItems();
+}
+
+DialogBox::DialogBox(int offsetX, int offsetY, int height, int width,
+		std::string title, std::string message, dialog type, bool blocking,
+		SDL_Renderer* renderer, action::actions actionType) {
+	areaRect->x = offsetX;
+	areaRect->y = offsetY;
+	areaRect->h = height;
+	areaRect->w = width;
+
+	utils::Text* newTitle = new utils::Text(renderer);
+	newTitle->createText(title);
+
+	utils::Text* newMessage = new utils::Text(renderer);
+	newMessage->createText(message);
+
+	this->title = newTitle;
+	this->message = newMessage;
+	this->type = type;
+	this->blocking = blocking;
+	this->renderer = renderer;
+
+	this->actionType = actionType;
+
 	drawItems();
 
 }
@@ -43,8 +70,8 @@ DialogBox::~DialogBox() {
 	message->unload();
 }
 
-void DialogBox::addTitleAndMessage() {
-
+bool DialogBox::accepted() {
+	return this->acccept;
 }
 
 void DialogBox::render() {
@@ -60,7 +87,8 @@ void DialogBox::render() {
 			DialogBox::ok->render(okRect->x, okRect->y);
 			break;
 		case YES_NO:
-			logMessage("Not implemented");
+			DialogBox::yes->render(yesRect->x, yesRect->y);
+			DialogBox::no->render(noRect->x, noRect->y);
 			break;
 		case INPUT:
 			logMessage("Not implemented");
@@ -82,21 +110,65 @@ bool DialogBox::inArea(int x, int y) {
 void DialogBox::handleEvents(SDL_Event event) {
 
 	if (IDisplay::inArea(curX, curY)) {
-		if (event.type == SDL_MOUSEBUTTONDOWN) {
-			if (event.button.button == SDL_BUTTON_LEFT) {
+		switch (this->type) {
+		case MESSAGE:
+			this->handleEventsMessage(event);
+			break;
+		case YES_NO:
+			this->handleEventsYesNo(event);
+			break;
+		case INPUT:
+			this->handleEventsInput(event);
+			break;
+		}
+	}
+}
 
-				if (curX >= okRect->x && (curX <= (okRect->x + okRect->w))) {
-					if (curY >= okRect->y
-							&& (curY <= (okRect->y + okRect->h))) {
-						action.setAction(action::CLOSE);
-						action.setObject(this);
-						action::ActionQueue::getInstance().addAction(&action);
-					}
+void DialogBox::handleEventsMessage(SDL_Event event) {
+
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+
+			if (curX >= okRect->x && (curX <= (okRect->x + okRect->w))) {
+				if (curY >= okRect->y && (curY <= (okRect->y + okRect->h))) {
+					action.setAction(actionType);
+					action.setObject(this);
+					action::ActionQueue::getInstance().addAction(&action);
 				}
+			}
 
+		}
+	}
+}
+
+void DialogBox::handleEventsYesNo(SDL_Event event) {
+
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+
+			if (curX >= yesRect->x && (curX <= (yesRect->x + yesRect->w))) {
+				if (curY >= yesRect->y && (curY <= (yesRect->y + yesRect->h))) {
+					this->acccept = true;
+					action.setAction(actionType);
+					action.setObject(this);
+					action::ActionQueue::getInstance().addAction(&action);
+				}
+			} else if (curX >= noRect->x && (curX <= (noRect->x + noRect->w))) {
+				if (curY >= noRect->y && (curY <= (noRect->y + noRect->h))) {
+					this->acccept = false;
+					action.setAction(actionType);
+					action.setObject(this);
+					action::ActionQueue::getInstance().addAction(&action);
+				}
 			}
 		}
 	}
+}
+
+void DialogBox::handleEventsInput(SDL_Event event) {
+
+	action::ActionQueue::getInstance().addAction(&action);
+
 }
 
 void DialogBox::drawItems() {
@@ -111,7 +183,15 @@ void DialogBox::drawItems() {
 			okRect->h = DialogBox::ok->getWidth();
 			break;
 		case YES_NO:
-			logMessage("Not implemented");
+			noRect->x = dialogRightX - DialogBox::no->getWidth();
+			noRect->y = dialogY - DialogBox::no->getHeight();
+			noRect->w = DialogBox::no->getWidth();
+			noRect->h = DialogBox::no->getWidth();
+
+			yesRect->x = noRect->x - DialogBox::yes->getWidth() - 10;
+			yesRect->y = dialogY - DialogBox::yes->getHeight();
+			yesRect->w = DialogBox::yes->getWidth();
+			yesRect->h = DialogBox::yes->getWidth();
 			break;
 		case INPUT:
 			logMessage("Not implemented");

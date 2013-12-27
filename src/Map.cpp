@@ -88,6 +88,8 @@ bool Map::loadResources() {
 	SDL_Color color = { 0, 0, 0 }; // black text
 	SDL_Color bgColor = { 255, 255, 255 }; // white background
 
+	utils::Text::setDefaults(color, font);
+
 	Json::Reader reader;
 	Json::Value root;
 
@@ -234,7 +236,8 @@ bool Map::loadResources() {
 			SCREEN_WIDTH - 200, NULL);
 
 	menu::DialogBox* dialogTest = new menu::DialogBox(300, 100, 60, 200,
-			dialogTitle, dialogMessage, menu::MESSAGE, true, renderer);
+			dialogTitle, dialogMessage, menu::YES_NO, true, renderer,
+			action::CLOSE);
 
 	addToDisplay(topMenu);
 	addToDisplay(drawingArea);
@@ -248,7 +251,8 @@ bool Map::loadResources() {
 void Map::cleanUp() {
 
 	for (utils::MapTexture* curTex : utils::MapTexture::loadedTextures) {
-		curTex->unload();
+		curTex->~MapTexture();
+		delete curTex;
 	}
 
 	SDL_DestroyRenderer(renderer);
@@ -292,6 +296,8 @@ void Map::handleAction(action::IAction action) {
 	display::IDisplay* display;
 	utils::MapTexture* tile;
 
+	menu::DialogBox* dialog;
+
 	Json::Reader reader;
 	Json::Value mapRoot;
 	Json::Value saveRoot;
@@ -320,12 +326,26 @@ void Map::handleAction(action::IAction action) {
 		break;
 	case action::SAVE:
 
-		saveRoot = drawingArea->save();
+		if (action.getObject() == nullptr) {
+			addToDisplay(
+					new menu::DialogBox(300, 100, 60, 200, "Save",
+							"Are you sure you want to save?", menu::YES_NO, true, renderer,
+							action::SAVE), 3);
+		} else {
+			dialog = reinterpret_cast<menu::DialogBox*>(action.getObject());
 
-		saveFile.open("resources/save.json");
-		if (saveFile) {
-			saveFile << saveRoot;
-			saveFile.close();
+			if (dialog->accepted()) {
+				saveRoot = drawingArea->save();
+
+				saveFile.open("resources/save.json");
+				if (saveFile) {
+					saveFile << saveRoot;
+					saveFile.close();
+				}
+
+			}
+
+			removeDisplay(dialog);
 		}
 
 		break;
@@ -398,10 +418,8 @@ void Map::run() {
 			}
 		}
 
-
 		while (action::ActionQueue::getInstance().pollEvent(&action)) {
 			handleAction(action);
-			delete &action;
 		}
 
 		this->render();
@@ -418,7 +436,7 @@ void Map::render() {
 	/*
 	 * The outer vector depicts layers, the positon in the vector represents the z-index
 	 */
-	for (size_t i = (displaysNew.size()); i-- > 0;) {
+	for (size_t i = 0; i < (displaysNew.size()); i++) {
 		for (size_t j = 0; j < displaysNew.at(i).size(); j++) {
 			displaysNew.at(i).at(j)->render();
 		}

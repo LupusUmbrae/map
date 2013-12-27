@@ -9,8 +9,33 @@
 
 namespace utils {
 
+SDL_Color Text::color = { 0, 0, 0 };
+TTF_Font* Text::font = nullptr;
+
+void Text::setDefaults(SDL_Color color, TTF_Font* font)
+{
+	Text::color = color;
+	Text::font = font;
+}
+
 Text::Text(SDL_Renderer* renderer) {
 	this->renderer = renderer;
+}
+
+bool Text::createText(std::string text) {
+	bool success = true;
+
+	SDL_Surface* textSurface;
+
+	if (font != nullptr) {
+		textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+
+		success = this->convertSurface(textSurface);
+	} else {
+		success = false;
+	}
+
+	return success;
 }
 
 bool Text::createText(std::string text, SDL_Color color, SDL_Color bgColor,

@@ -94,6 +94,7 @@ private:
 	std::vector<std::vector<display::IDisplay*>> displaysNew;
 	TTF_Font* font;
 	TTF_Font* font2;
+
 };
 
 #endif /* SDL_H_ */

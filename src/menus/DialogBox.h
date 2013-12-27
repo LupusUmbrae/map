@@ -9,6 +9,7 @@
 #define DIALOGBOX_H_
 
 // C++ Includes
+#include <string>
 
 // SDL Includes
 #include <SDL2/SDL.h>
@@ -17,6 +18,7 @@
 #include "../IDisplay.h"
 
 #include "../utils/MapTextures.h"
+#include "../utils/textures/Text.h"
 #include "../utils/logger.h"
 
 #include "../actions/ActionQueue.h"
@@ -32,7 +34,12 @@ class DialogBox: public display::IDisplay {
 public:
 	DialogBox(int offsetX, int offsetY, int height, int width,
 			utils::MapTexture* title, utils::MapTexture* message, dialog type,
-			bool blocking, SDL_Renderer* renderer);
+			bool blocking, SDL_Renderer* renderer, action::actions actionType);
+
+	DialogBox(int offsetX, int offsetY, int height, int width,
+				std::string title, std::string message, dialog type,
+				bool blocking, SDL_Renderer* renderer, action::actions actionType);
+
 	~DialogBox();
 
 	void render();
@@ -51,14 +58,17 @@ private:
 	static utils::MapTexture* no;
 
 	action::IAction action;
+	action::actions actionType;
 
 	SDL_Rect* okRect = new SDL_Rect();
 	SDL_Rect* yesRect = new SDL_Rect();
 	SDL_Rect* noRect = new SDL_Rect();
 
-
-	void addTitleAndMessage();
 	void drawItems();
+
+	void handleEventsMessage(SDL_Event event);
+	void handleEventsYesNo(SDL_Event event);
+	void handleEventsInput(SDL_Event event);
 
 	utils::MapTexture* title;
 	utils::MapTexture* message;

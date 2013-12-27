@@ -7,67 +7,62 @@
 
 #include "MapTextures.h"
 
-namespace utils
-{
+namespace utils {
 
-std::vector<MapTexture*> MapTexture::loadedTextures = {};
+std::vector<MapTexture*> MapTexture::loadedTextures = { };
 
-MapTexture::MapTexture()
-{
+MapTexture::MapTexture() {
 	width = 0;
 	height = 0;
 }
 
-MapTexture::~MapTexture()
-{
-	this->unload();
-}
-
-void MapTexture::unload()
-{
+MapTexture::~MapTexture() {
 	SDL_DestroyTexture(texture);
 }
 
-int MapTexture::getHeight()
-{
+void MapTexture::unload() {
+	SDL_DestroyTexture(texture);
+
+	// remove myself from the loaded resources
+	for (size_t i = 0; i < loadedTextures.size(); i++) {
+		if (loadedTextures.at(i) == this) {
+			loadedTextures.erase(loadedTextures.begin() + i);
+		}
+	}
+}
+
+int MapTexture::getHeight() {
 	return this->height;
 }
 
-int MapTexture::getWidth()
-{
+int MapTexture::getWidth() {
 	return this->width;
 }
 
-void MapTexture::setUniqueName(std::string uniqueName)
-{
+void MapTexture::setUniqueName(std::string uniqueName) {
 	this->uniqueName = uniqueName;
 }
 
-std::string* MapTexture::getUniqueName()
-{
+std::string* MapTexture::getUniqueName() {
 	return &this->uniqueName;
 }
 
 void MapTexture::render(int xPos, int yPos, int width, int height,
-		SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
-{
+		SDL_Rect* clip, double angle, SDL_Point* center,
+		SDL_RendererFlip flip) {
 	//Set rendering space and render to screen
-	SDL_Rect renderQuad =
-	{ xPos, yPos, this->width, this->height };
+	SDL_Rect renderQuad = { xPos, yPos, this->width, this->height };
 
-	if (width > 0)
-	{
+	if (width > 0) {
 		renderQuad.w = width;
 	}
 
-	if (height > 0)
-	{
+	if (height > 0) {
 		renderQuad.h = height;
 	}
 
 	//Set clip rendering dimensions
-	if (clip != NULL)
-	{
+	if (clip != NULL) {
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
 	}

@@ -10,7 +10,6 @@
 namespace action {
 
 void ActionQueue::addAction(IAction* action) {
-	std::cout << "action 1: " << action->getAction() << std::endl;
 	actionQueue.push(action);
 }
 
