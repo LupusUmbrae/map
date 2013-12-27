@@ -25,18 +25,24 @@ namespace action {
  * Close - Close the given display (i.e. remove it from the displays)
  */
 enum actions {
-	NONE, CHANGE_TILE, NEW, SAVE, LOAD, CLOSE
+	NONE=0, CHANGE_TILE=1, NEW=2, SAVE=3, LOAD=4, CLOSE=5
 };
 
 class IAction {
 public:
 	IAction();
 	IAction(actions action);
+	IAction(actions action, void* object);
 
 	actions getAction();
+	void setAction(actions action);
+
+	void* getObject();
+	void setObject(void* object);
 
 protected:
 	actions action;
+	void* object;
 };
 
 } /* namespace action */

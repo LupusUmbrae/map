@@ -10,18 +10,17 @@
 namespace action {
 
 void ActionQueue::addAction(IAction* action) {
+	std::cout << "action 1: " << action->getAction() << std::endl;
 	actionQueue.push(action);
 }
 
-IAction* ActionQueue::pollEvent() {
-	IAction* action;
+bool ActionQueue::pollEvent(IAction* action) {
 	if (!actionQueue.empty()) {
-
-		action = actionQueue.front();
+		*action = *actionQueue.front();
 		actionQueue.pop();
-		return action;
+		return true;
 	}
-	return NULL;
+	return false;
 }
 
 } /* namespace action */

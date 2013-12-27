@@ -77,7 +77,7 @@ void TopMenu::handleEvents(SDL_Event event) {
 			tooltip = curItem->tooltip;
 		}
 		if (event.type == SDL_MOUSEBUTTONDOWN) {
-			action::ActionQueue::getInstance().addAction(curItem->action);
+			action::ActionQueue::getInstance().addAction(&curItem->action);
 		}
 	} else {
 		tooltip = NULL;

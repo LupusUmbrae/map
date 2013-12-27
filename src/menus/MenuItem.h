@@ -22,7 +22,7 @@ namespace menu {
 
 class MenuItem {
 public:
-	MenuItem(std::string name, utils::MapTexture* tooltip, action::IAction* action,
+	MenuItem(std::string name, utils::MapTexture* tooltip, action::IAction action,
 			utils::MapTexture* icon, utils::MapTexture* iconHover);
 	virtual ~MenuItem();
 	utils::MapTexture* getIcon();
@@ -30,7 +30,7 @@ public:
 
 	std::string name;
 	utils::MapTexture* tooltip;
-	action::IAction* action;
+	action::IAction action;
 
 private:
 	bool hover = false;

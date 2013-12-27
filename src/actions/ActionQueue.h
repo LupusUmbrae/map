@@ -10,6 +10,7 @@
 
 // C++ Includes
 #include <queue>
+#include <iostream>
 
 // SDL Includes
 #include <SDL2/SDL.h>
@@ -28,7 +29,7 @@ public:
 	}
 
 	void addAction(IAction* action);
-	IAction* pollEvent();
+	bool pollEvent(IAction* action);
 
 private:
 	std::queue<IAction*> actionQueue;

@@ -119,7 +119,7 @@ bool Map::loadResources() {
 			setFolder << "resources/tilesets/" << ent->d_name;
 			jsonFolder << setFolder.str() << "/set.json";
 
-			ifile.open(jsonFolder.str(), std::ifstream::in); // marked as error but compiles
+			ifile.open(jsonFolder.str().c_str(), std::ifstream::in);
 			if (ifile) {
 				if (reader.parse(ifile, root)) {
 					tiles.clear();
@@ -170,6 +170,8 @@ bool Map::loadResources() {
 	utils::Image* menuLoadHover = new utils::Image(renderer);
 
 	utils::Image* ok = new utils::Image(renderer);
+	utils::Image* yes = new utils::Image(renderer);
+	utils::Image* no = new utils::Image(renderer);
 
 	menuNew->loadImage("resources/menus/new.bmp");
 	menuNewHover->loadImage("resources/menus/newHover.bmp");
@@ -184,6 +186,8 @@ bool Map::loadResources() {
 	groupClosed->loadImage("resources/menus/cross.png");
 
 	ok->loadImage("resources/menus/ok.png");
+	yes->loadImage("resources/menus/yes.png");
+	no->loadImage("resources/menus/no.png");
 
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
@@ -203,17 +207,17 @@ bool Map::loadResources() {
 	 *  Create the display areas
 	 */
 
-	menu::DialogBox::setImages(ok, ok, ok);
+	menu::DialogBox::setImages(ok, yes, no);
 
 	// Top Menu
 	std::vector<menu::MenuItem*> items;
 
 	menu::MenuItem* menuNewItem = new menu::MenuItem("new", newTooltip,
-			new action::IAction(action::NEW), menuNew, menuNewHover);
+			action::IAction(action::NEW), menuNew, menuNewHover);
 	menu::MenuItem* menuSaveItem = new menu::MenuItem("save", saveTooltip,
-			new action::IAction(action::SAVE), menuSave, menuSaveHover);
+			action::IAction(action::SAVE), menuSave, menuSaveHover);
 	menu::MenuItem* menuLoadItem = new menu::MenuItem("load", loadTooltip,
-			new action::IAction(action::LOAD), menuLoad, menuLoadHover);
+			action::IAction(action::LOAD), menuLoad, menuLoadHover);
 
 	items.push_back(menuNewItem);
 	items.push_back(menuSaveItem);
@@ -284,9 +288,9 @@ void Map::handleEvent(SDL_Event event) {
 	}
 }
 
-void Map::handleAction(action::IAction* action) {
-	action::ActionTile* tileAction;
-	action::ActionDialog* dialogAction;
+void Map::handleAction(action::IAction action) {
+	display::IDisplay* display;
+	utils::MapTexture* tile;
 
 	Json::Reader reader;
 	Json::Value mapRoot;
@@ -303,13 +307,13 @@ void Map::handleAction(action::IAction* action) {
 	int x;
 	int y;
 
-	switch (action->getAction()) {
+	switch (action.getAction()) {
 	case action::NONE:
 		logMessage("None action received");
 		break;
 	case action::CHANGE_TILE:
-		tileAction = static_cast<action::ActionTile*>(action);
-		drawingArea->setCurTexture(tileAction->getTexture());
+		tile = reinterpret_cast<utils::MapTexture*>(action.getObject());
+		drawingArea->setCurTexture(tile);
 		break;
 	case action::NEW:
 		drawingArea->clearMap();
@@ -369,8 +373,8 @@ void Map::handleAction(action::IAction* action) {
 
 		break;
 	case action::CLOSE:
-		dialogAction = static_cast<action::ActionDialog*>(action);
-		this->removeDisplay(dialogAction->getDisplay());
+		display = reinterpret_cast<display::IDisplay*>(action.getObject());
+		this->removeDisplay(display);
 		break;
 	default:
 		logMessage("Unknown event");
@@ -382,7 +386,7 @@ void Map::run() {
 	bool quit = false;
 
 	SDL_Event event;
-	action::IAction* action;
+	action::IAction action;
 
 	while (quit == false) {
 		SDL_RenderClear(renderer);
@@ -394,11 +398,10 @@ void Map::run() {
 			}
 		}
 
-		action = action::ActionQueue::getInstance().pollEvent();
-		while (action != NULL) {
+
+		while (action::ActionQueue::getInstance().pollEvent(&action)) {
 			handleAction(action);
-			delete action;
-			action = action::ActionQueue::getInstance().pollEvent();
+			delete &action;
 		}
 
 		this->render();

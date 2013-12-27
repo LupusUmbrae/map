@@ -20,7 +20,7 @@
 #include "../utils/logger.h"
 
 #include "../actions/ActionQueue.h"
-#include "../actions/ActionDialog.h"
+#include "../actions/IAction.h"
 
 namespace menu {
 
@@ -49,6 +49,8 @@ private:
 	static utils::MapTexture* ok;
 	static utils::MapTexture* yes;
 	static utils::MapTexture* no;
+
+	action::IAction action;
 
 	SDL_Rect* okRect = new SDL_Rect();
 	SDL_Rect* yesRect = new SDL_Rect();

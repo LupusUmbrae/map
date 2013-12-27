@@ -69,7 +69,7 @@ public:
 	void applySurface(int x, int y, SDL_Surface* source,
 			SDL_Surface* destination);
 	void handleEvent(SDL_Event event);
-	void handleAction(action::IAction* action);
+	void handleAction(action::IAction action);
 	void render();
 	void renderClean();
 

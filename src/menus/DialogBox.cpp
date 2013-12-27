@@ -88,8 +88,9 @@ void DialogBox::handleEvents(SDL_Event event) {
 				if (curX >= okRect->x && (curX <= (okRect->x + okRect->w))) {
 					if (curY >= okRect->y
 							&& (curY <= (okRect->y + okRect->h))) {
-						action::ActionQueue::getInstance().addAction(
-								new action::ActionDialog(this));
+						action.setAction(action::CLOSE);
+						action.setObject(this);
+						action::ActionQueue::getInstance().addAction(&action);
 					}
 				}
 
