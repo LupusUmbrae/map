@@ -22,7 +22,18 @@ namespace utils {
 
 class Image: public MapTexture {
 public:
+	//! Constructor
+	/*!
+	 *
+	 * @param renderer Global renderer
+	 */
 	Image(SDL_Renderer* renderer);
+
+	/*!
+	 * Load an image from file
+	 * @param file Location of the image file
+	 * @return True if image was successfully loaded
+	 */
 	bool loadImage(std::string file);
 };
 

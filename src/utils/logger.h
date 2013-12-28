@@ -14,12 +14,18 @@
 
 #include <SDL2/SDL.h>
 
+//! Static method to log an SDL error with a custom string to helpo location
+/*!
+ *
+ * @param os Output stream to print the message to
+ * @param msg Custom message
+ */
 static inline void logSDLError(std::ostream &os, const std::string &msg) {
 	os << msg << " error: " << SDL_GetError() << std::endl;
 }
 
-static inline void logMessage( const std::string &msg)
-{
+//! Static method to log a custom string
+static inline void logMessage(const std::string &msg) {
 	std::cout << msg << std::endl;
 }
 

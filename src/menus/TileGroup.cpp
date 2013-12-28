@@ -15,8 +15,13 @@ TileGroup::TileGroup(utils::MapTexture* groupName,
 	this->tiles = tiles;
 }
 
-bool TileGroup::isOpen() {
-	return this->open;
+bool TileGroup::inArea(int x, int y) {
+	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->w))) {
+		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->h))) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void TileGroup::setArea(int x, int y, int w, int h) {
@@ -30,15 +35,6 @@ void TileGroup::setSpacing(int spacer, int nameSize, int iconSize) {
 	this->spacer = spacer;
 	this->nameSize = nameSize;
 	this->iconSize = iconSize;
-}
-
-bool TileGroup::inArea(int x, int y) {
-	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->w))) {
-		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->h))) {
-			return true;
-		}
-	}
-	return false;
 }
 
 void TileGroup::handleEvent(int x, int y) {
@@ -70,6 +66,10 @@ void TileGroup::handleEvent(int x, int y) {
 			this->open = !this->open;
 		}
 	}
+}
+
+bool TileGroup::isOpen() {
+	return this->open;
 }
 
 } /* namespace menu */

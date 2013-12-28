@@ -10,13 +10,13 @@
 namespace mapping {
 
 DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
-		utils::MapTexture *texture, SDL_Renderer* renderer) {
+		SDL_Renderer* renderer) {
 	this->renderer = renderer;
 	areaRect->x = offsetX;
 	areaRect->y = offsetY;
 	areaRect->h = height;
 	areaRect->w = width;
-	this->texture = texture;
+	this->texture = NULL; // do not start with a texture loaded
 	tileY = 0;
 	tileX = 0;
 
@@ -28,23 +28,6 @@ DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
 	viewX = 0;
 	viewY = 0;
 
-}
-
-void DrawingArea::scrollDrawingArea(int x, int y) {
-	viewX += x * scale;
-	viewY += y * scale;
-
-	if (viewX < 0) {
-		viewX = 0;
-	} else if (viewX > mapArea.w) {
-		viewX = mapArea.w;
-	}
-
-	if (viewY < 0) {
-		viewY = 0;
-	} else if (viewY > mapArea.h) {
-		viewY = mapArea.h;
-	}
 }
 
 void DrawingArea::render() {
@@ -166,6 +149,29 @@ void DrawingArea::setCurTexture(utils::MapTexture *texture) {
 	this->texture = texture;
 }
 
+void DrawingArea::scrollDrawingArea(int x, int y) {
+	viewX += x * scale;
+	viewY += y * scale;
+
+	if (viewX < 0) {
+		viewX = 0;
+	} else if (viewX > mapArea.w) {
+		viewX = mapArea.w;
+	}
+
+	if (viewY < 0) {
+		viewY = 0;
+	} else if (viewY > mapArea.h) {
+		viewY = mapArea.h;
+	}
+}
+
+void DrawingArea::loadMap(std::vector<Tile*> tiles) {
+	this->tiles.clear();
+
+	this->tiles.insert(this->tiles.end(), tiles.begin(), tiles.end());
+}
+
 Json::Value DrawingArea::save() {
 	Json::Value root;
 
@@ -182,12 +188,6 @@ Json::Value DrawingArea::save() {
 	}
 
 	return root;
-}
-
-void DrawingArea::loadMap(std::vector<Tile*> tiles) {
-	this->tiles.clear();
-
-	this->tiles.insert(this->tiles.end(), tiles.begin(), tiles.end());
 }
 
 void DrawingArea::clearMap() {

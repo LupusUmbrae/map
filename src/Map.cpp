@@ -219,7 +219,7 @@ bool Map::loadResources() {
 	items.push_back(menuSaveItem);
 	items.push_back(menuLoadItem);
 
-	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, font, renderer);
+	topMenu = new menu::TopMenu(0, 0, 24, SCREEN_WIDTH, items, renderer);
 
 	// Side menu
 	menu::LeftMenu* leftMenu = new menu::LeftMenu(0, 24, SCREEN_HEIGHT - 24,
@@ -227,13 +227,43 @@ bool Map::loadResources() {
 
 	// Drawing Areas
 	drawingArea = new mapping::DrawingArea(200, 24, SCREEN_HEIGHT - 24,
-			SCREEN_WIDTH - 200, NULL, renderer);
+			SCREEN_WIDTH - 200, renderer);
 
 	addToDisplay(topMenu);
 	addToDisplay(drawingArea);
 	addToDisplay(leftMenu);
 
 	return true;
+}
+
+void Map::run() {
+	bool quit = false;
+
+	SDL_Event event;
+	action::IAction action;
+
+	while (quit == false) {
+		SDL_RenderClear(renderer);
+
+		while (SDL_PollEvent(&event)) {
+			this->handleEvent(event);
+			if (event.type == SDL_QUIT) {
+				quit = true;
+			}
+		}
+
+		while (action::ActionQueue::getInstance().pollEvent(&action)) {
+			handleAction(action);
+		}
+
+		this->render();
+
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_RenderPresent(renderer);
+
+	}
+
+	this->cleanUp();
 }
 
 void Map::cleanUp() {
@@ -401,36 +431,6 @@ void Map::handleAction(action::IAction action) {
 		logMessage("Unknown event");
 		break;
 	}
-}
-
-void Map::run() {
-	bool quit = false;
-
-	SDL_Event event;
-	action::IAction action;
-
-	while (quit == false) {
-		SDL_RenderClear(renderer);
-
-		while (SDL_PollEvent(&event)) {
-			this->handleEvent(event);
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
-		}
-
-		while (action::ActionQueue::getInstance().pollEvent(&action)) {
-			handleAction(action);
-		}
-
-		this->render();
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderPresent(renderer);
-
-	}
-
-	this->cleanUp();
 }
 
 void Map::render() {

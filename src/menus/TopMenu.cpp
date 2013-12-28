@@ -10,8 +10,7 @@
 namespace menu {
 
 TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
-		std::vector<menu::MenuItem*> menuItems, TTF_Font* font,
-		SDL_Renderer* renderer) {
+		std::vector<menu::MenuItem*> menuItems, SDL_Renderer* renderer) {
 	items = menuItems;
 
 	areaRect->x = offsetX;
@@ -19,7 +18,6 @@ TopMenu::TopMenu(int offsetX, int offsetY, int height, int width,
 	areaRect->h = height;
 	areaRect->w = width;
 
-	this->font = font;
 	this->renderer = renderer;
 	this->drawItems();
 }

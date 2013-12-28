@@ -70,10 +70,6 @@ DialogBox::~DialogBox() {
 	message->unload();
 }
 
-bool DialogBox::accepted() {
-	return this->acccept;
-}
-
 void DialogBox::render() {
 	SDL_SetRenderDrawColor(renderer, 0xE0, 0xE0, 0xE0, 0xFF);
 	SDL_RenderFillRect(renderer, areaRect);
@@ -124,6 +120,40 @@ void DialogBox::handleEvents(SDL_Event event) {
 	}
 }
 
+bool DialogBox::accepted() {
+	return this->acccept;
+}
+
+void DialogBox::drawItems() {
+	if (DialogBox::ok != NULL && DialogBox::yes != NULL && DialogBox::no != NULL) {
+		int dialogRightX = this->areaRect->x + this->areaRect->w - 10;
+		int dialogY = this->areaRect->y + this->areaRect->h - 10;
+		switch (type) {
+		case MESSAGE:
+			okRect->x = dialogRightX - DialogBox::ok->getWidth();
+			okRect->y = dialogY - DialogBox::ok->getHeight();
+			okRect->w = DialogBox::ok->getWidth();
+			okRect->h = DialogBox::ok->getWidth();
+			break;
+		case YES_NO:
+			noRect->x = dialogRightX - DialogBox::no->getWidth();
+			noRect->y = dialogY - DialogBox::no->getHeight();
+			noRect->w = DialogBox::no->getWidth();
+			noRect->h = DialogBox::no->getWidth();
+
+			yesRect->x = noRect->x - DialogBox::yes->getWidth() - 10;
+			yesRect->y = dialogY - DialogBox::yes->getHeight();
+			yesRect->w = DialogBox::yes->getWidth();
+			yesRect->h = DialogBox::yes->getWidth();
+			break;
+		case INPUT:
+			logMessage("Not implemented");
+			break;
+
+		}
+	}
+}
+
 void DialogBox::handleEventsMessage(SDL_Event event) {
 
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -169,36 +199,6 @@ void DialogBox::handleEventsInput(SDL_Event event) {
 
 	action::ActionQueue::getInstance().addAction(&action);
 
-}
-
-void DialogBox::drawItems() {
-	if (DialogBox::ok != NULL && DialogBox::yes != NULL && DialogBox::no != NULL) {
-		int dialogRightX = this->areaRect->x + this->areaRect->w - 10;
-		int dialogY = this->areaRect->y + this->areaRect->h - 10;
-		switch (type) {
-		case MESSAGE:
-			okRect->x = dialogRightX - DialogBox::ok->getWidth();
-			okRect->y = dialogY - DialogBox::ok->getHeight();
-			okRect->w = DialogBox::ok->getWidth();
-			okRect->h = DialogBox::ok->getWidth();
-			break;
-		case YES_NO:
-			noRect->x = dialogRightX - DialogBox::no->getWidth();
-			noRect->y = dialogY - DialogBox::no->getHeight();
-			noRect->w = DialogBox::no->getWidth();
-			noRect->h = DialogBox::no->getWidth();
-
-			yesRect->x = noRect->x - DialogBox::yes->getWidth() - 10;
-			yesRect->y = dialogY - DialogBox::yes->getHeight();
-			yesRect->w = DialogBox::yes->getWidth();
-			yesRect->h = DialogBox::yes->getWidth();
-			break;
-		case INPUT:
-			logMessage("Not implemented");
-			break;
-
-		}
-	}
 }
 
 } /* namespace menu */
