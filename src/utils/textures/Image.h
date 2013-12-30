@@ -16,7 +16,6 @@
 #include "../../MapConstants.h"
 
 #include "../MapTextures.h"
-#include "../logger.h"
 
 namespace utils {
 

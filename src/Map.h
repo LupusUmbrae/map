@@ -33,6 +33,7 @@
 #include "utils/MapTextures.h"
 #include "utils/textures/Image.h"
 #include "utils/textures/Text.h"
+#include "utils/JsonProcessor.h"
 
 #include "actions/ActionQueue.h"
 #include "actions/IAction.h"
@@ -102,6 +103,8 @@ public:
 private:
 	int curX = 0, curY = 0;
 
+
+
 	// me window
 	SDL_Window *screen = NULL;
 	SDL_Renderer *renderer = NULL;
@@ -117,6 +120,8 @@ private:
 	std::vector<std::vector<display::IDisplay*>> displaysNew;
 	TTF_Font* font;
 	TTF_Font* font2;
+
+	utils::JsonProcessor* jsonProcessor;
 
 	//! Adds a new display to be rendered
 	/*!

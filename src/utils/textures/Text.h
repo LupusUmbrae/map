@@ -16,7 +16,6 @@
 #include <SDL2/SDL_ttf.h>
 
 // Map Includes
-#include "../logger.h"
 #include "../MapTextures.h"
 
 namespace utils {
@@ -68,13 +67,6 @@ public:
 	 */
 	static void setDefaults(SDL_Color color, TTF_Font* font);
 private:
-	//! Convert the surface created by the TTF Lib into a texture
-	/*!
-	 * Common surface conversion code for text textures
-	 * @param textSurface surface to convert
-	 * @return True if texture was created successfully
-	 */
-	bool convertSurface(SDL_Surface* textSurface);
 
 	//! Default colour
 	static SDL_Color color;

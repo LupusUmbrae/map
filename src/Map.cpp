@@ -81,80 +81,18 @@ bool Map::loadResources() {
 		return false;
 	}
 
-	/*
-	 * Find tile sets
-	 */
-
 	SDL_Color color = { 0, 0, 0 }; // black text
 	SDL_Color bgColor = { 255, 255, 255 }; // white background
 
 	utils::Text::setDefaults(color, font);
 
-	Json::Reader reader;
-	Json::Value root;
-
-	std::vector<menu::TileGroup*> groups;
-	std::vector<utils::MapTexture*> tiles;
-	menu::TileGroup* curGroup;
-	utils::Image* curTile;
-	utils::Text* groupName;
-
-	DIR* dir;
-	struct dirent* ent;
-
-	std::stringstream setFolder;
-	std::stringstream jsonFolder;
-	std::stringstream imageLocation;
-	std::stringstream uniqueName;
-
 	/*
-	 * Load tilesets
+	 * Find tile sets
 	 */
 
-	// TODO mossro: improve this.. thing, also probably move to a new class
-	if ((dir = opendir("resources/tilesets/")) != NULL) {
-		std::ifstream ifile;
-		while ((ent = readdir(dir)) != NULL) {
-			setFolder.str("");
-			jsonFolder.str("");
-
-			setFolder << "resources/tilesets/" << ent->d_name;
-			jsonFolder << setFolder.str() << "/set.json";
-
-			ifile.open(jsonFolder.str().c_str(), std::ifstream::in);
-			if (ifile) {
-				if (reader.parse(ifile, root)) {
-					tiles.clear();
-					// Create tile set
-					groupName = new utils::Text(renderer);
-					groupName->createText(root["name"].asString(), color, font);
-
-					Json::Value imagesToLoad = root["tiles"];
-					for (size_t i = 0; i < imagesToLoad.size(); i++) {
-						curTile = new utils::Image(renderer);
-
-						uniqueName.str("");
-						imageLocation.str("");
-
-						imageLocation << setFolder.str() << "/"
-								<< imagesToLoad[0].get("filename", "").asString();
-						uniqueName << ent->d_name << "."
-								<< imagesToLoad[0].get("name", "").asString();
-
-						curTile->loadImage(imageLocation.str());
-						curTile->setUniqueName(uniqueName.str());
-						tiles.push_back(curTile);
-					}
-					curGroup = new menu::TileGroup(groupName, tiles);
-					groups.push_back(curGroup);
-
-				} else {
-					logMessage(reader.getFormattedErrorMessages());
-				}
-
-			}
-		}
-	}
+	jsonProcessor = new utils::JsonProcessor(renderer, font);
+	std::vector<menu::TileGroup*> groups = jsonProcessor->loadTilesets(
+			"resources/tilesets/");
 
 	/*
 	 * Load static textures
@@ -329,20 +267,11 @@ void Map::handleAction(action::IAction action) {
 
 	menu::DialogBox* dialog;
 
-	Json::Reader reader;
-	Json::Value mapRoot;
-	Json::Value saveRoot;
+	std::string saveRoot;
 
-	std::ifstream ifile;
 	std::ofstream saveFile;
 
-	Tile* loadedTile;
-	utils::MapTexture* texture;
 	std::vector<Tile*> loadedMap;
-
-	std::string tileName;
-	int x;
-	int y;
 
 	switch (action.getAction()) {
 	case action::NONE:
@@ -366,14 +295,12 @@ void Map::handleAction(action::IAction action) {
 			dialog = reinterpret_cast<menu::DialogBox*>(action.getObject());
 
 			if (dialog->accepted()) {
-				saveRoot = drawingArea->save();
-
+				saveRoot = jsonProcessor->saveMap(drawingArea->getMap());
 				saveFile.open("resources/save.json");
 				if (saveFile) {
 					saveFile << saveRoot;
 					saveFile.close();
 				}
-
 			}
 
 			removeDisplay(dialog);
@@ -382,45 +309,12 @@ void Map::handleAction(action::IAction action) {
 		break;
 	case action::LOAD:
 
-		/*
-		 * TODO mossro: Move this else where
-		 */
+		loadedMap = jsonProcessor->loadMap("resources/save.json");
 
-		ifile.open("resources/save.json");
-		if (ifile) {
-			if (reader.parse(ifile, mapRoot)) {
-				if (mapRoot["version"].asString().compare("v0.1") == 0) {
-					Json::Value tiles = mapRoot["map"];
-					for (Json::Value tile : tiles) {
-						texture = NULL; // clear it
-						tileName = tile["name"].asString();
-						for (utils::MapTexture* curTex : utils::MapTexture::loadedTextures) {
-							if (curTex->getUniqueName()->compare(tileName)
-									== 0) {
-								texture = curTex;
-								break;
-							}
-						}
-						x = tile["x"].asInt();
-						y = tile["y"].asInt();
-						if (texture != NULL) {
-							loadedTile = new Tile(x, y, texture);
-							loadedMap.push_back(loadedTile);
-						} else {
-							logMessage("Failed to find tile");
-						}
-
-					}
-					drawingArea->loadMap(loadedMap);
-				}
-			} else {
-				logMessage(reader.getFormattedErrorMessages());
-			}
+		if (loadedMap.empty()) {
+			logMessage("Save file had no map");
 		}
-
-		/*
-		 * END TODO..
-		 */
+		drawingArea->loadMap(loadedMap);
 
 		break;
 	case action::CLOSE:

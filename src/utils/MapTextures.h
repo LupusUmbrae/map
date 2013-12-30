@@ -19,6 +19,7 @@
 #include <SDL2/SDL_ttf.h>
 
 // Map Includes
+#include "logger.h"
 
 namespace utils {
 
@@ -53,6 +54,7 @@ public:
 	int getHeight();
 	//! Get the width of the texture
 	int getWidth();
+
 	//! get the textures unique name
 	/*!
 	 * The unique name is used when searching for an image, this is only really used for tilesets
@@ -75,6 +77,15 @@ public:
 	void unload();
 
 protected:
+
+	//! Convert the surface created by a sub-implementation to a texture
+	/*!
+	 * Common surface conversion code for converting surfaces to textures
+	 * @param surface surface to convert
+	 * @return True if texture was created successfully
+	 */
+	bool convertSurface(SDL_Surface* surface);
+
 	//! width of the texture
 	int width;
 	//! height of the texture

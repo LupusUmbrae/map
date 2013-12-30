@@ -166,28 +166,17 @@ void DrawingArea::scrollDrawingArea(int x, int y) {
 	}
 }
 
-void DrawingArea::loadMap(std::vector<Tile*> tiles) {
+void DrawingArea::loadMap(std::vector<Tile*> loadedTiles) {
 	this->tiles.clear();
 
-	this->tiles.insert(this->tiles.end(), tiles.begin(), tiles.end());
+	this->tiles.insert(this->tiles.end(), loadedTiles.begin(),
+			loadedTiles.end());
+
+	loadedTiles.clear();
 }
 
-Json::Value DrawingArea::save() {
-	Json::Value root;
-
-	root["name"] = "testSAve";
-	root["version"] = "v0.1";
-
-	Tile* tile;
-	for (size_t i = 0; i < tiles.size(); i++) {
-		tile = tiles.at(i);
-
-		root["map"][i]["name"] = *tile->texture->getUniqueName();
-		root["map"][i]["x"] = tile->x;
-		root["map"][i]["y"] = tile->y;
-	}
-
-	return root;
+std::vector<Tile*>* DrawingArea::getMap() {
+	return &tiles;
 }
 
 void DrawingArea::clearMap() {

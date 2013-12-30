@@ -44,6 +44,28 @@ void MapTexture::render(int xPos, int yPos, int width, int height,
 	SDL_RenderCopyEx(renderer, texture, clip, &renderQuad, angle, center, flip);
 }
 
+bool MapTexture::convertSurface(SDL_Surface* surface) {
+	bool success = true;
+	if (surface != NULL) {
+
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		if (texture == NULL) {
+			logSDLError(std::cerr, "CreateTextureFromSurface");
+			success = false;
+		}
+		width = surface->w;
+		height = surface->h;
+
+		SDL_FreeSurface (surface);
+
+		MapTexture::loadedTextures.push_back(this);
+	} else {
+		logSDLError(std::cerr, "Surface was null");
+		success = false;
+	}
+	return success;
+}
+
 int MapTexture::getHeight() {
 	return this->height;
 }

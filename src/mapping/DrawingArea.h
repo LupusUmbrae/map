@@ -56,14 +56,14 @@ public:
 	 * Currently initial implementation to be updated. Takes a vector of the map, clears the map then loads this one
 	 * @param tiles Vector of tiles, which is copied into an internal vector
 	 */
-	void loadMap(std::vector<Tile*> tiles);
+	void loadMap(std::vector<Tile*> loadedTiles);
 
-	//! Saves the map. Temporary
+	//! Gets the map vector, used for saving
 	/*!
-	 * Converts the map into a JSON file
-	 * @return JSON of the map
+	 *
+	 * @return Returns the map vector
 	 */
-	Json::Value save();
+	std::vector<Tile*>* getMap();
 
 	//! Clears the map
 	void clearMap();

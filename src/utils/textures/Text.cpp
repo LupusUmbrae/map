@@ -63,27 +63,5 @@ bool Text::createText(std::string text, SDL_Color color, TTF_Font* font) {
 	return success;
 }
 
-bool Text::convertSurface(SDL_Surface* textSurface) {
-	bool success = true;
-	if (textSurface != NULL) {
-
-		texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-		if (texture == NULL) {
-			logSDLError(std::cerr, "CreateTextureFromSurface in text");
-			success = false;
-		}
-		width = textSurface->w;
-		height = textSurface->h;
-
-		SDL_FreeSurface(textSurface);
-
-		MapTexture::loadedTextures.push_back(this);
-	} else {
-		logSDLError(std::cerr, "RenderText_Solid in Text");
-		success = false;
-	}
-	return success;
-}
-
 }
 /* namespace utils */

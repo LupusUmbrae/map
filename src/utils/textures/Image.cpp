@@ -19,23 +19,8 @@ bool Image::loadImage(std::string file) {
 	SDL_Surface *loadedImage = IMG_Load(file.c_str());
 
 
-	if (loadedImage != NULL) {
-		texture = SDL_CreateTextureFromSurface(renderer, loadedImage);
-		if (texture == NULL) {
+	success = this->convertSurface(loadedImage);
 
-			logSDLError(std::cout, "CreateTextureFromSurface");
-			success = false;
-		}
-		width = loadedImage->w;
-		height = loadedImage->h;
-
-		SDL_FreeSurface(loadedImage);
-
-		MapTexture::loadedTextures.push_back(this);
-	} else {
-		logSDLError(std::cout, "LoadBmp");
-		success = false;
-	}
 	return success;
 }
 
