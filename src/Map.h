@@ -45,6 +45,7 @@
 #include "menus/MenuItem.h"
 #include "menus/TileGroup.h"
 #include "menus/DialogBox.h"
+#include "menus/InputBox.h"
 
 #include "mapping/DrawingArea.h"
 

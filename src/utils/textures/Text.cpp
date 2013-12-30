@@ -29,7 +29,6 @@ bool Text::createText(std::string text) {
 
 	if (font != nullptr) {
 		textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
-
 		success = this->convertSurface(textSurface);
 	} else {
 		success = false;

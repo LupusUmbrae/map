@@ -46,6 +46,12 @@ void MapTexture::render(int xPos, int yPos, int width, int height,
 
 bool MapTexture::convertSurface(SDL_Surface* surface) {
 	bool success = true;
+
+	// Release the texture if one already exists
+	if (texture != NULL) {
+		SDL_DestroyTexture(texture);
+	}
+
 	if (surface != NULL) {
 
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -53,10 +59,11 @@ bool MapTexture::convertSurface(SDL_Surface* surface) {
 			logSDLError(std::cerr, "CreateTextureFromSurface");
 			success = false;
 		}
+
 		width = surface->w;
 		height = surface->h;
 
-		SDL_FreeSurface (surface);
+		SDL_FreeSurface(surface);
 
 		MapTexture::loadedTextures.push_back(this);
 	} else {

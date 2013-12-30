@@ -179,7 +179,7 @@ void Map::run() {
 
 	SDL_Event event;
 	action::IAction action;
-
+	SDL_StartTextInput();
 	while (quit == false) {
 		SDL_RenderClear(renderer);
 
@@ -200,7 +200,7 @@ void Map::run() {
 		SDL_RenderPresent(renderer);
 
 	}
-
+	SDL_StopTextInput();
 	this->cleanUp();
 }
 
@@ -258,6 +258,18 @@ void Map::handleEvent(SDL_Event event) {
 			drawingArea->scrollDrawingArea(1, 0);
 			break;
 		}
+
+	}
+
+	if (event.type == SDL_TEXTINPUT || event.type == SDL_KEYDOWN) {
+		for (size_t i = (displaysNew.size()); i-- > 0;) {
+			for (display::IDisplay *display : displaysNew.at(i)) {
+				if (display->inArea(curX, curY)) {
+					display->handleEvents(event);
+					return;
+				}
+			}
+		}
 	}
 }
 
@@ -266,12 +278,16 @@ void Map::handleAction(action::IAction action) {
 	utils::MapTexture* tile;
 
 	menu::DialogBox* dialog;
+	menu::InputBox* input;
 
 	std::string saveRoot;
 
 	std::ofstream saveFile;
 
 	std::vector<Tile*> loadedMap;
+
+	int x;
+	int y;
 
 	switch (action.getAction()) {
 	case action::NONE:
@@ -282,7 +298,29 @@ void Map::handleAction(action::IAction action) {
 		drawingArea->setCurTexture(tile);
 		break;
 	case action::NEW:
-		drawingArea->clearMap();
+
+		if (action.getObject() == nullptr) {
+			dialog = new menu::DialogBox(300, 100, 100, 200, "New Map",
+					"Enter new map tile size", menu::INPUT, true, renderer,
+					action::NEW);
+			input = new menu::InputBox(renderer, "height");
+			dialog->addInput(input);
+			input = new menu::InputBox(renderer, "width");
+			dialog->addInput(input);
+
+			addToDisplay(dialog, 3);
+
+		} else {
+			dialog = reinterpret_cast<menu::DialogBox*>(action.getObject());
+
+			x = atoi(dialog->findInput("width").c_str());
+			y = atoi(dialog->findInput("height").c_str());
+
+			drawingArea->clearMap(y, x);
+
+			removeDisplay(dialog);
+		}
+
 		break;
 	case action::SAVE:
 

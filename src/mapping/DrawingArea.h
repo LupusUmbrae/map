@@ -66,7 +66,7 @@ public:
 	std::vector<Tile*>* getMap();
 
 	//! Clears the map
-	void clearMap();
+	void clearMap(int height, int width);
 
 private:
 

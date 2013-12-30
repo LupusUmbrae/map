@@ -179,8 +179,12 @@ std::vector<Tile*>* DrawingArea::getMap() {
 	return &tiles;
 }
 
-void DrawingArea::clearMap() {
+void DrawingArea::clearMap(int height, int width) {
 	this->tiles.clear();
+	mapArea.x = 0;
+	mapArea.y = 0;
+	mapArea.w = width;
+	mapArea.h = height;
 }
 
 } /* namespace mapping */

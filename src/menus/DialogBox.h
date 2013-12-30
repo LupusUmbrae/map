@@ -10,12 +10,15 @@
 
 // C++ Includes
 #include <string>
+#include <vector>
 
 // SDL Includes
 #include <SDL2/SDL.h>
 
 // Map Includes
 #include "../IDisplay.h"
+
+#include "InputBox.h"
 
 #include "../utils/MapTextures.h"
 #include "../utils/textures/Text.h"
@@ -97,7 +100,11 @@ public:
 	//! Was the dialog box accepted
 	bool accepted();
 
-private:
+	void addInput(InputBox* input);
+
+	std::string findInput(std::string name);
+
+protected:
 	//! Static button image
 	static utils::MapTexture* ok;
 	//! Static button image
@@ -110,6 +117,14 @@ private:
 	//! What action should be sent
 	action::actions actionType;
 
+	//! Title of the dialog box
+	utils::MapTexture* title;
+
+	//! Message of this dialog box
+	utils::MapTexture* message;
+
+	std::vector<InputBox*> inputs;
+private:
 	//! area for the ok Button
 	SDL_Rect* okRect = new SDL_Rect();
 	//! area for the yes Button
@@ -130,14 +145,10 @@ private:
 	//! Handle events if this is a input dialog box
 	void handleEventsInput(SDL_Event event);
 
-	//! Title of the dialog box
-	utils::MapTexture* title;
-
-	//! Message of this dialog box
-	utils::MapTexture* message;
-
 	//! what type is this dialog box
 	dialog type = MESSAGE;
+
+	size_t inputTo = -1;
 
 	//! Should this dialog box block all lower layers?
 	/*!

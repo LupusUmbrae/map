@@ -73,6 +73,12 @@ private:
 
 	//! Default font
 	static TTF_Font* font;
+
+	//! width of the texture
+	int width;
+	//! height of the texture
+	int height;
+
 };
 
 } /* namespace utils */

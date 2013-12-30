@@ -87,7 +87,10 @@ void DialogBox::render() {
 			DialogBox::no->render(noRect->x, noRect->y);
 			break;
 		case INPUT:
-			logMessage("Not implemented");
+			DialogBox::ok->render(okRect->x, okRect->y);
+			for (InputBox* curInput : inputs) {
+				curInput->render();
+			}
 			break;
 
 		}
@@ -124,7 +127,23 @@ bool DialogBox::accepted() {
 	return this->acccept;
 }
 
+void DialogBox::addInput(InputBox* input) {
+	this->inputs.push_back(input);
+	drawItems();
+}
+
+std::string DialogBox::findInput(std::string name) {
+	for (InputBox* curInput : inputs) {
+		if (curInput->getName() == name) {
+			return curInput->getInput();
+		}
+	}
+	return "";
+}
+
 void DialogBox::drawItems() {
+	int inputY = areaRect->y + title->getHeight() + message->getHeight() + 10;
+
 	if (DialogBox::ok != NULL && DialogBox::yes != NULL && DialogBox::no != NULL) {
 		int dialogRightX = this->areaRect->x + this->areaRect->w - 10;
 		int dialogY = this->areaRect->y + this->areaRect->h - 10;
@@ -147,7 +166,16 @@ void DialogBox::drawItems() {
 			yesRect->h = DialogBox::yes->getWidth();
 			break;
 		case INPUT:
-			logMessage("Not implemented");
+			for (InputBox* curBox : inputs) {
+				curBox->setArea(areaRect->x + 10, inputY, areaRect->w - 20, 10);
+				inputY += 10;
+			}
+
+			okRect->x = dialogRightX - DialogBox::ok->getWidth();
+			okRect->y = dialogY - DialogBox::ok->getHeight();
+			okRect->w = DialogBox::ok->getWidth();
+			okRect->h = DialogBox::ok->getWidth();
+
 			break;
 
 		}
@@ -197,7 +225,39 @@ void DialogBox::handleEventsYesNo(SDL_Event event) {
 
 void DialogBox::handleEventsInput(SDL_Event event) {
 
-	action::ActionQueue::getInstance().addAction(&action);
+	bool found = false;
+
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+
+			for (size_t i = 0; i < inputs.size(); i++) {
+
+				if (inputs.at(i)->inArea(curX, curY)) {
+					inputTo = i;
+					found = true;
+					break;
+				}
+			}
+
+			if (!found) {
+				inputTo = -1;
+			}
+
+			if (curX >= okRect->x && (curX <= (okRect->x + okRect->w))) {
+				if (curY >= okRect->y && (curY <= (okRect->y + okRect->h))) {
+					action.setAction(actionType);
+					action.setObject(this);
+					action::ActionQueue::getInstance().addAction(&action);
+				}
+			}
+		}
+	}
+
+	if (event.type == SDL_TEXTINPUT || event.type == SDL_KEYDOWN) {
+		if (inputTo >= 0) {
+			inputs.at(inputTo)->handleEvents(event);
+		}
+	}
 
 }
 
