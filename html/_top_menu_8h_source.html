@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -61,7 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TopMenu.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_top_menu_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * TopMenu.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 17 Nov 2013</span></div>
@@ -113,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;../actions/ActionQueue.h&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_menu_item_8h.html">MenuItem.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;MenuItem.h&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;../IDisplay.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>menu {</div>
@@ -123,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classmenu_1_1_top_menu.html#a86347513bc9e27a52a5c5070b30e10c3">TopMenu</a>(<span class="keywordtype">int</span> offsetX, <span class="keywordtype">int</span> offsetY, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            std::vector&lt;MenuItem*&gt; menuItems,</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            SDL_Renderer* <a class="code" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classmenu_1_1_top_menu.html#a6c4c5001e63a6ab1cc2d614b6f2dc134">~TopMenu</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classmenu_1_1_top_menu.html">TopMenu</a>();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmenu_1_1_top_menu.html#a91382513a3ce8fd9361bb6d6b56f1844">render</a>();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
@@ -141,19 +139,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* TOPMENU_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classmenu_1_1_top_menu_html_a6c4c5001e63a6ab1cc2d614b6f2dc134"><div class="ttname"><a href="classmenu_1_1_top_menu.html#a6c4c5001e63a6ab1cc2d614b6f2dc134">menu::TopMenu::~TopMenu</a></div><div class="ttdeci">virtual ~TopMenu()</div><div class="ttdef"><b>Definition:</b> TopMenu.cpp:25</div></div>
-<div class="ttc" id="_menu_item_8h_html"><div class="ttname"><a href="_menu_item_8h.html">MenuItem.h</a></div></div>
 <div class="ttc" id="classmenu_1_1_top_menu_html_a91382513a3ce8fd9361bb6d6b56f1844"><div class="ttname"><a href="classmenu_1_1_top_menu.html#a91382513a3ce8fd9361bb6d6b56f1844">menu::TopMenu::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">Render the drawing area. </div><div class="ttdef"><b>Definition:</b> TopMenu.cpp:29</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html"><div class="ttname"><a href="classdisplay_1_1_i_display.html">display::IDisplay</a></div><div class="ttdef"><b>Definition:</b> IDisplay.h:23</div></div>
 <div class="ttc" id="classmenu_1_1_top_menu_html_a80abdf3bdfccfc8f11b530e3d6f6c8f1"><div class="ttname"><a href="classmenu_1_1_top_menu.html#a80abdf3bdfccfc8f11b530e3d6f6c8f1">menu::TopMenu::handleEvents</a></div><div class="ttdeci">void handleEvents(SDL_Event event)</div><div class="ttdoc">Handle an SDL Event. </div><div class="ttdef"><b>Definition:</b> TopMenu.cpp:51</div></div>
-<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:28</div></div>
+<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
 <div class="ttc" id="classmenu_1_1_top_menu_html_a86347513bc9e27a52a5c5070b30e10c3"><div class="ttname"><a href="classmenu_1_1_top_menu.html#a86347513bc9e27a52a5c5070b30e10c3">menu::TopMenu::TopMenu</a></div><div class="ttdeci">TopMenu(int offsetX, int offsetY, int height, int width, std::vector&lt; MenuItem * &gt; menuItems, SDL_Renderer *renderer)</div><div class="ttdoc">Constructor. </div><div class="ttdef"><b>Definition:</b> TopMenu.cpp:12</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_ab57fb8ccd8ccf11a9005bf16489bc1f9"><div class="ttname"><a href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">display::IDisplay::renderer</a></div><div class="ttdeci">SDL_Renderer * renderer</div><div class="ttdoc">pointer to the global renderer </div><div class="ttdef"><b>Definition:</b> IDisplay.h:68</div></div>
 <div class="ttc" id="classmenu_1_1_top_menu_html"><div class="ttname"><a href="classmenu_1_1_top_menu.html">menu::TopMenu</a></div><div class="ttdef"><b>Definition:</b> TopMenu.h:30</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

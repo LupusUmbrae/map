@@ -31,7 +31,7 @@ public:
 	MapTexture();
 	~MapTexture();
 
-	//! Static vector of all loaded textures. Texture MUST add themselves
+	//! Static vector of all loaded textures.
 	static std::vector<MapTexture*> loadedTextures;
 
 	//! render this texture
@@ -80,7 +80,7 @@ protected:
 
 	//! Convert the surface created by a sub-implementation to a texture
 	/*!
-	 * Common surface conversion code for converting surfaces to textures
+	 * Common surface conversion code for converting surfaces to textures. This also adds the texture to the loadedTextures
 	 * @param surface surface to convert
 	 * @return True if texture was created successfully
 	 */

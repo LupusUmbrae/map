@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -61,7 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MenuItem.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_menu_item_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * MenuItem.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 17 Nov 2013</span></div>
@@ -116,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classmenu_1_1_menu_item.html#a8b76d9dab8ed84bbcbc2cc35c3d8a03f">MenuItem</a>(std::string <a class="code" href="classmenu_1_1_menu_item.html#a0a00824f51ebc3b31701568b7965a4e2">name</a>, <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* <a class="code" href="classmenu_1_1_menu_item.html#a586e8d4e235955e8615629e5dbb430b4">tooltip</a>,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="classaction_1_1_i_action.html">action::IAction</a> <a class="code" href="classmenu_1_1_menu_item.html#ac6e492ba256a55b584ca175a0c93a34e">action</a>, <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* icon,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* iconHover);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classmenu_1_1_menu_item.html#ac53dba2634eca3f1c9e7064e7daa6ff0">~MenuItem</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classmenu_1_1_menu_item.html">MenuItem</a>();</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* <a class="code" href="classmenu_1_1_menu_item.html#af7265f3d25eeb28acbed22658bb84802">getIcon</a>();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmenu_1_1_menu_item.html#aa2b7294bcbf392b5a0ef841aab3e3b70">setHover</a>(<span class="keywordtype">bool</span> hovering);</div>
@@ -142,13 +140,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classmenu_1_1_menu_item_html_a586e8d4e235955e8615629e5dbb430b4"><div class="ttname"><a href="classmenu_1_1_menu_item.html#a586e8d4e235955e8615629e5dbb430b4">menu::MenuItem::tooltip</a></div><div class="ttdeci">utils::MapTexture * tooltip</div><div class="ttdoc">Tooltip of the item. </div><div class="ttdef"><b>Definition:</b> MenuItem.h:50</div></div>
 <div class="ttc" id="classmenu_1_1_menu_item_html"><div class="ttname"><a href="classmenu_1_1_menu_item.html">menu::MenuItem</a></div><div class="ttdef"><b>Definition:</b> MenuItem.h:26</div></div>
 <div class="ttc" id="classmenu_1_1_menu_item_html_ac6e492ba256a55b584ca175a0c93a34e"><div class="ttname"><a href="classmenu_1_1_menu_item.html#ac6e492ba256a55b584ca175a0c93a34e">menu::MenuItem::action</a></div><div class="ttdeci">action::IAction action</div><div class="ttdoc">items action </div><div class="ttdef"><b>Definition:</b> MenuItem.h:52</div></div>
-<div class="ttc" id="classmenu_1_1_menu_item_html_ac53dba2634eca3f1c9e7064e7daa6ff0"><div class="ttname"><a href="classmenu_1_1_menu_item.html#ac53dba2634eca3f1c9e7064e7daa6ff0">menu::MenuItem::~MenuItem</a></div><div class="ttdeci">virtual ~MenuItem()</div><div class="ttdef"><b>Definition:</b> MenuItem.cpp:22</div></div>
-<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:28</div></div>
+<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
 <div class="ttc" id="classmenu_1_1_menu_item_html_aa2b7294bcbf392b5a0ef841aab3e3b70"><div class="ttname"><a href="classmenu_1_1_menu_item.html#aa2b7294bcbf392b5a0ef841aab3e3b70">menu::MenuItem::setHover</a></div><div class="ttdeci">void setHover(bool hovering)</div><div class="ttdoc">Set whether the mouse is hovering over this item. </div><div class="ttdef"><b>Definition:</b> MenuItem.cpp:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

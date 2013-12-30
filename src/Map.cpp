@@ -90,7 +90,7 @@ bool Map::loadResources() {
 	 * Find tile sets
 	 */
 
-	jsonProcessor = new utils::JsonProcessor(renderer, font);
+	jsonProcessor = new utils::JsonProcessor(renderer);
 	std::vector<menu::TileGroup*> groups = jsonProcessor->loadTilesets(
 			"resources/tilesets/");
 

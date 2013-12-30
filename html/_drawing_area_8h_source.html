@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -61,7 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DrawingArea.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_drawing_area_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * DrawingArea.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 18 Nov 2013</span></div>
@@ -112,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;../IDisplay.h&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_tile_8h.html">Tile.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;Tile.h&quot;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>mapping {</div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classmapping_1_1_drawing_area.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmapping_1_1_drawing_area.html">DrawingArea</a>: <span class="keyword">public</span> <a class="code" href="classdisplay_1_1_i_display.html">display::IDisplay</a> {</div>
@@ -131,10 +129,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// TODO mossro: Update this temporary function</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#aa547677065c77ec2ee3952c18782ece4">loadMap</a>(std::vector&lt;Tile*&gt; tiles);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">loadMap</a>(std::vector&lt;Tile*&gt; loadedTiles);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Json::Value <a class="code" href="classmapping_1_1_drawing_area.html#aa965638dbec0ddd32f80fe82d40d1349">save</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt;Tile*&gt;* <a class="code" href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">getMap</a>();</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a4128c0e1273f4ece8fb50c21c99bb20d">clearMap</a>();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
@@ -158,23 +156,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <span class="comment">/* namespace mapping */</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DRAWINGAREA_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="_tile_8h_html"><div class="ttname"><a href="_tile_8h.html">Tile.h</a></div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_aaeb6e1425a9ca5c5a0410e0850970acb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">mapping::DrawingArea::getMap</a></div><div class="ttdeci">std::vector&lt; Tile * &gt; * getMap()</div><div class="ttdoc">Gets the map vector, used for saving. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:178</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html_ae49564756dc503d27acdf7de8c019ccd"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae49564756dc503d27acdf7de8c019ccd">mapping::DrawingArea::DrawingArea</a></div><div class="ttdeci">DrawingArea(int offsetX, int offsetY, int height, int width, SDL_Renderer *renderer)</div><div class="ttdoc">Constructor that defines the display area of the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:12</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html"><div class="ttname"><a href="classmapping_1_1_drawing_area.html">mapping::DrawingArea</a></div><div class="ttdef"><b>Definition:</b> DrawingArea.h:31</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_aa965638dbec0ddd32f80fe82d40d1349"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#aa965638dbec0ddd32f80fe82d40d1349">mapping::DrawingArea::save</a></div><div class="ttdeci">Json::Value save()</div><div class="ttdoc">Saves the map. Temporary. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:175</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html_a43ce84dba02e4464cfe8a933cca3bb9b"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">mapping::DrawingArea::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">Render the drawing area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:33</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html_a58afc7c3e9dca259ef414db7cf5ed536"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a58afc7c3e9dca259ef414db7cf5ed536">mapping::DrawingArea::setCurTexture</a></div><div class="ttdeci">void setCurTexture(utils::MapTexture *texture)</div><div class="ttdoc">Set the current texture. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:148</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html_a281adf5d53165362e38f6d8b7aa8255a"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a281adf5d53165362e38f6d8b7aa8255a">mapping::DrawingArea::handleEvents</a></div><div class="ttdeci">void handleEvents(SDL_Event event)</div><div class="ttdoc">Handle an SDL Event. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:87</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html"><div class="ttname"><a href="classdisplay_1_1_i_display.html">display::IDisplay</a></div><div class="ttdef"><b>Definition:</b> IDisplay.h:23</div></div>
-<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:28</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_ae00212a863dfc13e50772798278997bc"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">mapping::DrawingArea::loadMap</a></div><div class="ttdeci">void loadMap(std::vector&lt; Tile * &gt; loadedTiles)</div><div class="ttdoc">Loads a map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:169</div></div>
+<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html_a5a74b2d3aedab2706b4edf2d3e56c8cb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a5a74b2d3aedab2706b4edf2d3e56c8cb">mapping::DrawingArea::scrollDrawingArea</a></div><div class="ttdeci">void scrollDrawingArea(int x, int y)</div><div class="ttdoc">Temporary (ish) method for scrolling the map area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:152</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_aa547677065c77ec2ee3952c18782ece4"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#aa547677065c77ec2ee3952c18782ece4">mapping::DrawingArea::loadMap</a></div><div class="ttdeci">void loadMap(std::vector&lt; Tile * &gt; tiles)</div><div class="ttdoc">Loads a map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:169</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a4128c0e1273f4ece8fb50c21c99bb20d"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a4128c0e1273f4ece8fb50c21c99bb20d">mapping::DrawingArea::clearMap</a></div><div class="ttdeci">void clearMap()</div><div class="ttdoc">Clears the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:193</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a4128c0e1273f4ece8fb50c21c99bb20d"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a4128c0e1273f4ece8fb50c21c99bb20d">mapping::DrawingArea::clearMap</a></div><div class="ttdeci">void clearMap()</div><div class="ttdoc">Clears the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:182</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_ab57fb8ccd8ccf11a9005bf16489bc1f9"><div class="ttname"><a href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">display::IDisplay::renderer</a></div><div class="ttdeci">SDL_Renderer * renderer</div><div class="ttdoc">pointer to the global renderer </div><div class="ttdef"><b>Definition:</b> IDisplay.h:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

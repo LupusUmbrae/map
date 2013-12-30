@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -61,7 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DialogBox.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_dialog_box_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * DialogBox.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 26 Dec 2013</span></div>
@@ -116,10 +114,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>menu {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">   29</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">dialog</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea4052577e138889fa3ce04fa72a3ea15a">   30</a></span>&#160;    <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea4052577e138889fa3ce04fa72a3ea15a">MESSAGE</a>, </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea35e4de121add87b7dac50713a36ab51c">   31</a></span>&#160;    <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea35e4de121add87b7dac50713a36ab51c">YES_NO</a>, </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea983ffa3678d0141a918a94aa5c53be4c">   32</a></span>&#160;    <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea983ffa3678d0141a918a94aa5c53be4c">INPUT</a> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">enum</span> dialog {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    MESSAGE, </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    YES_NO, </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    INPUT </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classmenu_1_1_dialog_box.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmenu_1_1_dialog_box.html">DialogBox</a>: <span class="keyword">public</span> <a class="code" href="classdisplay_1_1_i_display.html">display::IDisplay</a> {</div>
@@ -129,15 +127,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classmenu_1_1_dialog_box.html#a3badf3245d5c12b7ee674ed44a7514fa">DialogBox</a>(<span class="keywordtype">int</span> offsetX, <span class="keywordtype">int</span> offsetY, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* title, <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* message, <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">dialog</a> type,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">bool</span> blocking, SDL_Renderer* <a class="code" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a>, <a class="code" href="namespaceaction.html#a3d9d47e7b8a050820325fdb7090f9574">action::actions</a> actionType);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* title, <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* message, dialog type,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">bool</span> blocking, SDL_Renderer* <a class="code" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a>, action::actions actionType);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="classmenu_1_1_dialog_box.html#a3badf3245d5c12b7ee674ed44a7514fa">DialogBox</a>(<span class="keywordtype">int</span> offsetX, <span class="keywordtype">int</span> offsetY, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            std::string title, std::string message, <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">dialog</a> type, <span class="keywordtype">bool</span> blocking,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            SDL_Renderer* renderer, <a class="code" href="namespaceaction.html#a3d9d47e7b8a050820325fdb7090f9574">action::actions</a> actionType);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            std::string title, std::string message, dialog type, <span class="keywordtype">bool</span> blocking,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            SDL_Renderer* renderer, action::actions actionType);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classmenu_1_1_dialog_box.html#ae5dc8a58000202f8471be0dd81d65e24">~DialogBox</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ~<a class="code" href="classmenu_1_1_dialog_box.html">DialogBox</a>();</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmenu_1_1_dialog_box.html#ac61fd85e256b9ef3c331768a994309a7">render</a>();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
@@ -154,7 +152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">static</span> <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* no;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="classaction_1_1_i_action.html">action::IAction</a> action;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="namespaceaction.html#a3d9d47e7b8a050820325fdb7090f9574">action::actions</a> actionType;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    action::actions actionType;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    SDL_Rect* okRect = <span class="keyword">new</span> SDL_Rect();</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    SDL_Rect* yesRect = <span class="keyword">new</span> SDL_Rect();</div>
@@ -171,7 +169,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* message;</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">dialog</a> type = <a class="code" href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea4052577e138889fa3ce04fa72a3ea15a">MESSAGE</a>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    dialog type = MESSAGE;</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordtype">bool</span> blocking;</div>
@@ -183,26 +181,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;} <span class="comment">/* namespace menu */</span></div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DIALOGBOX_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_ac61fd85e256b9ef3c331768a994309a7"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#ac61fd85e256b9ef3c331768a994309a7">menu::DialogBox::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">Render the drawing area. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:73</div></div>
-<div class="ttc" id="namespacemenu_html_a28a9158eaea743a43b5ecde46830ed2e"><div class="ttname"><a href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2e">menu::dialog</a></div><div class="ttdeci">dialog</div><div class="ttdef"><b>Definition:</b> DialogBox.h:29</div></div>
-<div class="ttc" id="namespacemenu_html_a28a9158eaea743a43b5ecde46830ed2ea983ffa3678d0141a918a94aa5c53be4c"><div class="ttname"><a href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea983ffa3678d0141a918a94aa5c53be4c">menu::INPUT</a></div><div class="ttdef"><b>Definition:</b> DialogBox.h:32</div></div>
-<div class="ttc" id="namespacemenu_html_a28a9158eaea743a43b5ecde46830ed2ea4052577e138889fa3ce04fa72a3ea15a"><div class="ttname"><a href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea4052577e138889fa3ce04fa72a3ea15a">menu::MESSAGE</a></div><div class="ttdef"><b>Definition:</b> DialogBox.h:30</div></div>
-<div class="ttc" id="namespaceaction_html_a3d9d47e7b8a050820325fdb7090f9574"><div class="ttname"><a href="namespaceaction.html#a3d9d47e7b8a050820325fdb7090f9574">action::actions</a></div><div class="ttdeci">actions</div><div class="ttdoc">Enum of possible actions. </div><div class="ttdef"><b>Definition:</b> IAction.h:20</div></div>
-<div class="ttc" id="namespacemenu_html_a28a9158eaea743a43b5ecde46830ed2ea35e4de121add87b7dac50713a36ab51c"><div class="ttname"><a href="namespacemenu.html#a28a9158eaea743a43b5ecde46830ed2ea35e4de121add87b7dac50713a36ab51c">menu::YES_NO</a></div><div class="ttdef"><b>Definition:</b> DialogBox.h:31</div></div>
 <div class="ttc" id="classaction_1_1_i_action_html"><div class="ttname"><a href="classaction_1_1_i_action.html">action::IAction</a></div><div class="ttdef"><b>Definition:</b> IAction.h:32</div></div>
-<div class="ttc" id="classmenu_1_1_dialog_box_html_ae5dc8a58000202f8471be0dd81d65e24"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#ae5dc8a58000202f8471be0dd81d65e24">menu::DialogBox::~DialogBox</a></div><div class="ttdeci">~DialogBox()</div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:68</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_af12ecba6514f27dca9c01e76df834ed9"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#af12ecba6514f27dca9c01e76df834ed9">menu::DialogBox::handleEvents</a></div><div class="ttdeci">void handleEvents(SDL_Event event)</div><div class="ttdoc">Handle an SDL Event. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:106</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html"><div class="ttname"><a href="classmenu_1_1_dialog_box.html">menu::DialogBox</a></div><div class="ttdef"><b>Definition:</b> DialogBox.h:38</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_acb56c808aad0e9f80d891cc29eaaae4f"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#acb56c808aad0e9f80d891cc29eaaae4f">menu::DialogBox::setImages</a></div><div class="ttdeci">static void setImages(utils::MapTexture *ok, utils::MapTexture *yes, utils::MapTexture *no)</div><div class="ttdoc">Sets the dialog box button images. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:16</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html"><div class="ttname"><a href="classdisplay_1_1_i_display.html">display::IDisplay</a></div><div class="ttdef"><b>Definition:</b> IDisplay.h:23</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_a3badf3245d5c12b7ee674ed44a7514fa"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#a3badf3245d5c12b7ee674ed44a7514fa">menu::DialogBox::DialogBox</a></div><div class="ttdeci">DialogBox(int offsetX, int offsetY, int height, int width, utils::MapTexture *title, utils::MapTexture *message, dialog type, bool blocking, SDL_Renderer *renderer, action::actions actionType)</div><div class="ttdoc">Construct a dialog box using the given text textures. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:23</div></div>
-<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:28</div></div>
+<div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_a8a13cba6f52e07e5963e066cb497f7df"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#a8a13cba6f52e07e5963e066cb497f7df">menu::DialogBox::inArea</a></div><div class="ttdeci">bool inArea(int x, int y)</div><div class="ttdoc">Overriden in area check,. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:97</div></div>
 <div class="ttc" id="classmenu_1_1_dialog_box_html_ada20c125051acd0b19903bbb98bb342d"><div class="ttname"><a href="classmenu_1_1_dialog_box.html#ada20c125051acd0b19903bbb98bb342d">menu::DialogBox::accepted</a></div><div class="ttdeci">bool accepted()</div><div class="ttdoc">Was the dialog box accepted. </div><div class="ttdef"><b>Definition:</b> DialogBox.cpp:123</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_ab57fb8ccd8ccf11a9005bf16489bc1f9"><div class="ttname"><a href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">display::IDisplay::renderer</a></div><div class="ttdeci">SDL_Renderer * renderer</div><div class="ttdoc">pointer to the global renderer </div><div class="ttdef"><b>Definition:</b> IDisplay.h:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

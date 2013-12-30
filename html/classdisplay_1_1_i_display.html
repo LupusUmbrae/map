@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacedisplay.html">display</a></li><li class="navelem"><a class="el" href="classdisplay_1_1_i_display.html">IDisplay</a></li>  </ul>
+<li class="navelem"><b>display</b></li><li class="navelem"><a class="el" href="classdisplay_1_1_i_display.html">IDisplay</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -111,12 +110,9 @@ Inheritance diagram for display::IDisplay:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa38587d9ea073b103fd9d8a1eb9de198"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#aa38587d9ea073b103fd9d8a1eb9de198">IDisplay</a> ()</td></tr>
-<tr class="separator:aa38587d9ea073b103fd9d8a1eb9de198"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8bac10410d31b34f514cc9c0b50494d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#af8bac10410d31b34f514cc9c0b50494d">~IDisplay</a> ()</td></tr>
-<tr class="separator:af8bac10410d31b34f514cc9c0b50494d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69b714b22252a4dc3bc12aef6c86c417"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a69b714b22252a4dc3bc12aef6c86c417">render</a> ()=0</td></tr>
-<tr class="memdesc:a69b714b22252a4dc3bc12aef6c86c417"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual member. Used to make displays render.  <a href="#a69b714b22252a4dc3bc12aef6c86c417">More...</a><br/></td></tr>
+<tr class="memitem:a69b714b22252a4dc3bc12aef6c86c417"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69b714b22252a4dc3bc12aef6c86c417"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a69b714b22252a4dc3bc12aef6c86c417">render</a> ()=0</td></tr>
+<tr class="memdesc:a69b714b22252a4dc3bc12aef6c86c417"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual member. Used to make displays render. <br/></td></tr>
 <tr class="separator:a69b714b22252a4dc3bc12aef6c86c417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa01db8dc35d841e0f6664e894e86ad37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#aa01db8dc35d841e0f6664e894e86ad37">handleEvents</a> (SDL_Event event)=0</td></tr>
 <tr class="memdesc:aa01db8dc35d841e0f6664e894e86ad37"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pure virtual member. Used to send displays events.  <a href="#aa01db8dc35d841e0f6664e894e86ad37">More...</a><br/></td></tr>
@@ -130,67 +126,34 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a71946af2dbad35cbdb8a1db61a6f0c0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a71946af2dbad35cbdb8a1db61a6f0c0d">leftDown</a> = false</td></tr>
-<tr class="memdesc:a71946af2dbad35cbdb8a1db61a6f0c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for left mouse button being down.  <a href="#a71946af2dbad35cbdb8a1db61a6f0c0d">More...</a><br/></td></tr>
+<tr class="memitem:a71946af2dbad35cbdb8a1db61a6f0c0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71946af2dbad35cbdb8a1db61a6f0c0d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a71946af2dbad35cbdb8a1db61a6f0c0d">leftDown</a> = false</td></tr>
+<tr class="memdesc:a71946af2dbad35cbdb8a1db61a6f0c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for left mouse button being down. <br/></td></tr>
 <tr class="separator:a71946af2dbad35cbdb8a1db61a6f0c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af92bcb554444615e656389d5eb88a14f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#af92bcb554444615e656389d5eb88a14f">rightDown</a> = false</td></tr>
-<tr class="memdesc:af92bcb554444615e656389d5eb88a14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for right mouse button being down.  <a href="#af92bcb554444615e656389d5eb88a14f">More...</a><br/></td></tr>
+<tr class="memitem:af92bcb554444615e656389d5eb88a14f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af92bcb554444615e656389d5eb88a14f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#af92bcb554444615e656389d5eb88a14f">rightDown</a> = false</td></tr>
+<tr class="memdesc:af92bcb554444615e656389d5eb88a14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for right mouse button being down. <br/></td></tr>
 <tr class="separator:af92bcb554444615e656389d5eb88a14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4596a2144287d1887031f8c4f21d01a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a4596a2144287d1887031f8c4f21d01a0">curX</a> = 0</td></tr>
-<tr class="memdesc:a4596a2144287d1887031f8c4f21d01a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current x location of the mouse.  <a href="#a4596a2144287d1887031f8c4f21d01a0">More...</a><br/></td></tr>
+<tr class="memitem:a4596a2144287d1887031f8c4f21d01a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4596a2144287d1887031f8c4f21d01a0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a4596a2144287d1887031f8c4f21d01a0">curX</a> = 0</td></tr>
+<tr class="memdesc:a4596a2144287d1887031f8c4f21d01a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current x location of the mouse. <br/></td></tr>
 <tr class="separator:a4596a2144287d1887031f8c4f21d01a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60a34ac0eb59c0cc594e840b8a3b1b8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a60a34ac0eb59c0cc594e840b8a3b1b8c">curY</a> = 0</td></tr>
-<tr class="memdesc:a60a34ac0eb59c0cc594e840b8a3b1b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current y location of the mouse.  <a href="#a60a34ac0eb59c0cc594e840b8a3b1b8c">More...</a><br/></td></tr>
+<tr class="memitem:a60a34ac0eb59c0cc594e840b8a3b1b8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60a34ac0eb59c0cc594e840b8a3b1b8c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#a60a34ac0eb59c0cc594e840b8a3b1b8c">curY</a> = 0</td></tr>
+<tr class="memdesc:a60a34ac0eb59c0cc594e840b8a3b1b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current y location of the mouse. <br/></td></tr>
 <tr class="separator:a60a34ac0eb59c0cc594e840b8a3b1b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab57fb8ccd8ccf11a9005bf16489bc1f9"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a></td></tr>
-<tr class="memdesc:ab57fb8ccd8ccf11a9005bf16489bc1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the global renderer  <a href="#ab57fb8ccd8ccf11a9005bf16489bc1f9">More...</a><br/></td></tr>
+<tr class="memitem:ab57fb8ccd8ccf11a9005bf16489bc1f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab57fb8ccd8ccf11a9005bf16489bc1f9"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a></td></tr>
+<tr class="memdesc:ab57fb8ccd8ccf11a9005bf16489bc1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the global renderer <br/></td></tr>
 <tr class="separator:ab57fb8ccd8ccf11a9005bf16489bc1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ec4a01eb88fca58230a2afd9c837a9"><td class="memItemLeft" align="right" valign="top">SDL_Rect *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#aa3ec4a01eb88fca58230a2afd9c837a9">areaRect</a> = new SDL_Rect()</td></tr>
-<tr class="memdesc:aa3ec4a01eb88fca58230a2afd9c837a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bounding box for the display.  <a href="#aa3ec4a01eb88fca58230a2afd9c837a9">More...</a><br/></td></tr>
+<tr class="memitem:aa3ec4a01eb88fca58230a2afd9c837a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3ec4a01eb88fca58230a2afd9c837a9"></a>
+SDL_Rect *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdisplay_1_1_i_display.html#aa3ec4a01eb88fca58230a2afd9c837a9">areaRect</a> = new SDL_Rect()</td></tr>
+<tr class="memdesc:aa3ec4a01eb88fca58230a2afd9c837a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bounding box for the display. <br/></td></tr>
 <tr class="separator:aa3ec4a01eb88fca58230a2afd9c837a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class must be inherited by all displays </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa38587d9ea073b103fd9d8a1eb9de198"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">display::IDisplay::IDisplay </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af8bac10410d31b34f514cc9c0b50494d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual display::IDisplay::~IDisplay </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa01db8dc35d841e0f6664e894e86ad37"></a>
 <div class="memitem">
 <div class="memproto">
@@ -297,174 +260,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a69b714b22252a4dc3bc12aef6c86c417"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void display::IDisplay::render </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>A pure virtual member. Used to make displays render. </p>
-
-<p>Implemented in <a class="el" href="classmenu_1_1_dialog_box.html#ac61fd85e256b9ef3c331768a994309a7">menu::DialogBox</a>, <a class="el" href="classmenu_1_1_left_menu.html#a30db64379da3adbafc7b18e9285d08af">menu::LeftMenu</a>, <a class="el" href="classmenu_1_1_top_menu.html#a91382513a3ce8fd9361bb6d6b56f1844">menu::TopMenu</a>, and <a class="el" href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">mapping::DrawingArea</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="aa3ec4a01eb88fca58230a2afd9c837a9"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">SDL_Rect* display::IDisplay::areaRect = new SDL_Rect()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Bounding box for the display. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4596a2144287d1887031f8c4f21d01a0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int display::IDisplay::curX = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Current x location of the mouse. </p>
-
-</div>
-</div>
-<a class="anchor" id="a60a34ac0eb59c0cc594e840b8a3b1b8c"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int display::IDisplay::curY = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Current y location of the mouse. </p>
-
-</div>
-</div>
-<a class="anchor" id="a71946af2dbad35cbdb8a1db61a6f0c0d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool display::IDisplay::leftDown = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Flag for left mouse button being down. </p>
-
-</div>
-</div>
-<a class="anchor" id="ab57fb8ccd8ccf11a9005bf16489bc1f9"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">SDL_Renderer* display::IDisplay::renderer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>pointer to the global renderer </p>
-
-</div>
-</div>
-<a class="anchor" id="af92bcb554444615e656389d5eb88a14f"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool display::IDisplay::rightDown = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Flag for right mouse button being down. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="_i_display_8h_source.html">IDisplay.h</a></li>
-<li>src/<a class="el" href="_i_display_8cpp.html">IDisplay.cpp</a></li>
+<li>src/IDisplay.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

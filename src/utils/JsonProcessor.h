@@ -30,15 +30,39 @@ namespace utils {
 
 class JsonProcessor {
 public:
-	JsonProcessor(SDL_Renderer* renderer, TTF_Font* font);
+	//! Constructor
+	/*!
+	 *
+	 * @param renderer Global renderer
+	 */
+	JsonProcessor(SDL_Renderer* renderer);
 	virtual ~JsonProcessor();
 
+	//! Load the tilesets from json files
+	/*!
+	 * Searches the given directory for sub-folders containing json files and then attempts to load the tileset
+	 * @param rootDir tileset root directory
+	 * @return Vectory of loaded tilesets
+	 */
 	std::vector<menu::TileGroup*> loadTilesets(std::string rootDir);
+
+	//! Load map from given json
+	/*!
+	 *
+	 * @param saveFile File to load
+	 * @return vector of the loaded tiles based on the json file
+	 */
 	std::vector<Tile*> loadMap(std::string saveFile);
+
+	//! Save map to json
+	/*!
+	 *
+	 * @param map vector of tiles of the current map
+	 * @return styles json string of the map
+	 */
 	std::string saveMap(std::vector<Tile*>* map);
 
 private:
-	TTF_Font* font;
 	SDL_Renderer* renderer;
 
 };

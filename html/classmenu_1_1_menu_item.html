@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacemenu.html">menu</a></li><li class="navelem"><a class="el" href="classmenu_1_1_menu_item.html">MenuItem</a></li>  </ul>
+<li class="navelem"><b>menu</b></li><li class="navelem"><a class="el" href="classmenu_1_1_menu_item.html">MenuItem</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -102,25 +101,28 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b76d9dab8ed84bbcbc2cc35c3d8a03f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#a8b76d9dab8ed84bbcbc2cc35c3d8a03f">MenuItem</a> (std::string <a class="el" href="classmenu_1_1_menu_item.html#a0a00824f51ebc3b31701568b7965a4e2">name</a>, <a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *<a class="el" href="classmenu_1_1_menu_item.html#a586e8d4e235955e8615629e5dbb430b4">tooltip</a>, <a class="el" href="classaction_1_1_i_action.html">action::IAction</a> <a class="el" href="classmenu_1_1_menu_item.html#ac6e492ba256a55b584ca175a0c93a34e">action</a>, <a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *icon, <a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *iconHover)</td></tr>
 <tr class="memdesc:a8b76d9dab8ed84bbcbc2cc35c3d8a03f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a8b76d9dab8ed84bbcbc2cc35c3d8a03f">More...</a><br/></td></tr>
 <tr class="separator:a8b76d9dab8ed84bbcbc2cc35c3d8a03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac53dba2634eca3f1c9e7064e7daa6ff0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#ac53dba2634eca3f1c9e7064e7daa6ff0">~MenuItem</a> ()</td></tr>
-<tr class="separator:ac53dba2634eca3f1c9e7064e7daa6ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7265f3d25eeb28acbed22658bb84802"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#af7265f3d25eeb28acbed22658bb84802">getIcon</a> ()</td></tr>
-<tr class="memdesc:af7265f3d25eeb28acbed22658bb84802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get teh icon (if hovers set returns the hover image)  <a href="#af7265f3d25eeb28acbed22658bb84802">More...</a><br/></td></tr>
+<tr class="memitem:af7265f3d25eeb28acbed22658bb84802"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7265f3d25eeb28acbed22658bb84802"></a>
+<a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#af7265f3d25eeb28acbed22658bb84802">getIcon</a> ()</td></tr>
+<tr class="memdesc:af7265f3d25eeb28acbed22658bb84802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get teh icon (if hovers set returns the hover image) <br/></td></tr>
 <tr class="separator:af7265f3d25eeb28acbed22658bb84802"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2b7294bcbf392b5a0ef841aab3e3b70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#aa2b7294bcbf392b5a0ef841aab3e3b70">setHover</a> (bool hovering)</td></tr>
-<tr class="memdesc:aa2b7294bcbf392b5a0ef841aab3e3b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether the mouse is hovering over this item.  <a href="#aa2b7294bcbf392b5a0ef841aab3e3b70">More...</a><br/></td></tr>
+<tr class="memitem:aa2b7294bcbf392b5a0ef841aab3e3b70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2b7294bcbf392b5a0ef841aab3e3b70"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#aa2b7294bcbf392b5a0ef841aab3e3b70">setHover</a> (bool hovering)</td></tr>
+<tr class="memdesc:aa2b7294bcbf392b5a0ef841aab3e3b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether the mouse is hovering over this item. <br/></td></tr>
 <tr class="separator:aa2b7294bcbf392b5a0ef841aab3e3b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a0a00824f51ebc3b31701568b7965a4e2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#a0a00824f51ebc3b31701568b7965a4e2">name</a></td></tr>
-<tr class="memdesc:a0a00824f51ebc3b31701568b7965a4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the item.  <a href="#a0a00824f51ebc3b31701568b7965a4e2">More...</a><br/></td></tr>
+<tr class="memitem:a0a00824f51ebc3b31701568b7965a4e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a00824f51ebc3b31701568b7965a4e2"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#a0a00824f51ebc3b31701568b7965a4e2">name</a></td></tr>
+<tr class="memdesc:a0a00824f51ebc3b31701568b7965a4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the item. <br/></td></tr>
 <tr class="separator:a0a00824f51ebc3b31701568b7965a4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586e8d4e235955e8615629e5dbb430b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#a586e8d4e235955e8615629e5dbb430b4">tooltip</a></td></tr>
-<tr class="memdesc:a586e8d4e235955e8615629e5dbb430b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tooltip of the item.  <a href="#a586e8d4e235955e8615629e5dbb430b4">More...</a><br/></td></tr>
+<tr class="memitem:a586e8d4e235955e8615629e5dbb430b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a586e8d4e235955e8615629e5dbb430b4"></a>
+<a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#a586e8d4e235955e8615629e5dbb430b4">tooltip</a></td></tr>
+<tr class="memdesc:a586e8d4e235955e8615629e5dbb430b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tooltip of the item. <br/></td></tr>
 <tr class="separator:a586e8d4e235955e8615629e5dbb430b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6e492ba256a55b584ca175a0c93a34e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaction_1_1_i_action.html">action::IAction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#ac6e492ba256a55b584ca175a0c93a34e">action</a></td></tr>
-<tr class="memdesc:ac6e492ba256a55b584ca175a0c93a34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">items action  <a href="#ac6e492ba256a55b584ca175a0c93a34e">More...</a><br/></td></tr>
+<tr class="memitem:ac6e492ba256a55b584ca175a0c93a34e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6e492ba256a55b584ca175a0c93a34e"></a>
+<a class="el" href="classaction_1_1_i_action.html">action::IAction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmenu_1_1_menu_item.html#ac6e492ba256a55b584ca175a0c93a34e">action</a></td></tr>
+<tr class="memdesc:ac6e492ba256a55b584ca175a0c93a34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">items action <br/></td></tr>
 <tr class="separator:ac6e492ba256a55b584ca175a0c93a34e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -182,116 +184,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac53dba2634eca3f1c9e7064e7daa6ff0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">menu::MenuItem::~MenuItem </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="af7265f3d25eeb28acbed22658bb84802"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a> * menu::MenuItem::getIcon </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get teh icon (if hovers set returns the hover image) </p>
-
-</div>
-</div>
-<a class="anchor" id="aa2b7294bcbf392b5a0ef841aab3e3b70"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void menu::MenuItem::setHover </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>hovering</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set whether the mouse is hovering over this item. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ac6e492ba256a55b584ca175a0c93a34e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classaction_1_1_i_action.html">action::IAction</a> menu::MenuItem::action</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>items action </p>
-
-</div>
-</div>
-<a class="anchor" id="a0a00824f51ebc3b31701568b7965a4e2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string menu::MenuItem::name</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Name of the item. </p>
-
-</div>
-</div>
-<a class="anchor" id="a586e8d4e235955e8615629e5dbb430b4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* menu::MenuItem::tooltip</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Tooltip of the item. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/menus/<a class="el" href="_menu_item_8h_source.html">MenuItem.h</a></li>
-<li>src/menus/<a class="el" href="_menu_item_8cpp.html">MenuItem.cpp</a></li>
+<li>src/menus/MenuItem.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

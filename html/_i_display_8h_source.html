@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -61,7 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">IDisplay.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_i_display_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * IDisplay.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 18 Nov 2013</span></div>
@@ -110,8 +108,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classdisplay_1_1_i_display.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classdisplay_1_1_i_display.html">IDisplay</a> {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classdisplay_1_1_i_display.html#aa38587d9ea073b103fd9d8a1eb9de198">IDisplay</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classdisplay_1_1_i_display.html#af8bac10410d31b34f514cc9c0b50494d">   27</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classdisplay_1_1_i_display.html#af8bac10410d31b34f514cc9c0b50494d">~IDisplay</a>() {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classdisplay_1_1_i_display.html">IDisplay</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classdisplay_1_1_i_display.html">IDisplay</a>() {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    ;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
@@ -138,10 +136,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">/* namespace display */</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* IDISPLAY_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classdisplay_1_1_i_display_html_af8bac10410d31b34f514cc9c0b50494d"><div class="ttname"><a href="classdisplay_1_1_i_display.html#af8bac10410d31b34f514cc9c0b50494d">display::IDisplay::~IDisplay</a></div><div class="ttdeci">virtual ~IDisplay()</div><div class="ttdef"><b>Definition:</b> IDisplay.h:27</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_aa01db8dc35d841e0f6664e894e86ad37"><div class="ttname"><a href="classdisplay_1_1_i_display.html#aa01db8dc35d841e0f6664e894e86ad37">display::IDisplay::handleEvents</a></div><div class="ttdeci">virtual void handleEvents(SDL_Event event)=0</div><div class="ttdoc">A pure virtual member. Used to send displays events. </div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_a71946af2dbad35cbdb8a1db61a6f0c0d"><div class="ttname"><a href="classdisplay_1_1_i_display.html#a71946af2dbad35cbdb8a1db61a6f0c0d">display::IDisplay::leftDown</a></div><div class="ttdeci">bool leftDown</div><div class="ttdoc">Flag for left mouse button being down. </div><div class="ttdef"><b>Definition:</b> IDisplay.h:59</div></div>
-<div class="ttc" id="classdisplay_1_1_i_display_html_aa38587d9ea073b103fd9d8a1eb9de198"><div class="ttname"><a href="classdisplay_1_1_i_display.html#aa38587d9ea073b103fd9d8a1eb9de198">display::IDisplay::IDisplay</a></div><div class="ttdeci">IDisplay()</div><div class="ttdef"><b>Definition:</b> IDisplay.cpp:12</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_aa3ec4a01eb88fca58230a2afd9c837a9"><div class="ttname"><a href="classdisplay_1_1_i_display.html#aa3ec4a01eb88fca58230a2afd9c837a9">display::IDisplay::areaRect</a></div><div class="ttdeci">SDL_Rect * areaRect</div><div class="ttdoc">Bounding box for the display. </div><div class="ttdef"><b>Definition:</b> IDisplay.h:70</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_a4596a2144287d1887031f8c4f21d01a0"><div class="ttname"><a href="classdisplay_1_1_i_display.html#a4596a2144287d1887031f8c4f21d01a0">display::IDisplay::curX</a></div><div class="ttdeci">int curX</div><div class="ttdoc">Current x location of the mouse. </div><div class="ttdef"><b>Definition:</b> IDisplay.h:63</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html"><div class="ttname"><a href="classdisplay_1_1_i_display.html">display::IDisplay</a></div><div class="ttdef"><b>Definition:</b> IDisplay.h:23</div></div>
@@ -154,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -71,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,27 +88,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Map Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="_map_8h_source.html">Map.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f5ad0fd4563497b4214038cbca8b582"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a0f5ad0fd4563497b4214038cbca8b582">Map</a> ()</td></tr>
 <tr class="memdesc:a0f5ad0fd4563497b4214038cbca8b582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a0f5ad0fd4563497b4214038cbca8b582">More...</a><br/></td></tr>
 <tr class="separator:a0f5ad0fd4563497b4214038cbca8b582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa403fbe09394ccf39747588f5168e3b2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#aa403fbe09394ccf39747588f5168e3b2">~Map</a> ()</td></tr>
-<tr class="separator:aa403fbe09394ccf39747588f5168e3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe021098e9448f443afba14364295c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a3fe021098e9448f443afba14364295c1">init</a> ()</td></tr>
 <tr class="memdesc:a3fe021098e9448f443afba14364295c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises SDL, and other LIBs. Also created the renderer for the main window.  <a href="#a3fe021098e9448f443afba14364295c1">More...</a><br/></td></tr>
 <tr class="separator:a3fe021098e9448f443afba14364295c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10a014895dcd98d7e2a45c477d0eabd7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a10a014895dcd98d7e2a45c477d0eabd7">loadResources</a> ()</td></tr>
 <tr class="memdesc:a10a014895dcd98d7e2a45c477d0eabd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the tilesets from json, creates the menus and drawing area.  <a href="#a10a014895dcd98d7e2a45c477d0eabd7">More...</a><br/></td></tr>
 <tr class="separator:a10a014895dcd98d7e2a45c477d0eabd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a076053adc0adcd4d6ddf54d7eb12a7e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a076053adc0adcd4d6ddf54d7eb12a7e3">run</a> ()</td></tr>
-<tr class="memdesc:a076053adc0adcd4d6ddf54d7eb12a7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the entry to the run loop for SDL.  <a href="#a076053adc0adcd4d6ddf54d7eb12a7e3">More...</a><br/></td></tr>
+<tr class="memitem:a076053adc0adcd4d6ddf54d7eb12a7e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a076053adc0adcd4d6ddf54d7eb12a7e3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a076053adc0adcd4d6ddf54d7eb12a7e3">run</a> ()</td></tr>
+<tr class="memdesc:a076053adc0adcd4d6ddf54d7eb12a7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the entry to the run loop for SDL. <br/></td></tr>
 <tr class="separator:a076053adc0adcd4d6ddf54d7eb12a7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa31aaeabd1d61a1d138ea0f33d8ebe40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#aa31aaeabd1d61a1d138ea0f33d8ebe40">cleanUp</a> ()</td></tr>
-<tr class="memdesc:aa31aaeabd1d61a1d138ea0f33d8ebe40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after SDL_Quit, attempts to unload all resources.  <a href="#aa31aaeabd1d61a1d138ea0f33d8ebe40">More...</a><br/></td></tr>
+<tr class="memitem:aa31aaeabd1d61a1d138ea0f33d8ebe40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa31aaeabd1d61a1d138ea0f33d8ebe40"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#aa31aaeabd1d61a1d138ea0f33d8ebe40">cleanUp</a> ()</td></tr>
+<tr class="memdesc:aa31aaeabd1d61a1d138ea0f33d8ebe40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called after SDL_Quit, attempts to unload all resources. <br/></td></tr>
 <tr class="separator:aa31aaeabd1d61a1d138ea0f33d8ebe40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d77b34e84cf7ecbc3c1eb6fd94020aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a7d77b34e84cf7ecbc3c1eb6fd94020aa">handleEvent</a> (SDL_Event event)</td></tr>
 <tr class="memdesc:a7d77b34e84cf7ecbc3c1eb6fd94020aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes SDL Events.  <a href="#a7d77b34e84cf7ecbc3c1eb6fd94020aa">More...</a><br/></td></tr>
@@ -117,8 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a978a9e892dc6e1a3a1c44c770e80182b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a978a9e892dc6e1a3a1c44c770e80182b">handleAction</a> (<a class="el" href="classaction_1_1_i_action.html">action::IAction</a> action)</td></tr>
 <tr class="memdesc:a978a9e892dc6e1a3a1c44c770e80182b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process <a class="el" href="class_map.html">Map</a> Actions.  <a href="#a978a9e892dc6e1a3a1c44c770e80182b">More...</a><br/></td></tr>
 <tr class="separator:a978a9e892dc6e1a3a1c44c770e80182b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3be698445324a0d0e18b49d0730b9bea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a3be698445324a0d0e18b49d0730b9bea">render</a> ()</td></tr>
-<tr class="memdesc:a3be698445324a0d0e18b49d0730b9bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders all the displayss.  <a href="#a3be698445324a0d0e18b49d0730b9bea">More...</a><br/></td></tr>
+<tr class="memitem:a3be698445324a0d0e18b49d0730b9bea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3be698445324a0d0e18b49d0730b9bea"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map.html#a3be698445324a0d0e18b49d0730b9bea">render</a> ()</td></tr>
+<tr class="memdesc:a3be698445324a0d0e18b49d0730b9bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders all the displayss. <br/></td></tr>
 <tr class="separator:a3be698445324a0d0e18b49d0730b9bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -140,47 +138,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa403fbe09394ccf39747588f5168e3b2"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Map::~Map </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aa31aaeabd1d61a1d138ea0f33d8ebe40"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Map::cleanUp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Called after SDL_Quit, attempts to unload all resources. </p>
-
-</div>
-</div>
 <a class="anchor" id="a978a9e892dc6e1a3a1c44c770e80182b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -267,48 +225,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3be698445324a0d0e18b49d0730b9bea"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Map::render </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Renders all the displayss. </p>
-
-</div>
-</div>
-<a class="anchor" id="a076053adc0adcd4d6ddf54d7eb12a7e3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Map::run </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This is the entry to the run loop for SDL. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="_map_8h_source.html">Map.h</a></li>
-<li>src/<a class="el" href="_map_8cpp.html">Map.cpp</a></li>
+<li>src/Map.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 28 2013 13:23:44 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

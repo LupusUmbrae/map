@@ -9,9 +9,8 @@
 
 namespace utils {
 
-JsonProcessor::JsonProcessor(SDL_Renderer* renderer, TTF_Font* font) {
+JsonProcessor::JsonProcessor(SDL_Renderer* renderer) {
 	this->renderer = renderer;
-	this->font = font;
 
 }
 
@@ -37,8 +36,6 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 	std::stringstream imageLocation;
 	std::stringstream uniqueName;
 
-	SDL_Color color = { 0, 0, 0 }; // black text
-
 	if ((dir = opendir(rootDir.c_str())) != NULL) {
 		std::ifstream ifile;
 		while ((ent = readdir(dir)) != NULL) {
@@ -54,7 +51,7 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 					tiles.clear();
 					// Create tile set
 					groupName = new utils::Text(renderer);
-					groupName->createText(root["name"].asString(), color, font);
+					groupName->createText(root["name"].asString());
 
 					Json::Value imagesToLoad = root["tiles"];
 					for (size_t i = 0; i < imagesToLoad.size(); i++) {
