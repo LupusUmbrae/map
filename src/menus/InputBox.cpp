@@ -72,7 +72,6 @@ void InputBox::setArea(int x, int y, int w, int h) {
 bool InputBox::inArea(int x, int y) {
 	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->w))) {
 		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->h))) {
-			logMessage("in Area");
 			return true;
 		}
 	}
