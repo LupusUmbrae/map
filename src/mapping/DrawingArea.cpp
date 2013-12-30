@@ -37,22 +37,33 @@ void DrawingArea::render() {
 
 	SDL_Rect curArea;
 
-	curArea.x = areaRect->x - viewX;
-	curArea.y = areaRect->y - viewY;
-	curArea.w = areaRect->w + (mapArea.w - viewX);
-	curArea.h = areaRect->h + (mapArea.h - viewY);
+	curArea.x = -viewX;
+	curArea.y = -viewY;
+	curArea.w = mapArea.w - viewX;
+	curArea.h = mapArea.h - viewY;
 
-	if (curArea.x < areaRect->x) {
+	if (curArea.x < 0) {
 		curArea.x = areaRect->x;
+	} else {
+		curArea.x += areaRect->x;
 	}
-	if (curArea.w > areaRect->w) {
-		curArea.w = areaRect->w;
-	}
-	if (curArea.y < areaRect->y) {
+
+	if (curArea.y < 0) {
 		curArea.y = areaRect->y;
+	} else {
+		curArea.y += areaRect->y;
 	}
-	if (curArea.h > areaRect->h) {
+
+	if (curArea.w > 0) {
+		curArea.w = areaRect->w;
+	} else {
+		curArea.w = areaRect->w + curArea.w;
+	}
+
+	if (curArea.h > 0) {
 		curArea.h = areaRect->h;
+	} else {
+		curArea.h = areaRect->h + curArea.h;
 	}
 
 	SDL_RenderDrawRect(renderer, &curArea);
@@ -60,9 +71,6 @@ void DrawingArea::render() {
 	for (Tile *curTile : tiles) {
 		x = (curTile->x * scale);
 		y = (curTile->y * scale);
-
-//		std::cout << "x(" << x << ") >= viewX(" << viewX << ") && x(" << x << ") < [viewX(" << viewX << ") + areaRect->w(" << areaRect->w << ")]" << std::endl;
-//		std::cout << "y(" << y << ") >= viewY(" << viewY << ") && y(" << y << ") < [viewY(" << viewY << ") + areaRect->h(" << areaRect->h << ")]" << std::endl;
 
 		if ((x >= viewX && x < (viewX + scale + areaRect->w))
 				&& (y >= viewY && y < (viewY + scale + areaRect->h))) {
@@ -153,16 +161,16 @@ void DrawingArea::scrollDrawingArea(int x, int y) {
 	viewX += x * scale;
 	viewY += y * scale;
 
-	if (viewX < 0) {
-		viewX = 0;
-	} else if (viewX > mapArea.w) {
-		viewX = mapArea.w;
+	if (viewX < (0 - (border * scale))) {
+		viewX = 0 - (border * scale);
+	} else if (viewX > (mapArea.w + (border * scale))) {
+		viewX = mapArea.w + (border * scale);
 	}
 
-	if (viewY < 0) {
-		viewY = 0;
-	} else if (viewY > mapArea.h) {
-		viewY = mapArea.h;
+	if (viewY < (0 - (border * scale))) {
+		viewY = 0 - (border * scale);
+	} else if (viewY > (mapArea.h + (border * scale))) {
+		viewY = mapArea.h + (border * scale);
 	}
 }
 

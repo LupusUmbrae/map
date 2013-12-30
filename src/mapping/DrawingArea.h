@@ -74,7 +74,7 @@ private:
 	int scale = 20;
 
 	//! Allowed gap from edge of map to border of the display area
-	int border = 0;
+	int border = 6;
 
 	//! Texture displayed under the mouse cursor
 	utils::MapTexture *texture = NULL;
