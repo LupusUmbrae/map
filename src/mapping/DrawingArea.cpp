@@ -170,18 +170,26 @@ void DrawingArea::scrollDrawingArea(int x, int y) {
 	viewX += x;
 	viewY += y;
 
-	if (viewX < (0 - border)) {
-		viewX = 0 - (border);
-	} else if ((viewX + (areaRect->w / scale)) > (mapArea.w + border)) {
-		viewX = (mapArea.w + border) - (areaRect->w / scale);
+	if ((areaRect->w / scale) > mapArea.w) {
+		viewX -= x;
+	} else {
+
+		if (viewX < (0 - border)) {
+			viewX = 0 - (border);
+		} else if ((viewX + (areaRect->w / scale)) > (mapArea.w + border)) {
+			viewX = (mapArea.w + border) - (areaRect->w / scale);
+		}
 	}
 
-	if (viewY < (0 - border)) {
-		viewY = 0 - border;
-	} else if ((viewY + (areaRect->h / scale)) > (mapArea.h + border)) {
-		viewY = (mapArea.h + border) - (areaRect->h / scale);
+	if ((areaRect->h / scale) > mapArea.h) {
+		viewY -= y;
+	} else {
+		if (viewY < (0 - border)) {
+			viewY = 0 - border;
+		} else if ((viewY + (areaRect->h / scale)) > (mapArea.h + border)) {
+			viewY = (mapArea.h + border) - (areaRect->h / scale);
+		}
 	}
-
 }
 
 void DrawingArea::loadMap(std::vector<Tile*> loadedTiles) {
