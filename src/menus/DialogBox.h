@@ -149,6 +149,7 @@ private:
 	dialog type = MESSAGE;
 
 	size_t inputTo = -1;
+	bool found = false;
 
 	//! Should this dialog box block all lower layers?
 	/*!

@@ -120,12 +120,12 @@ void DrawingArea::handleEvents(SDL_Event event) {
 		}
 	}
 
-	if (event.type == SDL_MOUSEWHEEL) {
+	if (event.type == SDL_MOUSEWHEEL && (SDL_GetModState() & KMOD_CTRL)) {
 		scale += event.wheel.y;
 		if (scale < 10) {
 			scale = 10;
-		} else if (scale > 100) {
-			scale = 100;
+		} else if (scale > 50) {
+			scale = 50;
 		}
 	}
 

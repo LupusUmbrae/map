@@ -225,11 +225,9 @@ void DialogBox::handleEventsYesNo(SDL_Event event) {
 
 void DialogBox::handleEventsInput(SDL_Event event) {
 
-	bool found = false;
-
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		if (event.button.button == SDL_BUTTON_LEFT) {
-
+			found = false;
 			for (size_t i = 0; i < inputs.size(); i++) {
 
 				if (inputs.at(i)->inArea(curX, curY)) {
@@ -237,10 +235,6 @@ void DialogBox::handleEventsInput(SDL_Event event) {
 					found = true;
 					break;
 				}
-			}
-
-			if (!found) {
-				inputTo = -1;
 			}
 
 			if (curX >= okRect->x && (curX <= (okRect->x + okRect->w))) {
@@ -254,7 +248,7 @@ void DialogBox::handleEventsInput(SDL_Event event) {
 	}
 
 	if (event.type == SDL_TEXTINPUT || event.type == SDL_KEYDOWN) {
-		if (inputTo >= 0) {
+		if (found) {
 			inputs.at(inputTo)->handleEvents(event);
 		}
 	}
