@@ -57,20 +57,23 @@ void DrawingArea::render() {
 
 	if (curArea.w > 0) {
 		curArea.w = areaRect->w;
+	} else {
+
 		if (mapArea.w < (areaRect->h / scale)) {
 			curArea.w = (mapArea.w * scale);
+		} else {
+			curArea.w = ((areaRect->w / scale) + curArea.w) * scale;
 		}
-	} else {
-		curArea.w = ((areaRect->w / scale) + curArea.w) * scale;
 	}
 
 	if (curArea.h > 0) {
 		curArea.h = areaRect->h;
+	} else {
 		if ((mapArea.h * scale) < areaRect->h) {
 			curArea.h = mapArea.h * scale;
+		} else {
+			curArea.h = ((areaRect->h / scale) + curArea.h) * scale;
 		}
-	} else {
-		curArea.h = ((areaRect->h / scale) + curArea.h) * scale;
 	}
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -127,6 +130,8 @@ void DrawingArea::handleEvents(SDL_Event event) {
 		} else if (scale > 50) {
 			scale = 50;
 		}
+		// This will centre the map if we zoom out enough
+		scrollDrawingArea(0, 0);
 	}
 
 	if (leftDown) {
@@ -171,7 +176,7 @@ void DrawingArea::scrollDrawingArea(int x, int y) {
 	viewY += y;
 
 	if ((areaRect->w / scale) > mapArea.w) {
-		viewX -= x;
+		viewX = -((areaRect->w / scale) - mapArea.w) / 2;
 	} else {
 
 		if (viewX < (0 - border)) {
@@ -182,7 +187,7 @@ void DrawingArea::scrollDrawingArea(int x, int y) {
 	}
 
 	if ((areaRect->h / scale) > mapArea.h) {
-		viewY -= y;
+		viewY = -((areaRect->h / scale) - mapArea.h) / 2;
 	} else {
 		if (viewY < (0 - border)) {
 			viewY = 0 - border;
