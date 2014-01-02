@@ -65,10 +65,18 @@ public:
 	 */
 	std::vector<Tile*>* getMap();
 
+	int getWidth() {
+		return this->mapArea.w;
+	}
+	int getHieght() {
+		return this->mapArea.h;
+	}
+
 	//! Clears the map
 	void clearMap(int height, int width);
 
 private:
+	void checkZoom();
 
 	//! Current scaling applied to the drawing area
 	int scale = 20;
@@ -78,6 +86,9 @@ private:
 
 	//! Texture displayed under the mouse cursor
 	utils::MapTexture *texture = NULL;
+
+	//! Rotation of the tiles
+	double rotation = 0.0;
 
 	//! The actual map
 	std::vector<Tile*> tiles;

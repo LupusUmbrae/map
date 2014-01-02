@@ -25,6 +25,10 @@ public:
 	Tile(int x, int y, utils::MapTexture* texture);
 	virtual ~Tile();
 
+	void setRotation(double rotation);
+
+	//! Rotation of tile
+	double rotation = 0.0;
 	//! Tiles x location
 	int x;
 	//! Tiles y location

@@ -96,12 +96,15 @@ std::vector<Tile*> JsonProcessor::loadMap(std::string saveFile) {
 	std::string tileName;
 	int x;
 	int y;
+	double rotation;
 
 	ifile.open(saveFile.c_str());
 	if (ifile) {
 		if (reader.parse(ifile, mapRoot)) {
 			if (mapRoot["version"].asString().compare("v0.1") == 0) {
-				Json::Value tiles = mapRoot["map"];
+				mapWidth = mapRoot["map"]["area"]["width"].asInt();
+				mapHeight = mapRoot["map"]["area"]["height"].asInt();
+				Json::Value tiles = mapRoot["map"]["tiles"];
 				for (Json::Value tile : tiles) {
 					texture = NULL; // clear it
 					tileName = tile["name"].asString();
@@ -113,8 +116,10 @@ std::vector<Tile*> JsonProcessor::loadMap(std::string saveFile) {
 					}
 					x = tile["x"].asInt();
 					y = tile["y"].asInt();
+					rotation = tile["rot"].asDouble();
 					if (texture != NULL) {
 						loadedTile = new Tile(x, y, texture);
+						loadedTile->setRotation(rotation);
 						loadedMap.push_back(loadedTile);
 					} else {
 						logMessage("Failed to find tile");
@@ -130,20 +135,25 @@ std::vector<Tile*> JsonProcessor::loadMap(std::string saveFile) {
 	return loadedMap;
 }
 
-std::string JsonProcessor::saveMap(std::vector<Tile*>* map) {
+std::string JsonProcessor::saveMap(std::vector<Tile*>* map, int width,
+		int height) {
 	Json::Value root;
 	Json::StyledWriter writer;
 
 	root["name"] = "testSave";
 	root["version"] = "v0.1";
 
+	root["map"]["area"]["width"] = width;
+	root["map"]["area"]["height"] = height;
+
 	Tile* tile;
 	for (size_t i = 0; i < map->size(); i++) {
 		tile = map->at(i);
 
-		root["map"][i]["name"] = *tile->texture->getUniqueName();
-		root["map"][i]["x"] = tile->x;
-		root["map"][i]["y"] = tile->y;
+		root["map"]["tiles"][i]["name"] = *tile->texture->getUniqueName();
+		root["map"]["tiles"][i]["x"] = tile->x;
+		root["map"]["tiles"][i]["y"] = tile->y;
+		root["map"]["tiles"][i]["rot"] = tile->rotation;
 	}
 
 	return writer.write(root);

@@ -333,7 +333,8 @@ void Map::handleAction(action::IAction action) {
 			dialog = reinterpret_cast<menu::DialogBox*>(action.getObject());
 
 			if (dialog->accepted()) {
-				saveRoot = jsonProcessor->saveMap(drawingArea->getMap());
+				saveRoot = jsonProcessor->saveMap(drawingArea->getMap(),
+						drawingArea->getWidth(), drawingArea->getHieght());
 				saveFile.open("resources/save.json");
 				if (saveFile) {
 					saveFile << saveRoot;
@@ -351,8 +352,11 @@ void Map::handleAction(action::IAction action) {
 
 		if (loadedMap.empty()) {
 			logMessage("Save file had no map");
+		} else {
+			drawingArea->clearMap(jsonProcessor->getMapHeight(),
+					jsonProcessor->getMapWidth());
+			drawingArea->loadMap(loadedMap);
 		}
-		drawingArea->loadMap(loadedMap);
 
 		break;
 	case action::CLOSE:

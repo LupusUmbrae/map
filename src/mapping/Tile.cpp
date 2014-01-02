@@ -17,3 +17,7 @@ Tile::Tile(int x, int y, utils::MapTexture* texture) {
 Tile::~Tile() {
 
 }
+
+void Tile::setRotation(double rotation) {
+	this->rotation = rotation;
+}

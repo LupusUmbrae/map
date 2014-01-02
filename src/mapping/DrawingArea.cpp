@@ -38,6 +38,8 @@ void DrawingArea::render() {
 
 	SDL_Rect curArea;
 
+	checkZoom();
+
 	curArea.x = -viewX;
 	curArea.y = -viewY;
 	curArea.w = mapArea.w - (viewX + (areaRect->w / scale));
@@ -89,7 +91,8 @@ void DrawingArea::render() {
 			// Correct locations within the actual screen
 			x += areaRect->x - (viewX * scale);
 			y += areaRect->y - (viewY * scale);
-			curTile->texture->render(x, y, scale, scale);
+			curTile->texture->render(x, y, scale, scale, NULL,
+					curTile->rotation);
 		}
 
 	}
@@ -101,7 +104,7 @@ void DrawingArea::render() {
 	y += areaRect->y;
 
 	if (texture != NULL) {
-		texture->render(x, y, scale, scale);
+		texture->render(x, y, scale, scale, NULL, rotation);
 	}
 
 }
@@ -130,8 +133,19 @@ void DrawingArea::handleEvents(SDL_Event event) {
 		} else if (scale > 50) {
 			scale = 50;
 		}
-		// This will centre the map if we zoom out enough
-		scrollDrawingArea(0, 0);
+	}
+
+	if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.sym == SDLK_q) {
+			rotation -= 90;
+		} else if (event.key.keysym.sym == SDLK_e) {
+			rotation += 90;
+		}
+		if (rotation > 360) {
+			rotation -= 360;
+		} else if (rotation < 0) {
+			rotation += 360;
+		}
 	}
 
 	if (leftDown) {
@@ -139,6 +153,7 @@ void DrawingArea::handleEvents(SDL_Event event) {
 			if ((tileX >= 0 && tileX < mapArea.w)
 					&& (tileY >= 0 && tileY < mapArea.h)) {
 				Tile *newTile = new Tile(tileX, tileY, texture);
+				newTile->setRotation(rotation);
 				bool found = false;
 				for (size_t i = 0; i < tiles.size(); i++) {
 					if (tiles[i]->x == tileX && tiles[i]->y == tileY) {
@@ -168,33 +183,13 @@ void DrawingArea::handleEvents(SDL_Event event) {
 }
 
 void DrawingArea::setCurTexture(utils::MapTexture *texture) {
+	rotation = 0.0;
 	this->texture = texture;
 }
 
 void DrawingArea::scrollDrawingArea(int x, int y) {
 	viewX += x;
 	viewY += y;
-
-	if ((areaRect->w / scale) > mapArea.w) {
-		viewX = -((areaRect->w / scale) - mapArea.w) / 2;
-	} else {
-
-		if (viewX < (0 - border)) {
-			viewX = 0 - (border);
-		} else if ((viewX + (areaRect->w / scale)) > (mapArea.w + border)) {
-			viewX = (mapArea.w + border) - (areaRect->w / scale);
-		}
-	}
-
-	if ((areaRect->h / scale) > mapArea.h) {
-		viewY = -((areaRect->h / scale) - mapArea.h) / 2;
-	} else {
-		if (viewY < (0 - border)) {
-			viewY = 0 - border;
-		} else if ((viewY + (areaRect->h / scale)) > (mapArea.h + border)) {
-			viewY = (mapArea.h + border) - (areaRect->h / scale);
-		}
-	}
 }
 
 void DrawingArea::loadMap(std::vector<Tile*> loadedTiles) {
@@ -216,6 +211,29 @@ void DrawingArea::clearMap(int height, int width) {
 	mapArea.y = 0;
 	mapArea.w = width;
 	mapArea.h = height;
+}
+
+void DrawingArea::checkZoom() {
+	if ((areaRect->w / scale) > mapArea.w) {
+		viewX = -((areaRect->w / scale) - mapArea.w) / 2;
+	} else {
+
+		if (viewX < (0 - border)) {
+			viewX = 0 - (border);
+		} else if ((viewX + (areaRect->w / scale)) > (mapArea.w + border)) {
+			viewX = (mapArea.w + border) - (areaRect->w / scale);
+		}
+	}
+
+	if ((areaRect->h / scale) > mapArea.h) {
+		viewY = -((areaRect->h / scale) - mapArea.h) / 2;
+	} else {
+		if (viewY < (0 - border)) {
+			viewY = 0 - border;
+		} else if ((viewY + (areaRect->h / scale)) > (mapArea.h + border)) {
+			viewY = (mapArea.h + border) - (areaRect->h / scale);
+		}
+	}
 }
 
 } /* namespace mapping */

@@ -54,16 +54,26 @@ public:
 	 */
 	std::vector<Tile*> loadMap(std::string saveFile);
 
+	int getMapWidth() {
+		return this->mapWidth;
+	}
+	int getMapHeight() {
+		return this->mapHeight;
+	}
+
 	//! Save map to json
 	/*!
 	 *
 	 * @param map vector of tiles of the current map
 	 * @return styles json string of the map
 	 */
-	std::string saveMap(std::vector<Tile*>* map);
+	std::string saveMap(std::vector<Tile*>* map, int width, int height);
 
 private:
 	SDL_Renderer* renderer;
+
+	int mapWidth;
+	int mapHeight;
 
 };
 
