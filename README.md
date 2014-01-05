@@ -10,6 +10,6 @@ Dependencies
 * SDL2
 * SDL2 Image
 * SDL2 Font
-* JsonCPP
+* [JsonCPP](http://jsoncpp.sourceforge.net/) 0.6.0.rc2
  
 Also require a fix to minGw's io.h the references of "off64 _ t" to "_ off64_t" (without spaces, sorry formatting issues for _) see: http://sourceforge.net/p/mingw/bugs/2024/
