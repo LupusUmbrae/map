@@ -91,6 +91,16 @@ void DrawingArea::render() {
 			// Correct locations within the actual screen
 			x += areaRect->x - (viewX * scale);
 			y += areaRect->y - (viewY * scale);
+			if ((scale % 2) == 0) {
+				if (curTile->rotation == 90.0) {
+					x--;
+				} else if (curTile->rotation == 180) {
+					x--;
+					y--;
+				} else if (curTile->rotation == 270) {
+					y--;
+				}
+			}
 			curTile->texture->render(x, y, scale, scale, NULL,
 					curTile->rotation);
 		}
@@ -104,6 +114,16 @@ void DrawingArea::render() {
 	y += areaRect->y;
 
 	if (texture != NULL) {
+		if ((scale % 2) == 0) {
+			if (rotation == 90.0) {
+				x--;
+			} else if (rotation == 180) {
+				y--;
+				x--;
+			} else if (rotation == 270) {
+				y--;
+			}
+		}
 		texture->render(x, y, scale, scale, NULL, rotation);
 	}
 
