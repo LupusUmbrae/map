@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name',['name',['../classmenu_1_1_menu_item.html#a0a00824f51ebc3b31701568b7965a4e2',1,'menu::MenuItem']]]
+  ['message',['message',['../classmenu_1_1_dialog_box.html#aa06323a7cb0cb0a52b8bfa410c446848',1,'menu::DialogBox']]]
 ];

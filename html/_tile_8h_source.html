@@ -109,23 +109,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_tile.html#ad292f89cd674385fc649542d07bf2288">Tile</a>(<span class="keywordtype">int</span> <a class="code" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a>, <span class="keywordtype">int</span> <a class="code" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a>, <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* <a class="code" href="class_tile.html#ac3e9b29f39db45008b62c1a5882954f1">texture</a>);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_tile.html">Tile</a>();</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">   29</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">   31</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_tile.html#ac3e9b29f39db45008b62c1a5882954f1">   33</a></span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* texture = NULL;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* TILE_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="class_tile_html_a2d87d8813151af6bbd60811964f047a8"><div class="ttname"><a href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">Tile::y</a></div><div class="ttdeci">int y</div><div class="ttdoc">Tiles y location. </div><div class="ttdef"><b>Definition:</b> Tile.h:31</div></div>
-<div class="ttc" id="class_tile_html_ac3e9b29f39db45008b62c1a5882954f1"><div class="ttname"><a href="class_tile.html#ac3e9b29f39db45008b62c1a5882954f1">Tile::texture</a></div><div class="ttdeci">utils::MapTexture * texture</div><div class="ttdoc">Tiles texture. </div><div class="ttdef"><b>Definition:</b> Tile.h:33</div></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> setRotation(<span class="keywordtype">double</span> <a class="code" href="class_tile.html#a4ddf26f414d80410096dece433219c99">rotation</a>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_tile.html#a4ddf26f414d80410096dece433219c99">   31</a></span>&#160;    <span class="keywordtype">double</span> rotation = 0.0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">   33</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">   35</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_tile.html#ac3e9b29f39db45008b62c1a5882954f1">   37</a></span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* texture = NULL;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* TILE_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="class_tile_html_a2d87d8813151af6bbd60811964f047a8"><div class="ttname"><a href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">Tile::y</a></div><div class="ttdeci">int y</div><div class="ttdoc">Tiles y location. </div><div class="ttdef"><b>Definition:</b> Tile.h:35</div></div>
+<div class="ttc" id="class_tile_html_ac3e9b29f39db45008b62c1a5882954f1"><div class="ttname"><a href="class_tile.html#ac3e9b29f39db45008b62c1a5882954f1">Tile::texture</a></div><div class="ttdeci">utils::MapTexture * texture</div><div class="ttdoc">Tiles texture. </div><div class="ttdef"><b>Definition:</b> Tile.h:37</div></div>
 <div class="ttc" id="class_tile_html"><div class="ttname"><a href="class_tile.html">Tile</a></div><div class="ttdef"><b>Definition:</b> Tile.h:21</div></div>
+<div class="ttc" id="class_tile_html_a4ddf26f414d80410096dece433219c99"><div class="ttname"><a href="class_tile.html#a4ddf26f414d80410096dece433219c99">Tile::rotation</a></div><div class="ttdeci">double rotation</div><div class="ttdoc">Rotation of tile. </div><div class="ttdef"><b>Definition:</b> Tile.h:31</div></div>
 <div class="ttc" id="class_tile_html_ad292f89cd674385fc649542d07bf2288"><div class="ttname"><a href="class_tile.html#ad292f89cd674385fc649542d07bf2288">Tile::Tile</a></div><div class="ttdeci">Tile(int x, int y, utils::MapTexture *texture)</div><div class="ttdoc">Constructor. </div><div class="ttdef"><b>Definition:</b> Tile.cpp:10</div></div>
-<div class="ttc" id="class_tile_html_a47b5eb2072d4b1978923a480043899c9"><div class="ttname"><a href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">Tile::x</a></div><div class="ttdeci">int x</div><div class="ttdoc">Tiles x location. </div><div class="ttdef"><b>Definition:</b> Tile.h:29</div></div>
+<div class="ttc" id="class_tile_html_a47b5eb2072d4b1978923a480043899c9"><div class="ttname"><a href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">Tile::x</a></div><div class="ttdeci">int x</div><div class="ttdoc">Tiles x location. </div><div class="ttdef"><b>Definition:</b> Tile.h:33</div></div>
 <div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 5 2014 13:39:37 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

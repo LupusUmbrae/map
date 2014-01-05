@@ -115,63 +115,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>mapping {</div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classmapping_1_1_drawing_area.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmapping_1_1_drawing_area.html">DrawingArea</a>: <span class="keyword">public</span> <a class="code" href="classdisplay_1_1_i_display.html">display::IDisplay</a> {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classmapping_1_1_drawing_area.html#ae49564756dc503d27acdf7de8c019ccd">DrawingArea</a>(<span class="keywordtype">int</span> offsetX, <span class="keywordtype">int</span> offsetY, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            SDL_Renderer* <a class="code" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a30a5fb1d2395a75db73f8f4056435ee6">setImages</a>(<a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* scrollBarVertical,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* scrollBarHorizontal);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">render</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a281adf5d53165362e38f6d8b7aa8255a">handleEvents</a>(SDL_Event event);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a58afc7c3e9dca259ef414db7cf5ed536">setCurTexture</a>(<a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *texture);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a5a74b2d3aedab2706b4edf2d3e56c8cb">scrollDrawingArea</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// TODO mossro: Update this temporary function</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">loadMap</a>(std::vector&lt;Tile*&gt; loadedTiles);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt;Tile*&gt;* <a class="code" href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">getMap</a>();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a4128c0e1273f4ece8fb50c21c99bb20d">clearMap</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">int</span> scale = 20;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> border = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classmapping_1_1_drawing_area.html#ae49564756dc503d27acdf7de8c019ccd">DrawingArea</a>(<span class="keywordtype">int</span> offsetX, <span class="keywordtype">int</span> offsetY, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            SDL_Renderer* <a class="code" href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">renderer</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">render</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a281adf5d53165362e38f6d8b7aa8255a">handleEvents</a>(SDL_Event event);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a58afc7c3e9dca259ef414db7cf5ed536">setCurTexture</a>(<a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *texture);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#a5a74b2d3aedab2706b4edf2d3e56c8cb">scrollDrawingArea</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// TODO mossro: Update this temporary function</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">loadMap</a>(std::vector&lt;Tile*&gt; loadedTiles);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::vector&lt;Tile*&gt;* <a class="code" href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">getMap</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> getWidth() {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span> this-&gt;mapArea.w;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> getHieght() {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> this-&gt;mapArea.h;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *texture = NULL;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmapping_1_1_drawing_area.html#abafd24952e178158a54b6c3a62f04b69">clearMap</a>(<span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    std::vector&lt;Tile*&gt; tiles;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> checkZoom();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    SDL_Rect mapArea;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">int</span> viewX;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> viewY;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">static</span> <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* scrollBarVertical;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">static</span> <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a>* scrollBarHorizontal;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> scale = 20;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> tileX = 0;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">int</span> tileY = 0;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> border = 1;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classutils_1_1_map_texture.html">utils::MapTexture</a> *texture = NULL;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <span class="comment">/* namespace mapping */</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DRAWINGAREA_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_aaeb6e1425a9ca5c5a0410e0850970acb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">mapping::DrawingArea::getMap</a></div><div class="ttdeci">std::vector&lt; Tile * &gt; * getMap()</div><div class="ttdoc">Gets the map vector, used for saving. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:178</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_ae49564756dc503d27acdf7de8c019ccd"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae49564756dc503d27acdf7de8c019ccd">mapping::DrawingArea::DrawingArea</a></div><div class="ttdeci">DrawingArea(int offsetX, int offsetY, int height, int width, SDL_Renderer *renderer)</div><div class="ttdoc">Constructor that defines the display area of the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:12</div></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">double</span> rotation = 0.0;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::vector&lt;Tile*&gt; tiles;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    SDL_Rect mapArea;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">int</span> viewX;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">int</span> viewY;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">int</span> tileX = 0;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">int</span> tileY = 0;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;} <span class="comment">/* namespace mapping */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* DRAWINGAREA_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_aaeb6e1425a9ca5c5a0410e0850970acb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#aaeb6e1425a9ca5c5a0410e0850970acb">mapping::DrawingArea::getMap</a></div><div class="ttdeci">std::vector&lt; Tile * &gt; * getMap()</div><div class="ttdoc">Gets the map vector, used for saving. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:279</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_ae49564756dc503d27acdf7de8c019ccd"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae49564756dc503d27acdf7de8c019ccd">mapping::DrawingArea::DrawingArea</a></div><div class="ttdeci">DrawingArea(int offsetX, int offsetY, int height, int width, SDL_Renderer *renderer)</div><div class="ttdoc">Constructor that defines the display area of the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:21</div></div>
 <div class="ttc" id="classmapping_1_1_drawing_area_html"><div class="ttname"><a href="classmapping_1_1_drawing_area.html">mapping::DrawingArea</a></div><div class="ttdef"><b>Definition:</b> DrawingArea.h:31</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a43ce84dba02e4464cfe8a933cca3bb9b"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">mapping::DrawingArea::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">Render the drawing area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:33</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a58afc7c3e9dca259ef414db7cf5ed536"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a58afc7c3e9dca259ef414db7cf5ed536">mapping::DrawingArea::setCurTexture</a></div><div class="ttdeci">void setCurTexture(utils::MapTexture *texture)</div><div class="ttdoc">Set the current texture. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:148</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a281adf5d53165362e38f6d8b7aa8255a"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a281adf5d53165362e38f6d8b7aa8255a">mapping::DrawingArea::handleEvents</a></div><div class="ttdeci">void handleEvents(SDL_Event event)</div><div class="ttdoc">Handle an SDL Event. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:87</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a43ce84dba02e4464cfe8a933cca3bb9b"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a43ce84dba02e4464cfe8a933cca3bb9b">mapping::DrawingArea::render</a></div><div class="ttdeci">void render()</div><div class="ttdoc">Render the drawing area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:42</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_abafd24952e178158a54b6c3a62f04b69"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#abafd24952e178158a54b6c3a62f04b69">mapping::DrawingArea::clearMap</a></div><div class="ttdeci">void clearMap(int height, int width)</div><div class="ttdoc">Clears the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:283</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a58afc7c3e9dca259ef414db7cf5ed536"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a58afc7c3e9dca259ef414db7cf5ed536">mapping::DrawingArea::setCurTexture</a></div><div class="ttdeci">void setCurTexture(utils::MapTexture *texture)</div><div class="ttdoc">Set the current texture. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:260</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a281adf5d53165362e38f6d8b7aa8255a"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a281adf5d53165362e38f6d8b7aa8255a">mapping::DrawingArea::handleEvents</a></div><div class="ttdeci">void handleEvents(SDL_Event event)</div><div class="ttdoc">Handle an SDL Event. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:186</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html"><div class="ttname"><a href="classdisplay_1_1_i_display.html">display::IDisplay</a></div><div class="ttdef"><b>Definition:</b> IDisplay.h:23</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_ae00212a863dfc13e50772798278997bc"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">mapping::DrawingArea::loadMap</a></div><div class="ttdeci">void loadMap(std::vector&lt; Tile * &gt; loadedTiles)</div><div class="ttdoc">Loads a map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:169</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_ae00212a863dfc13e50772798278997bc"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#ae00212a863dfc13e50772798278997bc">mapping::DrawingArea::loadMap</a></div><div class="ttdeci">void loadMap(std::vector&lt; Tile * &gt; loadedTiles)</div><div class="ttdoc">Loads a map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:270</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a30a5fb1d2395a75db73f8f4056435ee6"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a30a5fb1d2395a75db73f8f4056435ee6">mapping::DrawingArea::setImages</a></div><div class="ttdeci">static void setImages(utils::MapTexture *scrollBarVertical, utils::MapTexture *scrollBarHorizontal)</div><div class="ttdoc">Sets the dialog box button images. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:15</div></div>
 <div class="ttc" id="classutils_1_1_map_texture_html"><div class="ttname"><a href="classutils_1_1_map_texture.html">utils::MapTexture</a></div><div class="ttdef"><b>Definition:</b> MapTextures.h:29</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a5a74b2d3aedab2706b4edf2d3e56c8cb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a5a74b2d3aedab2706b4edf2d3e56c8cb">mapping::DrawingArea::scrollDrawingArea</a></div><div class="ttdeci">void scrollDrawingArea(int x, int y)</div><div class="ttdoc">Temporary (ish) method for scrolling the map area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:152</div></div>
-<div class="ttc" id="classmapping_1_1_drawing_area_html_a4128c0e1273f4ece8fb50c21c99bb20d"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a4128c0e1273f4ece8fb50c21c99bb20d">mapping::DrawingArea::clearMap</a></div><div class="ttdeci">void clearMap()</div><div class="ttdoc">Clears the map. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:182</div></div>
+<div class="ttc" id="classmapping_1_1_drawing_area_html_a5a74b2d3aedab2706b4edf2d3e56c8cb"><div class="ttname"><a href="classmapping_1_1_drawing_area.html#a5a74b2d3aedab2706b4edf2d3e56c8cb">mapping::DrawingArea::scrollDrawingArea</a></div><div class="ttdeci">void scrollDrawingArea(int x, int y)</div><div class="ttdoc">Temporary (ish) method for scrolling the map area. </div><div class="ttdef"><b>Definition:</b> DrawingArea.cpp:265</div></div>
 <div class="ttc" id="classdisplay_1_1_i_display_html_ab57fb8ccd8ccf11a9005bf16489bc1f9"><div class="ttname"><a href="classdisplay_1_1_i_display.html#ab57fb8ccd8ccf11a9005bf16489bc1f9">display::IDisplay::renderer</a></div><div class="ttdeci">SDL_Renderer * renderer</div><div class="ttdoc">pointer to the global renderer </div><div class="ttdef"><b>Definition:</b> IDisplay.h:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 5 2014 13:39:37 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -104,9 +104,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6612055e6daf2e01536ccec3a42b08e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils_1_1_json_processor.html#ac6612055e6daf2e01536ccec3a42b08e">loadMap</a> (std::string saveFile)</td></tr>
 <tr class="memdesc:ac6612055e6daf2e01536ccec3a42b08e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load map from given json.  <a href="#ac6612055e6daf2e01536ccec3a42b08e">More...</a><br/></td></tr>
 <tr class="separator:ac6612055e6daf2e01536ccec3a42b08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14b340ff53aa65efd8ffedf75043d3da"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils_1_1_json_processor.html#a14b340ff53aa65efd8ffedf75043d3da">saveMap</a> (std::vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; *map)</td></tr>
-<tr class="memdesc:a14b340ff53aa65efd8ffedf75043d3da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save map to json.  <a href="#a14b340ff53aa65efd8ffedf75043d3da">More...</a><br/></td></tr>
-<tr class="separator:a14b340ff53aa65efd8ffedf75043d3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e61cc5cf45b594694ca2ac4255cc133"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e61cc5cf45b594694ca2ac4255cc133"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getMapWidth</b> ()</td></tr>
+<tr class="separator:a0e61cc5cf45b594694ca2ac4255cc133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b44442f55146db336e293adde28e2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41b44442f55146db336e293adde28e2b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getMapHeight</b> ()</td></tr>
+<tr class="separator:a41b44442f55146db336e293adde28e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84560f10ce2adad54d2be8d03d776523"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils_1_1_json_processor.html#a84560f10ce2adad54d2be8d03d776523">saveMap</a> (std::vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; *map, int width, int height)</td></tr>
+<tr class="memdesc:a84560f10ce2adad54d2be8d03d776523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save map to json.  <a href="#a84560f10ce2adad54d2be8d03d776523">More...</a><br/></td></tr>
+<tr class="separator:a84560f10ce2adad54d2be8d03d776523"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a17161e0b43d3143d221a4422c6b3017f"></a>
@@ -185,7 +191,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a14b340ff53aa65efd8ffedf75043d3da"></a>
+<a class="anchor" id="a84560f10ce2adad54d2be8d03d776523"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -193,8 +199,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">std::string utils::JsonProcessor::saveMap </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>map</em></td><td>)</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -217,7 +239,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 30 2013 12:32:55 for Map by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 5 2014 13:39:38 for Map by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
