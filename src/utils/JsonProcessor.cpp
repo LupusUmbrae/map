@@ -61,9 +61,9 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 						imageLocation.str("");
 
 						imageLocation << setFolder.str() << "/"
-								<< imagesToLoad[0].get("filename", "").asString();
+								<< imagesToLoad[i].get("filename", "").asString();
 						uniqueName << ent->d_name << "."
-								<< imagesToLoad[0].get("name", "").asString();
+								<< imagesToLoad[i].get("name", "").asString();
 
 						curTile->loadImage(imageLocation.str());
 						curTile->setUniqueName(uniqueName.str());

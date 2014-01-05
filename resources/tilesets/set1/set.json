@@ -5,6 +5,21 @@
       "name"     : "tile1",
       "filename" : "stone.png", 
       "category" : "floor"
+      },
+      { 
+      "name"     : "tile2",
+      "filename" : "stone2.png", 
+      "category" : "floor"
+      },
+      { 
+      "name"     : "tile3",
+      "filename" : "stone3.png", 
+      "category" : "floor"
+      },
+      { 
+      "name"     : "tile4",
+      "filename" : "stone4.bmp", 
+      "category" : "floor"
       }
     ]
   }
