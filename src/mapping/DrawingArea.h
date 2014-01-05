@@ -30,6 +30,10 @@ namespace mapping {
  */
 class DrawingArea: public display::IDisplay {
 public:
+	//! Sets the dialog box button images
+	static void setImages(utils::MapTexture* scrollBarVertical,
+			utils::MapTexture* scrollBarHorizontal);
+
 	//! Constructor that defines the display area of the map
 	DrawingArea(int offsetX, int offsetY, int height, int width,
 			SDL_Renderer* renderer);
@@ -77,6 +81,10 @@ public:
 
 private:
 	void checkZoom();
+
+	//! Image for a scroll bar
+	static utils::MapTexture* scrollBarVertical;
+	static utils::MapTexture* scrollBarHorizontal;
 
 	//! Current scaling applied to the drawing area
 	int scale = 20;

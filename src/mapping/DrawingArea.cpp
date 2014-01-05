@@ -9,6 +9,15 @@
 
 namespace mapping {
 
+utils::MapTexture* DrawingArea::scrollBarVertical = new utils::MapTexture();
+utils::MapTexture* DrawingArea::scrollBarHorizontal = new utils::MapTexture();
+
+void DrawingArea::setImages(utils::MapTexture* scrollBarVertical,
+		utils::MapTexture* scrollBarHorizontal) {
+	DrawingArea::scrollBarVertical = scrollBarVertical;
+	DrawingArea::scrollBarHorizontal = scrollBarHorizontal;
+}
+
 DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
 		SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -127,6 +136,51 @@ void DrawingArea::render() {
 		texture->render(x, y, scale, scale, NULL, rotation);
 	}
 
+	// Scroll bars
+	int viewMax = (mapArea.w + (border * 2)) - (areaRect->w / scale);
+	if (viewMax == 0 || viewMax < 0) {
+		viewMax = 1;
+	}
+	int curPos = (viewX + border) * (areaRect->w / viewMax);
+	int curWidth = areaRect->w / viewMax;
+
+	if (curWidth > areaRect->w) {
+		curWidth = areaRect->w;
+	}
+
+	if (curPos < 0) {
+		curPos = 0;
+	} else if ((curPos + curWidth) > areaRect->w) {
+		curPos = areaRect->w - curWidth;
+	}
+
+	curPos += areaRect->x;
+
+	scrollBarHorizontal->render(curPos, areaRect->h + areaRect->y - 10,
+			curWidth, 10);
+
+	// Scroll bars
+	viewMax = (mapArea.h + (border * 2)) - (areaRect->h / scale);
+	if (viewMax == 0 || viewMax < 0) {
+		viewMax = 1;
+	}
+	curPos = (viewY + border) * (areaRect->h / viewMax);
+	curWidth = areaRect->h / viewMax;
+
+	if (curWidth > areaRect->h) {
+		curWidth = areaRect->h;
+	}
+
+	if (curPos < 0) {
+		curPos = 0;
+	} else if ((curPos + curWidth) > areaRect->h) {
+		curPos = areaRect->h - curWidth;
+	}
+
+	curPos += areaRect->y;
+
+	scrollBarVertical->render(areaRect->w + areaRect->x - 10, curPos, 10,
+			curWidth);
 }
 
 void DrawingArea::handleEvents(SDL_Event event) {

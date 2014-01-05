@@ -113,6 +113,9 @@ bool Map::loadResources() {
 	utils::Image* yes = new utils::Image(renderer);
 	utils::Image* no = new utils::Image(renderer);
 
+	utils::Image* scrollBarVert = new utils::Image(renderer);
+	utils::Image* scrollBarHori = new utils::Image(renderer);
+
 	menuNew->loadImage("resources/menus/new.bmp");
 	menuNewHover->loadImage("resources/menus/newHover.bmp");
 
@@ -129,6 +132,9 @@ bool Map::loadResources() {
 	yes->loadImage("resources/menus/yes.png");
 	no->loadImage("resources/menus/no.png");
 
+	scrollBarVert->loadImage("resources/menus/scrollVert.png");
+	scrollBarHori->loadImage("resources/menus/scrollHor.png");
+
 	utils::Text* newTooltip = new utils::Text(renderer);
 	utils::Text* saveTooltip = new utils::Text(renderer);
 	utils::Text* loadTooltip = new utils::Text(renderer);
@@ -142,6 +148,7 @@ bool Map::loadResources() {
 	 */
 
 	menu::DialogBox::setImages(ok, yes, no);
+	mapping::DrawingArea::setImages(scrollBarVert, scrollBarHori);
 
 	// Top Menu
 	std::vector<menu::MenuItem*> items;
