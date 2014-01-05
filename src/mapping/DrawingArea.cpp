@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "DrawingArea.h"
+#include "mapping/DrawingArea.h"
 
 namespace mapping {
 

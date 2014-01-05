@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "LeftMenu.h"
+#include "menus/LeftMenu.h"
 
 namespace menu {
 

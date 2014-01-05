@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "DialogBox.h"
+#include "menus/DialogBox.h"
 
 namespace menu {
 

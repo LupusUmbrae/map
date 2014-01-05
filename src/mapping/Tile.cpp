@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "Tile.h"
+#include "mapping/Tile.h"
 
 Tile::Tile(int x, int y, utils::MapTexture* texture) {
 	this->x = x;

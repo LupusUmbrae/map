@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "InputBox.h"
+#include "menus/InputBox.h"
 
 namespace menu {
 

@@ -5,7 +5,7 @@
  *      Author: Robin
  */
 
-#include "Image.h"
+#include "utils/textures/Image.h"
 
 namespace utils {
 
