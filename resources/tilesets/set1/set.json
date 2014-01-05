@@ -18,7 +18,7 @@
       },
       { 
       "name"     : "tile4",
-      "filename" : "stone4.bmp", 
+      "filename" : "stone4.png", 
       "category" : "floor"
       }
     ]
