@@ -19,3 +19,5 @@
 *.project
 *.settings
 /Doxyfile
+/libs
+*.dll
