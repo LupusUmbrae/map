@@ -80,7 +80,12 @@ public:
 	void clearMap(int height, int width);
 
 private:
-	void checkZoom();
+
+	void renderDrawingBox();
+
+	void renderTiles();
+
+	void renderScrollBars();
 
 	//! Image for a scroll bar
 	static utils::MapTexture* scrollBarVertical;

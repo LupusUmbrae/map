@@ -40,147 +40,14 @@ DrawingArea::DrawingArea(int offsetX, int offsetY, int height, int width,
 }
 
 void DrawingArea::render() {
-	int x, y;
-
 	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 	SDL_RenderFillRect(renderer, areaRect);
 
-	SDL_Rect curArea;
+	renderDrawingBox();
 
-	checkZoom();
+	renderTiles();
 
-	curArea.x = -viewX;
-	curArea.y = -viewY;
-	curArea.w = mapArea.w - (viewX + (areaRect->w / scale));
-	curArea.h = mapArea.h - (viewY + (areaRect->h / scale));
-
-	if (-viewX < 0) {
-		curArea.x = areaRect->x;
-	} else {
-		curArea.x = areaRect->x + (curArea.x * scale);
-	}
-
-	if (curArea.y < 0) {
-		curArea.y = areaRect->y;
-	} else {
-		curArea.y = areaRect->y + (curArea.y * scale);
-	}
-
-	if (curArea.w > 0) {
-		curArea.w = areaRect->w;
-	} else {
-
-		if (mapArea.w < (areaRect->h / scale)) {
-			curArea.w = (mapArea.w * scale);
-		} else {
-			curArea.w = ((areaRect->w / scale) + curArea.w) * scale;
-		}
-	}
-
-	if (curArea.h > 0) {
-		curArea.h = areaRect->h;
-	} else {
-		if ((mapArea.h * scale) < areaRect->h) {
-			curArea.h = mapArea.h * scale;
-		} else {
-			curArea.h = ((areaRect->h / scale) + curArea.h) * scale;
-		}
-	}
-
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderFillRect(renderer, &curArea);
-
-	for (Tile *curTile : tiles) {
-		x = (curTile->x * scale);
-		y = (curTile->y * scale);
-
-		if ((x >= (viewX * scale) && x < ((viewX * scale) + areaRect->w))
-				&& (y >= (viewY * scale) && y < ((viewY * scale) + areaRect->h))) {
-
-			// Correct locations within the actual screen
-			x += areaRect->x - (viewX * scale);
-			y += areaRect->y - (viewY * scale);
-			if ((scale % 2) == 0) {
-				if (curTile->rotation == 90.0) {
-					x--;
-				} else if (curTile->rotation == 180) {
-					x--;
-					y--;
-				} else if (curTile->rotation == 270) {
-					y--;
-				}
-			}
-			curTile->texture->render(x, y, scale, scale, NULL,
-					curTile->rotation);
-		}
-
-	}
-
-	x = (tileX - viewX) * scale;
-	x += areaRect->x;
-
-	y = (tileY - viewY) * scale;
-	y += areaRect->y;
-
-	if (texture != NULL) {
-		if ((scale % 2) == 0) {
-			if (rotation == 90.0) {
-				x--;
-			} else if (rotation == 180) {
-				y--;
-				x--;
-			} else if (rotation == 270) {
-				y--;
-			}
-		}
-		texture->render(x, y, scale, scale, NULL, rotation);
-	}
-
-	// Scroll bars
-	int viewMax = (mapArea.w + (border * 2)) - (areaRect->w / scale);
-	if (viewMax == 0 || viewMax < 0) {
-		viewMax = 1;
-	}
-	int curPos = (viewX + border) * (areaRect->w / viewMax);
-	int curWidth = areaRect->w / viewMax;
-
-	if (curWidth > areaRect->w) {
-		curWidth = areaRect->w;
-	}
-
-	if (curPos < 0) {
-		curPos = 0;
-	} else if ((curPos + curWidth) > areaRect->w) {
-		curPos = areaRect->w - curWidth;
-	}
-
-	curPos += areaRect->x;
-
-	scrollBarHorizontal->render(curPos, areaRect->h + areaRect->y - 10,
-			curWidth, 10);
-
-	// Scroll bars
-	viewMax = (mapArea.h + (border * 2)) - (areaRect->h / scale);
-	if (viewMax == 0 || viewMax < 0) {
-		viewMax = 1;
-	}
-	curPos = (viewY + border) * (areaRect->h / viewMax);
-	curWidth = areaRect->h / viewMax;
-
-	if (curWidth > areaRect->h) {
-		curWidth = areaRect->h;
-	}
-
-	if (curPos < 0) {
-		curPos = 0;
-	} else if ((curPos + curWidth) > areaRect->h) {
-		curPos = areaRect->h - curWidth;
-	}
-
-	curPos += areaRect->y;
-
-	scrollBarVertical->render(areaRect->w + areaRect->x - 10, curPos, 10,
-			curWidth);
+	renderScrollBars();
 }
 
 void DrawingArea::handleEvents(SDL_Event event) {
@@ -288,7 +155,8 @@ void DrawingArea::clearMap(int height, int width) {
 	mapArea.h = height;
 }
 
-void DrawingArea::checkZoom() {
+void DrawingArea::renderDrawingBox() {
+	// First validate the scrolled position and zoom
 	if ((areaRect->w / scale) > mapArea.w) {
 		viewX = -((areaRect->w / scale) - mapArea.w) / 2;
 	} else {
@@ -309,6 +177,141 @@ void DrawingArea::checkZoom() {
 			viewY = (mapArea.h + border) - (areaRect->h / scale);
 		}
 	}
+
+	//  Create the drawing area
+	SDL_Rect curArea;
+
+	if (-viewX < 0) {
+		curArea.x = areaRect->x;
+	} else {
+		curArea.x = areaRect->x + (-viewX * scale);
+	}
+
+	if (-viewY < 0) {
+		curArea.y = areaRect->y;
+	} else {
+		curArea.y = areaRect->y + (-viewY * scale);
+	}
+
+	curArea.w = mapArea.w - (viewX + (areaRect->w / scale));
+	curArea.h = mapArea.h - (viewY + (areaRect->h / scale));
+
+	/*
+	 * If width or height are bigger than the screen set them to the screen size,  otherwise work out the actual width
+	 */
+	if (curArea.w > 0) {
+		curArea.w = areaRect->w;
+	} else {
+
+		if ((mapArea.w * scale) < areaRect->w) {
+			curArea.w = (mapArea.w * scale);
+		} else {
+			curArea.w = ((areaRect->w / scale) + curArea.w) * scale;
+		}
+	}
+
+	if (curArea.h > 0) {
+		curArea.h = areaRect->h;
+	} else {
+		if ((mapArea.h * scale) < areaRect->h) {
+			curArea.h = mapArea.h * scale;
+		} else {
+			curArea.h = ((areaRect->h / scale) + curArea.h) * scale;
+		}
+	}
+
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderFillRect(renderer, &curArea);
 }
 
+void DrawingArea::renderTiles() {
+	int x;
+	int y;
+	for (Tile *curTile : tiles) {
+		x = (curTile->x * scale);
+		y = (curTile->y * scale);
+
+		if ((x >= (viewX * scale) && x < ((viewX * scale) + areaRect->w))
+				&& (y >= (viewY * scale) && y < ((viewY * scale) + areaRect->h))) {
+
+			// Correct locations within the actual screen
+			x += areaRect->x - (viewX * scale);
+			y += areaRect->y - (viewY * scale);
+			if ((scale % 2) == 0) {
+				if (curTile->rotation == 90.0) {
+					x--;
+				} else if (curTile->rotation == 180) {
+					x--;
+					y--;
+				} else if (curTile->rotation == 270) {
+					y--;
+				}
+			}
+			curTile->texture->render(x, y, scale, scale, NULL,
+					curTile->rotation);
+		}
+	}
+
+	x = (tileX - viewX) * scale;
+	x += areaRect->x;
+
+	y = (tileY - viewY) * scale;
+	y += areaRect->y;
+
+	if (texture != NULL) {
+		if ((scale % 2) == 0) {
+			if (rotation == 90.0) {
+				x--;
+			} else if (rotation == 180) {
+				y--;
+				x--;
+			} else if (rotation == 270) {
+				y--;
+			}
+		}
+		texture->setAlpha(0xAA);
+		texture->render(x, y, scale, scale, NULL, rotation);
+		texture->setAlpha(0xFF);
+	}
+}
+
+void DrawingArea::renderScrollBars() {
+	int curPos = viewX * (areaRect->w / mapArea.w);
+	int curWidth = (areaRect->w / scale) * (areaRect->w / mapArea.w)
+			+ (areaRect->w % mapArea.w);
+
+	if (curWidth > areaRect->w) {
+		curWidth = areaRect->w;
+	}
+
+	if (curPos < 0) {
+		curPos = 0;
+	} else if ((curPos + curWidth) > areaRect->w) {
+		curPos = areaRect->w - curWidth;
+	}
+
+	curPos += areaRect->x;
+
+	scrollBarHorizontal->render(curPos, areaRect->h + areaRect->y - 10,
+			curWidth, 10);
+
+	curPos = viewY * (areaRect->h / mapArea.h);
+	curWidth = (areaRect->h / scale) * (areaRect->h / mapArea.h)
+			+ (areaRect->h % mapArea.h);
+
+	if (curWidth > areaRect->h) {
+		curWidth = areaRect->h;
+	}
+
+	if (curPos < 0) {
+		curPos = 0;
+	} else if ((curPos + curWidth) > areaRect->h) {
+		curPos = areaRect->h - curWidth;
+	}
+
+	curPos += areaRect->y;
+
+	scrollBarVertical->render(areaRect->w + areaRect->x - 10, curPos, 10,
+			curWidth);
+}
 } /* namespace mapping */

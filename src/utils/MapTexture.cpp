@@ -44,6 +44,10 @@ void MapTexture::render(int xPos, int yPos, int width, int height,
 	SDL_RenderCopyEx(renderer, texture, clip, &renderQuad, angle, center, flip);
 }
 
+void MapTexture::setAlpha(Uint8 alpha) {
+	SDL_SetTextureAlphaMod(texture, alpha);
+}
+
 bool MapTexture::convertSurface(SDL_Surface* surface) {
 	bool success = true;
 
