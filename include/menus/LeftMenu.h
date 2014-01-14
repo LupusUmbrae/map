@@ -53,14 +53,11 @@ public:
 	void handleEvents(SDL_Event event);
 
 private:
-
 	//! Space between elements
 	static const int SPACER = 5;
 
-	//! Group close icon
-	utils::MapTexture* groupClosed;
-	//! Group open icon
-	utils::MapTexture* groupOpen;
+	void draw();
+
 	//! Tilesets
 	std::vector<TileGroup*> groups;
 };

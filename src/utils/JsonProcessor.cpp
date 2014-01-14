@@ -44,7 +44,6 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 
 			setFolder << "resources/tilesets/" << ent->d_name;
 			jsonFolder << setFolder.str() << "/set.json";
-
 			ifile.open(jsonFolder.str().c_str(), std::ifstream::in);
 			if (ifile) {
 				if (reader.parse(ifile, root)) {
@@ -75,7 +74,7 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 				} else {
 					logMessage(reader.getFormattedErrorMessages());
 				}
-
+				ifile.close();
 			}
 		}
 	}
