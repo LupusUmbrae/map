@@ -15,8 +15,10 @@
 // SDL Includes
 
 // Map Includes
+#include "MenuItem.h"
 #include "../IDisplay.h"
 #include "../utils/MapTextures.h"
+#include "../utils/textures/Text.h"
 #include "../utils/logger.h"
 #include "../actions/IAction.h"
 #include "../actions/ActionQueue.h"
@@ -29,6 +31,13 @@ namespace menu {
  */
 class TileGroup: public display::IDisplay {
 public:
+	//! Set the static images for tile groups
+	/*!
+	 *
+	 *
+	 *@param groupOpen Icon to show that the group is open
+	 *@param groupClosed Icon to show that the group is closed
+	 */
 	static void setImages(utils::MapTexture* groupOpen,
 			utils::MapTexture* groupClosed);
 
@@ -38,22 +47,27 @@ public:
 	 * @param groupName Name of the group to be displayed
 	 * @param tiles The tiles in this group
 	 */
-	TileGroup(utils::MapTexture* groupName,
-			std::vector<utils::MapTexture*> tiles);
+	TileGroup(utils::MapTexture* groupName, std::vector<MenuItem*> tiles,
+			SDL_Renderer* renderer);
 
 	void handleEvents(SDL_Event event);
 
 	void render();
 
+	//! Re-draw the group with the new location
+	/*!
+	 * Redraw the group and return it's height.
+	 *
+	 * @param x X position on the screen of this group
+	 * @param y Y position of the screen of this group
+	 * @param w Width that this group can use
+	 * @return height of the groups
+	 */
 	int redraw(int x, int y, int w);
 
-	bool hasChanged() {
-		return changed;
-	}
+	void addGroup(std::vector<MenuItem*> newGroup, std::string category);
 
-	int getHeight() {
-		return height;
-	}
+	bool hasChanged();
 
 	//! Is the group currently open?
 	bool isOpen();
@@ -63,23 +77,17 @@ public:
 		return groupName;
 	}
 
-	//! get the tiles
-	std::vector<utils::MapTexture*> getTiles() {
-		return tiles;
-	}
-
 private:
 	//! Group close icon
 	static utils::MapTexture* groupClosed;
 	//! Group open icon
 	static utils::MapTexture* groupOpen;
 
+	//! Draws the group.
 	void draw();
 
 	//! action to be passed to the queue
 	action::IAction action;
-
-	int height;
 
 	//! Size of the tiles
 	int scale = 20;
@@ -88,10 +96,12 @@ private:
 	utils::MapTexture* groupName;
 
 	//! Tile images
-	std::vector<utils::MapTexture*> tiles;
+	std::vector<MenuItem*> tiles;
+
+	std::vector<TileGroup*> subGroups;
 
 	//! Tile images with location on screen
-	std::map<SDL_Rect*, utils::MapTexture*> tileMap;
+	std::map<SDL_Rect*, MenuItem*> tileMap;
 
 	//! Location for the open/close icon and name
 	SDL_Rect* nameRect = new SDL_Rect();

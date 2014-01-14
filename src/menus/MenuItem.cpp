@@ -23,7 +23,7 @@ MenuItem::~MenuItem() {
 }
 
 utils::MapTexture* MenuItem::getIcon() {
-	if (hover) {
+	if (hover && iconHover != NULL) {
 		return iconHover;
 	}
 

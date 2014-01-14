@@ -18,34 +18,34 @@ void TileGroup::setImages(utils::MapTexture* groupOpen,
 	TileGroup::groupClosed = groupClosed;
 }
 
-TileGroup::TileGroup(utils::MapTexture* groupName,
-		std::vector<utils::MapTexture*> tiles) {
+TileGroup::TileGroup(utils::MapTexture* groupName, std::vector<MenuItem*> tiles,
+		SDL_Renderer* renderer) {
 	this->groupName = groupName;
 	this->tiles = tiles;
+	this->renderer = renderer;
 }
 
 void TileGroup::handleEvents(SDL_Event event) {
 
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		if (event.button.button == SDL_BUTTON_LEFT) {
-
 			if (this->open) {
+
 				SDL_Rect* tileRect;
-				utils::MapTexture* tileTex;
+				MenuItem* tileItem;
+
 				for (auto itemIter = tileMap.begin(); itemIter != tileMap.end();
 						++itemIter) {
 
 					tileRect = itemIter->first;
-					tileTex = itemIter->second;
+					tileItem = itemIter->second;
 
 					if (curX >= tileRect->x
 							&& (curX <= (tileRect->x + scale))) {
 						if (curY >= tileRect->y
 								&& (curY <= (tileRect->y + scale))) {
-							action.setAction(action::CHANGE_TILE);
-							action.setObject(tileTex);
 							action::ActionQueue::getInstance().addAction(
-									&action);
+									&tileItem->action);
 							break;
 						}
 					}
@@ -58,13 +58,17 @@ void TileGroup::handleEvents(SDL_Event event) {
 					this->changed = true;
 				}
 			}
+
+			for (TileGroup* curGroup : subGroups) {
+				curGroup->handleEvents(event);
+			}
 		}
 	}
 }
 
 void TileGroup::render() {
 	SDL_Rect* tileRect;
-	utils::MapTexture* tileTex;
+	MenuItem* tileItem;
 
 	if (open) {
 		groupOpen->render(nameRect->x, nameRect->y, 10, 10);
@@ -77,11 +81,16 @@ void TileGroup::render() {
 		for (auto itemIter = tileMap.begin(); itemIter != tileMap.end();
 				++itemIter) {
 			tileRect = itemIter->first;
-			tileTex = itemIter->second;
+			tileItem = itemIter->second;
 
-			tileTex->render(tileRect->x, tileRect->y, scale, scale);
+			tileItem->getIcon()->render(tileRect->x, tileRect->y, scale, scale);
+		}
+
+		for (TileGroup* curGroup : subGroups) {
+			curGroup->render();
 		}
 	}
+
 }
 
 int TileGroup::redraw(int x, int y, int w) {
@@ -92,6 +101,30 @@ int TileGroup::redraw(int x, int y, int w) {
 	draw();
 	this->changed = false;
 	return areaRect->h;
+}
+
+void TileGroup::addGroup(std::vector<MenuItem*> newGroup,
+		std::string category) {
+	utils::Text* groupName = new utils::Text(renderer);
+	groupName->createText(category);
+
+	TileGroup* group = new TileGroup(groupName, newGroup, renderer);
+	subGroups.push_back(group);
+}
+
+bool TileGroup::hasChanged() {
+	changed = this->changed;
+
+	if (!changed) {
+		for (TileGroup* curGroup : subGroups) {
+			changed = curGroup->hasChanged();
+			if (changed) {
+				break;
+			}
+		}
+	}
+
+	return changed;
 }
 
 bool TileGroup::isOpen() {
@@ -122,12 +155,13 @@ void TileGroup::draw() {
 		renY += 15;
 
 		SDL_Rect* tileRect;
-		for (utils::MapTexture* curTex : tiles) {
+
+		for (MenuItem* curItem : tiles) {
 			tileRect = new SDL_Rect();
 
 			tileRect->x = renX;
 			tileRect->y = renY;
-			tileMap.insert(std::make_pair(tileRect, curTex));
+			tileMap.insert(std::make_pair(tileRect, curItem));
 			renX += scale + SPACER;
 
 			if (renX >= (areaRect->w - (scale + SPACER))) {
@@ -135,14 +169,19 @@ void TileGroup::draw() {
 				renY += scale + SPACER;
 			}
 		}
+
 		renY += scale;
+
+		for (TileGroup* curGroup : subGroups) {
+			renY += curGroup->redraw(startX + 5, renY, areaRect->w - 5);
+		}
 	} else {
 		renY += 10;
 	}
 
 	areaRect->x = startX;
 	areaRect->y = startY;
-	areaRect->w = this->areaRect->w;
+
 	areaRect->h = renY - startY;
 }
 

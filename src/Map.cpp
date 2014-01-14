@@ -69,13 +69,13 @@ bool Map::loadResources() {
 	 * Fonts
 	 */
 
-	font = TTF_OpenFont("resources/arial.ttf", 10);
+	font = TTF_OpenFont("resources/verdana.ttf", 10);
 	if (font == NULL) {
 		std::cout << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
 		return false;
 	}
 
-	font2 = TTF_OpenFont("resources/arial.ttf", 15);
+	font2 = TTF_OpenFont("resources/verdana.ttf", 15);
 	if (font == NULL) {
 		std::cout << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
 		return false;

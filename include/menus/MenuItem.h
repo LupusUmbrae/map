@@ -39,7 +39,7 @@ public:
 			utils::MapTexture* iconHover);
 	virtual ~MenuItem();
 
-	//! Get teh icon (if hovers set returns the hover image)
+	//! Get the icon (if hovers set returns the hover image)
 	utils::MapTexture* getIcon();
 	//! Set whether the mouse is hovering over this item
 	void setHover(bool hovering);

@@ -22,11 +22,15 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 	Json::Reader reader;
 	Json::Value root;
 
+	std::map<std::string, std::vector<menu::MenuItem*> > categories;
+
 	std::vector<menu::TileGroup*> groups;
-	std::vector<utils::MapTexture*> tiles;
+	std::vector<menu::MenuItem*> tiles;
 	menu::TileGroup* curGroup;
 	utils::Image* curTile;
 	utils::Text* groupName;
+
+	menu::MenuItem* menuItem;
 
 	DIR* dir;
 	struct dirent* ent;
@@ -35,6 +39,7 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 	std::stringstream jsonFolder;
 	std::stringstream imageLocation;
 	std::stringstream uniqueName;
+	std::string category;
 
 	if ((dir = opendir(rootDir.c_str())) != NULL) {
 		std::ifstream ifile;
@@ -48,6 +53,7 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 			if (ifile) {
 				if (reader.parse(ifile, root)) {
 					tiles.clear();
+					categories.clear();
 					// Create tile set
 					groupName = new utils::Text(renderer);
 					groupName->createText(root["name"].asString());
@@ -64,11 +70,40 @@ std::vector<menu::TileGroup*> JsonProcessor::loadTilesets(std::string rootDir) {
 						uniqueName << ent->d_name << "."
 								<< imagesToLoad[i].get("name", "").asString();
 
+						category =
+								imagesToLoad[i].get("category", "unknown").asString();
+
 						curTile->loadImage(imageLocation.str());
 						curTile->setUniqueName(uniqueName.str());
-						tiles.push_back(curTile);
+						menuItem = new menu::MenuItem(
+								imagesToLoad[i].get("name", "").asString(),
+								NULL,
+								action::IAction(action::CHANGE_TILE, curTile),
+								curTile, NULL);
+
+						if (categories.find(category) == categories.end()) {
+							categories.insert(
+									std::make_pair(category,
+											std::vector<menu::MenuItem*>()));
+						}
+						categories.at(category).push_back(menuItem);
+
 					}
-					curGroup = new menu::TileGroup(groupName, tiles);
+
+					// make safe!!
+					for (menu::MenuItem* curItem : categories.find("floor")->second) {
+						tiles.push_back(curItem);
+					}
+
+					curGroup = new menu::TileGroup(groupName, tiles, renderer);
+
+					categories.erase("floor");
+
+					for (auto itemIter = categories.begin();
+							itemIter != categories.end(); ++itemIter) {
+						curGroup->addGroup(itemIter->second, itemIter->first);
+					}
+
 					groups.push_back(curGroup);
 
 				} else {

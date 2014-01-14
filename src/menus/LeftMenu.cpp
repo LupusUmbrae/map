@@ -59,6 +59,7 @@ void LeftMenu::handleEvents(SDL_Event event) {
 void LeftMenu::draw() {
 	int y = areaRect->y;
 
+	// Tell each tile group to re-draw itself
 	for (TileGroup* curGroup : groups) {
 		y += curGroup->redraw(areaRect->x, y, areaRect->w);
 		y += SPACER;
