@@ -9,67 +9,180 @@
 
 namespace menu {
 
-TileGroup::TileGroup(utils::MapTexture* groupName,
-		std::vector<utils::MapTexture*> tiles) {
+utils::MapTexture* TileGroup::groupOpen = NULL;
+utils::MapTexture* TileGroup::groupClosed = NULL;
+
+void TileGroup::setImages(utils::MapTexture* groupOpen,
+		utils::MapTexture* groupClosed) {
+	TileGroup::groupOpen = groupOpen;
+	TileGroup::groupClosed = groupClosed;
+}
+
+TileGroup::TileGroup(utils::MapTexture* groupName, std::vector<MenuItem*> tiles,
+		SDL_Renderer* renderer) {
 	this->groupName = groupName;
 	this->tiles = tiles;
+	this->renderer = renderer;
 }
 
-bool TileGroup::inArea(int x, int y) {
-	if (x >= areaRect->x && (x <= (areaRect->x + areaRect->w))) {
-		if (y >= areaRect->y && (y <= (areaRect->y + areaRect->h))) {
-			return true;
-		}
-	}
-	return false;
-}
+void TileGroup::handleEvents(SDL_Event event) {
 
-void TileGroup::setArea(int x, int y, int w, int h) {
-	areaRect->x = x;
-	areaRect->y = y;
-	areaRect->h = h;
-	areaRect->w = w;
-}
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (event.button.button == SDL_BUTTON_LEFT) {
+			if (this->open) {
 
-void TileGroup::setSpacing(int spacer, int nameSize, int iconSize) {
-	this->spacer = spacer;
-	this->nameSize = nameSize;
-	this->iconSize = iconSize;
-}
+				SDL_Rect* tileRect;
+				MenuItem* tileItem;
 
-void TileGroup::handleEvent(int x, int y) {
+				for (auto itemIter = tileMap.begin(); itemIter != tileMap.end();
+						++itemIter) {
 
-	if (this->open) {
-		// Lets work out which icon
-		int curX = areaRect->x;
-		int curY = areaRect->y + nameSize;
+					tileRect = itemIter->first;
+					tileItem = itemIter->second;
 
-		for (size_t i = 0; i < tiles.size(); i++) {
-			if (x >= curX && (x <= (curX + iconSize))) {
-				if (y >= curY && (y <= (curY + iconSize))) {
-					action.setAction(action::CHANGE_TILE);
-					action.setObject(tiles.at(i));
-					action::ActionQueue::getInstance().addAction(&action);
-					break;
+					if (curX >= tileRect->x
+							&& (curX <= (tileRect->x + scale))) {
+						if (curY >= tileRect->y
+								&& (curY <= (tileRect->y + scale))) {
+							action::ActionQueue::getInstance().addAction(
+									&tileItem->action);
+							break;
+						}
+					}
 				}
 			}
-			curX += iconSize + spacer;
-			if (curX >= (areaRect->w - (iconSize + spacer))) {
-				curX = this->areaRect->x;
-				curY += iconSize + spacer;
+
+			if (curX >= nameRect->x && (curX <= (nameRect->x + 10))) {
+				if (curY >= nameRect->y && (curY <= (nameRect->y + 10))) {
+					this->open = !this->open;
+					this->changed = true;
+				}
+			}
+
+			for (TileGroup* curGroup : subGroups) {
+				curGroup->handleEvents(event);
+			}
+		}
+	}
+}
+
+void TileGroup::render() {
+	SDL_Rect* tileRect;
+	MenuItem* tileItem;
+
+	if (open) {
+		groupOpen->render(nameRect->x, nameRect->y, 10, 10);
+	} else {
+		groupClosed->render(nameRect->x, nameRect->y, 10, 10);
+	}
+	groupName->render(nameRect->x + 20, nameRect->y);
+
+	if (open) {
+		for (auto itemIter = tileMap.begin(); itemIter != tileMap.end();
+				++itemIter) {
+			tileRect = itemIter->first;
+			tileItem = itemIter->second;
+
+			tileItem->getIcon()->render(tileRect->x, tileRect->y, scale, scale);
+		}
+
+		for (TileGroup* curGroup : subGroups) {
+			curGroup->render();
+		}
+	}
+
+}
+
+int TileGroup::redraw(int x, int y, int w) {
+	areaRect->x = x;
+	areaRect->y = y;
+	areaRect->w = w;
+
+	draw();
+	this->changed = false;
+	return areaRect->h;
+}
+
+void TileGroup::addGroup(std::vector<MenuItem*> newGroup,
+		std::string category) {
+	utils::Text* groupName = new utils::Text(renderer);
+	groupName->createText(category);
+
+	TileGroup* group = new TileGroup(groupName, newGroup, renderer);
+	subGroups.push_back(group);
+}
+
+bool TileGroup::hasChanged() {
+	changed = this->changed;
+
+	if (!changed) {
+		for (TileGroup* curGroup : subGroups) {
+			changed = curGroup->hasChanged();
+			if (changed) {
+				break;
 			}
 		}
 	}
 
-	if (x >= areaRect->x && (x <= (areaRect->x + nameSize))) {
-		if (y >= areaRect->y && (y <= (areaRect->y + nameSize))) {
-			this->open = !this->open;
-		}
-	}
+	return changed;
 }
 
 bool TileGroup::isOpen() {
 	return this->open;
+}
+
+void TileGroup::draw() {
+	int renX = this->areaRect->x;
+	int renY = this->areaRect->y;
+
+	int SPACER = 5;
+
+	int startX;
+	int startY;
+
+	startX = renX;
+	startY = renY;
+
+	renX += 5;
+	renY += 5;
+
+	nameRect->x = renX;
+	nameRect->y = renY;
+
+	if (open) {
+		tileMap.clear();
+
+		renY += 15;
+
+		SDL_Rect* tileRect;
+
+		for (MenuItem* curItem : tiles) {
+			tileRect = new SDL_Rect();
+
+			tileRect->x = renX;
+			tileRect->y = renY;
+			tileMap.insert(std::make_pair(tileRect, curItem));
+			renX += scale + SPACER;
+
+			if (renX >= (areaRect->w - (scale + SPACER))) {
+				renX = this->areaRect->x + SPACER;
+				renY += scale + SPACER;
+			}
+		}
+
+		renY += scale;
+
+		for (TileGroup* curGroup : subGroups) {
+			renY += curGroup->redraw(startX + 5, renY, areaRect->w - 5);
+		}
+	} else {
+		renY += 10;
+	}
+
+	areaRect->x = startX;
+	areaRect->y = startY;
+
+	areaRect->h = renY - startY;
 }
 
 } /* namespace menu */

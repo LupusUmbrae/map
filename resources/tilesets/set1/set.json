@@ -20,6 +20,11 @@
       "name"     : "tile4",
       "filename" : "stone4.png", 
       "category" : "floor"
+      },
+      {
+      "name"     : "chest",
+      "filename" : "objects/chest.png", 
+      "category" : "chests"
       }
     ]
   }

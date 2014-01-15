@@ -47,6 +47,8 @@ public:
 	 */
 	virtual bool inArea(int x, int y);
 
+	virtual void setArea(int x, int y, int w, int h);
+
 	//! Called to signal mouse buttons have been released
 	/*!
 	 *
@@ -54,15 +56,20 @@ public:
 	 */
 	void mouseUp(Uint8 button);
 
+	SDL_Rect getArea() {
+		return *areaRect;
+	}
+
 protected:
+	//! Current x location of the mouse
+	static int curX;
+	//! Current y location of the mouse
+	static int curY;
+
 	//! Flag for left mouse button being down
 	bool leftDown = false;
 	//! Flag for right mouse button being down
 	bool rightDown = false;
-	//! Current x location of the mouse
-	int curX = 0;
-	//! Current y location of the mouse
-	int curY = 0;
 
 	//! pointer to the global renderer
 	SDL_Renderer* renderer;

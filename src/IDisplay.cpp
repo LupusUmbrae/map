@@ -9,6 +9,9 @@
 
 namespace display {
 
+int IDisplay::curX = 0;
+int IDisplay::curY = 0;
+
 IDisplay::IDisplay() {
 	// TODO Auto-generated constructor stub
 
@@ -23,6 +26,13 @@ bool IDisplay::inArea(int x, int y) {
 		}
 	}
 	return false;
+}
+
+void IDisplay::setArea(int x, int y, int w, int h) {
+	areaRect->x = x;
+	areaRect->y = y;
+	areaRect->w = w;
+	areaRect->h = h;
 }
 
 void IDisplay::mouseUp(Uint8 button) {

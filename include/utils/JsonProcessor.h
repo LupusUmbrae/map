@@ -21,7 +21,9 @@
 #include <SDL2/SDL.h>
 
 // Map Includes
+#include "../actions/IAction.h"
 #include "../menus/TileGroup.h"
+#include "../menus/MenuItem.h"
 #include "../mapping/Tile.h"
 #include "textures/Image.h"
 #include "textures/Text.h"

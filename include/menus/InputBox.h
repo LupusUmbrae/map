@@ -15,11 +15,12 @@
 #include <SDL2/SDL.h>
 
 // Map Includes
+#include "../IDisplay.h"
 #include "../utils/textures/Text.h"
 
 namespace menu {
 
-class InputBox {
+class InputBox: public display::IDisplay {
 public:
 	InputBox(SDL_Renderer* renderer, std::string name);
 	virtual ~InputBox();
